@@ -1,0 +1,21 @@
+PODS:
+  - SnapKit (4.0.1)
+  - StyleKit (0.7.0)
+
+DEPENDENCIES:
+  - SnapKit (~> 4.0.0)
+  - StyleKit (~> 0.7)
+
+SPEC REPOS:
+  https://github.com/146BC/Specs.git:
+    - StyleKit
+  https://github.com/cocoapods/specs.git:
+    - SnapKit
+
+SPEC CHECKSUMS:
+  SnapKit: 0de968a9fec17499afa29683b05d0c775b6d1c29
+  StyleKit: ed2b3d05dab439b2cf44d715621a43a603eaaac6
+
+PODFILE CHECKSUM: 78f3e33218f48fcb3ad5dfbcda814716be13e52b
+
+COCOAPODS: 1.7.5
