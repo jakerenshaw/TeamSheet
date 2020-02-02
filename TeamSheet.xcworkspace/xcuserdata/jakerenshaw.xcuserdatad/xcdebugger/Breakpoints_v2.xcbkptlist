@@ -7,32 +7,48 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "2BC523B9-D6DB-4CF0-A252-16015239F120"
+            uuid = "3F882287-9713-4A52-8ED9-5430E2D21D6A"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "TeamSheet/ViewController.swift"
+            filePath = "TeamSheet/PitchViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "108"
-            endingLineNumber = "108"
-            landmarkName = "showPitch()"
+            startingLineNumber = "39"
+            endingLineNumber = "39"
+            landmarkName = "sortSquad()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "8971042B-6578-4D9D-9AC0-7952DD89D13C"
+            uuid = "7BF7D925-F5F7-4515-9086-558D6FD2D19D"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "TeamSheet/ViewController.swift"
+            filePath = "TeamSheet/PitchViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "114"
-            endingLineNumber = "114"
-            landmarkName = "showPitch()"
+            startingLineNumber = "48"
+            endingLineNumber = "48"
+            landmarkName = "addPlayerCheck()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "984DF851-861D-4903-A999-62A2EDDD9DDA"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TeamSheet/TeamMateTableViewCell.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "84"
+            endingLineNumber = "84"
+            landmarkName = "captainSelected(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

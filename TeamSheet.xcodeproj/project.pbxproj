@@ -20,6 +20,7 @@
 		B62654BC2339425F008BC17B /* style_dark.json in Resources */ = {isa = PBXBuildFile; fileRef = B62654BA2339425F008BC17B /* style_dark.json */; };
 		B62654BD2339425F008BC17B /* style.json in Resources */ = {isa = PBXBuildFile; fileRef = B62654BB2339425F008BC17B /* style.json */; };
 		B62654C023394AB1008BC17B /* StylingCustomClasses.swift in Sources */ = {isa = PBXBuildFile; fileRef = B62654BF23394AB1008BC17B /* StylingCustomClasses.swift */; };
+		B655C3EA23E70AE3000E6994 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = B655C3E923E70AE3000E6994 /* Player.swift */; };
 		E7AAD268A51613E4B3473D97 /* Pods_TeamSheet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E557A2A3BE657EB592C542E3 /* Pods_TeamSheet.framework */; };
 /* End PBXBuildFile section */
 
@@ -40,6 +41,7 @@
 		B62654BA2339425F008BC17B /* style_dark.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = style_dark.json; sourceTree = "<group>"; };
 		B62654BB2339425F008BC17B /* style.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = style.json; sourceTree = "<group>"; };
 		B62654BF23394AB1008BC17B /* StylingCustomClasses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StylingCustomClasses.swift; sourceTree = "<group>"; };
+		B655C3E923E70AE3000E6994 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		CBC8CCE496B24DF6637BCDD4 /* Pods-TeamSheet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TeamSheet.debug.xcconfig"; path = "Target Support Files/Pods-TeamSheet/Pods-TeamSheet.debug.xcconfig"; sourceTree = "<group>"; };
 		E557A2A3BE657EB592C542E3 /* Pods_TeamSheet.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TeamSheet.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -89,6 +91,7 @@
 				B6151F64225A090D008A9185 /* PitchViewController.swift */,
 				B6151F66225A25AB008A9185 /* PlayerIcon.xib */,
 				B6151F6A225A277D008A9185 /* PlayerIcon.swift */,
+				B655C3E923E70AE3000E6994 /* Player.swift */,
 			);
 			path = TeamSheet;
 			sourceTree = "<group>";
@@ -243,6 +246,7 @@
 				B6151F6B225A277D008A9185 /* PlayerIcon.swift in Sources */,
 				B6151F4F225A0123008A9185 /* AppDelegate.swift in Sources */,
 				B6151F62225A042F008A9185 /* TeamMateTableViewCell.swift in Sources */,
+				B655C3EA23E70AE3000E6994 /* Player.swift in Sources */,
 				B62654C023394AB1008BC17B /* StylingCustomClasses.swift in Sources */,
 				B6151F65225A090D008A9185 /* PitchViewController.swift in Sources */,
 			);

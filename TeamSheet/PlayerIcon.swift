@@ -60,7 +60,7 @@ class PlayerIcon: UIView, UIGestureRecognizerDelegate {
     }
     
     func setCaptain() {
-        self.containerView.backgroundColor = UIColor.yellow
+        self.containerView.backgroundColor = UIColor.green
     }
     
     func removeCaptain() {

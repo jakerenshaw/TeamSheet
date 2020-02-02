@@ -11,6 +11,7 @@ import UIKit
 protocol TeamMateTableViewCellDelegate: class {
     func setActiveCell(cell: TeamMateTableViewCell)
     func setCaptain(cell: TeamMateTableViewCell)
+    func updatePlayerInfo(cell: TeamMateTableViewCell)
 }
 
 extension UITextField {
@@ -41,7 +42,15 @@ class TeamMateTableViewCell: UITableViewCell, UITextFieldDelegate {
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var numberTextField: UITextField!
     weak var delegate: TeamMateTableViewCellDelegate?
-    var captain = false
+    var captain = false {
+        didSet {
+            if self.captain {
+                self.captainButton.backgroundColor = .green
+            } else {
+                self.captainButton.backgroundColor = .white
+            }
+        }
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -52,6 +61,7 @@ class TeamMateTableViewCell: UITableViewCell, UITextFieldDelegate {
     }
     
     func createCaptainButton() {
+        self.captainButton.setTitleColor(.black, for: .normal)
         self.captainButton.layer.cornerRadius = self.captainButton.bounds.size.width / 2
         self.captainButton.layer.borderColor = UIColor.black.cgColor
         self.captainButton.layer.borderWidth = 2
@@ -66,9 +76,11 @@ class TeamMateTableViewCell: UITableViewCell, UITextFieldDelegate {
         return true
     }
     
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        self.delegate?.updatePlayerInfo(cell: self)
+    }
+    
     @IBAction func captainSelected(_ sender: Any) {
-        self.captainButton.backgroundColor = UIColor.green
-        captain = true
         self.delegate?.setCaptain(cell: self)
     }
     

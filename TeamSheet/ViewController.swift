@@ -8,31 +8,11 @@
 
 import UIKit
 
-class Player: Equatable, Encodable {
-    static func == (lhs: Player, rhs: Player) -> Bool {
-        return lhs.name == rhs.name && lhs.number == rhs.number
-    }
-    
-    var name: String
-    var number: String
-    var captain: Bool
-    var x: CGFloat
-    var y: CGFloat
-    
-    init(name: String, number: String, captain: Bool, x: CGFloat, y: CGFloat) {
-        self.name = name
-        self.number = number
-        self.captain = captain
-        self.x = x
-        self.y = y
-    }
-}
-
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, TeamMateTableViewCellDelegate {
     
     @IBOutlet weak var playersTableView: PlayersTableView!
     
-    var players = [TeamMateTableViewCell]()
+    var players = [Player]()
     var activeCell: TeamMateTableViewCell?
     var vc: PitchViewController?
     
@@ -41,7 +21,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = playersTableView.dequeueReusableCell(withIdentifier: "Cell") as? TeamMateTableViewCell
+        let cell = playersTableView.dequeueReusableCell(withIdentifier: "TeamMateTableViewCell") as? TeamMateTableViewCell
+        cell?.captain = players[indexPath.row].captain
+        cell?.nameTextField.text = players[indexPath.row].name
+        cell?.numberTextField.text = players[indexPath.row].number
         cell?.delegate = self
         return cell!
     }
@@ -57,10 +40,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.playersTableView.estimatedRowHeight = 0
-        self.playersTableView.estimatedSectionHeaderHeight = 0
-        self.playersTableView.estimatedSectionFooterHeight = 0
-        self.playersTableView.tableFooterView = UIView()
         let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap(sender:)))
         self.view.addGestureRecognizer(tap)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
@@ -68,7 +47,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         navigationItem.title = "Squad"
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addPlayer))
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Pitch", style: .plain, target: self, action: #selector(showPitch))
-        playersTableView.register(UINib(nibName: "TeamMateTableViewCell", bundle: nil), forCellReuseIdentifier: "Cell")
+        playersTableView.register(UINib(nibName: "TeamMateTableViewCell", bundle: nil), forCellReuseIdentifier: "TeamMateTableViewCell")
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -87,15 +66,17 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             }
             self.playersTableView.scrollIndicatorInsets = self.playersTableView.contentInset
         }
+        navigationItem.rightBarButtonItem?.isEnabled = false
     }
     
     @objc func keyboardWillHide(notification: NSNotification) {
         self.playersTableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        navigationItem.rightBarButtonItem?.isEnabled = true
     }
     
     @objc func addPlayer() {
-        let cell = playersTableView.dequeueReusableCell(withIdentifier: "Cell") as? TeamMateTableViewCell
-        players.append(cell!)
+        let player = Player()
+        players.append(player)
         playersTableView.beginUpdates()
         playersTableView.insertRows(at: [IndexPath(row: players.count-1, section: 0)], with: .automatic)
         playersTableView.endUpdates()
@@ -105,24 +86,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         if duplicatePlayer() {
             showAlert(message: "Duplicate players in squad")
         } else {
-            var squad = [Player]()
-            var emptyField = false
-            playersTableView.visibleCells.forEach { (cell) in
-                guard let cell = cell as? TeamMateTableViewCell, let name = cell.nameTextField.text, name != "", let number = cell.numberTextField.text, number != "" else {
-                    showAlert(message: "A name/number is missing for one of the players")
-                    emptyField = true
-                    return
-                }
-                let player = Player(name: name, number: number, captain: cell.captain, x: self.view.bounds.width / 2, y: (self.view.bounds.height / 2) + 60)
-                squad.append(player)
-            }
-            if !emptyField {
-                if vc == nil {
-                    vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "PitchViewController") as? PitchViewController
-                } else {
-                    vc?.squad = squad
-                    self.navigationController?.pushViewController(vc!, animated: true)
-                }
+            if vc == nil {
+                vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "PitchViewController") as? PitchViewController
+            } else {
+                vc?.squad = players
+                self.navigationController?.pushViewController(vc!, animated: true)
             }
         }
     }
@@ -164,13 +132,26 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             }
             if playerCell != cell {
                 playerCell.captain = false
-                playerCell.captainButton.backgroundColor = UIColor.white
+            } else {
+                playerCell.captain.toggle()
             }
+            self.updatePlayerInfo(cell: playerCell)
         }
     }
     
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return 30
+    }
+    
+    func updatePlayerInfo(cell: TeamMateTableViewCell) {
+        guard let indexPath = playersTableView.indexPath(for: cell),
+            let name = cell.nameTextField.text,
+            name != "",
+            let number = cell.numberTextField.text,
+            number != "" else {
+            return
+        }
+        players[indexPath.row] = Player(name: name, number: number, captain: cell.captain, x: self.view.bounds.width / 2, y: (self.view.bounds.height / 2) + 60)
     }
 }
 
