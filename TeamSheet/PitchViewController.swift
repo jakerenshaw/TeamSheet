@@ -16,6 +16,8 @@ enum PlayerType {
 
 class PitchViewController: UIViewController, PlayerIconDelegate {
     
+    @IBOutlet weak var pitchImageView: UIImageView!
+    
     var squad = [Player]()
     var opposition = [Player]()
     var playerIcons = [PlayerIcon]()
@@ -107,10 +109,21 @@ class PitchViewController: UIViewController, PlayerIconDelegate {
     }
     
     func draggedView(_ sender:UIPanGestureRecognizer, viewDrag: PlayerIcon) {
-        self.view.bringSubviewToFront(viewDrag)
-        let translation = sender.translation(in: self.view)
-        viewDrag.center = CGPoint(x: viewDrag.center.x + translation.x, y: viewDrag.center.y + translation.y)
-        sender.setTranslation(CGPoint.zero, in: self.view)
+        guard let senderView = sender.view else {
+          return
+        }
+
+        var translation = sender.translation(in: view)
+
+        translation.x = max(translation.x, pitchImageView.frame.minX - viewDrag.frame.minX)
+        translation.x = min(translation.x, pitchImageView.frame.maxX - viewDrag.frame.maxX)
+
+        translation.y = max(translation.y, pitchImageView.frame.minY - viewDrag.frame.minY)
+        translation.y = min(translation.y, pitchImageView.frame.maxY - viewDrag.frame.maxY)
+
+        senderView.center = CGPoint(x: senderView.center.x + translation.x, y: senderView.center.y + translation.y)
+        sender.setTranslation(.zero, in: view)
+        view.bringSubviewToFront(senderView)
     }
     
     func updatePlayerPositon(view: PlayerIcon, x: CGFloat, y: CGFloat) {

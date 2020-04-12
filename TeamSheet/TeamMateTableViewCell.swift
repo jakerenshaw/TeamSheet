@@ -89,6 +89,16 @@ class TeamMateTableViewCell: UITableViewCell, UITextFieldDelegate {
         return false
     }
     
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if textField == self.numberTextField,
+            let text = self.numberTextField.text,
+            string != "" {
+            return text.count < 2 && string != " "
+        } else {
+            return true
+        }
+    }
+    
     override func prepareForReuse() {
         self.captain = false
         self.nameTextField.text = ""

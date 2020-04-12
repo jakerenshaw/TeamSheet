@@ -61,7 +61,7 @@ class PlayerIcon: UIView, UIGestureRecognizerDelegate {
         self.nameLabel.sizeToFit()
         self.numberLabel.sizeToFit()
         let height = self.nameLabel.frame.height + self.numberLabel.frame.height
-        let width = (self.nameLabel.frame.width > self.numberLabel.frame.width) ? self.nameLabel.frame.width : self.numberLabel.frame.width
+        let width = (self.nameLabel.frame.width > self.containerView.frame.width) ? self.nameLabel.frame.width : self.containerView.frame.width
         self.frame = CGRect(x: self.frame.origin.x, y: self.frame.origin.y, width: width, height: height)
     }
     
