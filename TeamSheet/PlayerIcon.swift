@@ -57,10 +57,16 @@ class PlayerIcon: UIView, UIGestureRecognizerDelegate {
         }
         self.containerView.layer.borderColor = UIColor.black.cgColor
         self.containerView.layer.borderWidth = 2
+        self.containerView.layer.cornerRadius = self.containerView.bounds.size.width/2
+        self.nameLabel.sizeToFit()
+        self.numberLabel.sizeToFit()
+        let height = self.nameLabel.frame.height + self.numberLabel.frame.height
+        let width = (self.nameLabel.frame.width > self.numberLabel.frame.width) ? self.nameLabel.frame.width : self.numberLabel.frame.width
+        self.frame = CGRect(x: self.frame.origin.x, y: self.frame.origin.y, width: width, height: height)
     }
     
     func setCaptain() {
-        self.containerView.backgroundColor = UIColor.green
+        self.containerView.backgroundColor = UIColor.yellow
     }
     
     func removeCaptain() {
@@ -73,10 +79,6 @@ class PlayerIcon: UIView, UIGestureRecognizerDelegate {
         {
             let playerX = self.frame.origin.x + (self.frame.width / 2)
             let playerY = self.frame.origin.y + (self.frame.height / 2)
-            self.snp.remakeConstraints { (make) in
-                make.centerX.equalTo(playerX)
-                make.centerY.equalTo(playerY)
-            }
             self.delegate?.updatePlayerPositon(view: self, x: playerX, y: playerY)
         }
     }
@@ -85,7 +87,6 @@ class PlayerIcon: UIView, UIGestureRecognizerDelegate {
         didSet {
             if self.containerView != nil {
                 self.containerView.layer.cornerRadius = self.containerView.bounds.size.width/2
-                self.containerView.clipsToBounds = true
             }
         }
     }

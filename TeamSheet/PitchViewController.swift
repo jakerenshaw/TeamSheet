@@ -75,13 +75,9 @@ class PitchViewController: UIViewController, PlayerIconDelegate {
     }
     
     func addPlayer(player: Player, playerType: PlayerType) {
-        let playerIcon = PlayerIcon(frame: CGRect(x: 150, y: 150, width: 200, height: 200), name: player.name, number: player.number, captain: player.captain)
+        let playerIcon = PlayerIcon(frame: CGRect(x: player.x, y: player.y, width: 10, height: 10), name: player.name, number: player.number, captain: player.captain)
         playerIcon.delegate = self
         self.view.addSubview(playerIcon)
-        playerIcon.snp.remakeConstraints { (make) in
-            make.centerX.equalTo(player.x)
-            make.centerY.equalTo(player.y)
-        }
         switch playerType {
         case .squad:
             playerIcons.append(playerIcon)

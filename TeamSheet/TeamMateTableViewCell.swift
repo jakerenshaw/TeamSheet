@@ -45,7 +45,7 @@ class TeamMateTableViewCell: UITableViewCell, UITextFieldDelegate {
     var captain = false {
         didSet {
             if self.captain {
-                self.captainButton.backgroundColor = .green
+                self.captainButton.backgroundColor = .yellow
             } else {
                 self.captainButton.backgroundColor = .white
             }

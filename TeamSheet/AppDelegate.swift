@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import StyleKit
+import SKStyleKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,16 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        var styleKitJson = "style"
-        if #available(iOS 12.0, *) {
-            if window?.rootViewController?.traitCollection.userInterfaceStyle == .dark {
-                styleKitJson = "style_dark"
-            }
-        }
-        if let styleFile = Bundle.main.url(forResource: "\(styleKitJson)", withExtension: "json") {
-            let stylekKit = StyleKit(fileUrl: styleFile)
-            stylekKit?.apply()
-        }
+        StyleKit.initStyleKit()
         return true
     }
 
