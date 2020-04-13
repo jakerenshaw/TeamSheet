@@ -33,11 +33,6 @@ extension UITextField {
 }
 
 class TeamMateTableViewCell: UITableViewCell, UITextFieldDelegate {
-    
-    override func isEqual(_ object: Any?) -> Bool {
-        return (nameTextField.text == (object as? TeamMateTableViewCell)?.nameTextField.text) && (numberTextField.text == (object as? TeamMateTableViewCell)?.numberTextField.text)
-    }
-    
     @IBOutlet weak var captainButton: UIButton!
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var numberTextField: UITextField!

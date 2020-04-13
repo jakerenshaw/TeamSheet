@@ -83,7 +83,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     @objc func showPitch() {
-        if duplicatePlayer() {
+        if missingInfo() {
+            showAlert(message: "Info for a player is missing")
+        } else if multipleCaptains() {
+            showAlert(message: "More than one captain is selected")
+        } else if duplicatePlayer() {
             showAlert(message: "Duplicate players in squad")
         } else {
             if vc == nil {
@@ -97,13 +101,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func duplicatePlayer() -> Bool {
         var duplicatePlayer = false
-        var duplicates = [TeamMateTableViewCell]()
-        playersTableView.visibleCells.forEach { (cell) in
-            guard let cell = cell as? TeamMateTableViewCell else {
-                return
-            }
-            if !duplicates.contains(cell) {
-                duplicates.append(cell)
+        var duplicates = [Player]()
+        players.forEach { (player) in
+            if !duplicates.contains(player) {
+                duplicates.append(player)
             } else {
                 duplicatePlayer = true
                 return
@@ -112,8 +113,28 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         return duplicatePlayer
     }
     
+    func multipleCaptains() -> Bool {
+        var numberOfCaptains = 0
+        players.forEach { (player) in
+            if player.captain {
+                numberOfCaptains += 1
+            }
+        }
+        return numberOfCaptains > 1
+    }
+    
+    func missingInfo() -> Bool {
+        var missing = false
+        players.forEach { (player) in
+            if player.name == "" || player.number == "" {
+                missing = true
+                return
+            }
+        }
+        return missing
+    }
+    
     func showAlert(message: String) {
-
         let alert = UIAlertController(title: "Warning", message: message, preferredStyle: UIAlertController.Style.alert)
         
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
@@ -126,29 +147,17 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     func setCaptain(cell: TeamMateTableViewCell) {
-        playersTableView.visibleCells.forEach { (playerCell) in
-            guard let playerCell = playerCell as? TeamMateTableViewCell else {
-                return
-            }
-            if playerCell != cell {
-                playerCell.captain = false
-            } else {
-                playerCell.captain.toggle()
-            }
-            self.updatePlayerInfo(cell: playerCell)
+        cell.captain.toggle()
+        guard let indexPath = playersTableView.indexPath(for: cell) else {
+            return
         }
-    }
-    
-    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 30
+        players[indexPath.row].captain = cell.captain
     }
     
     func updatePlayerInfo(cell: TeamMateTableViewCell) {
         guard let indexPath = playersTableView.indexPath(for: cell),
             let name = cell.nameTextField.text,
-            name != "",
-            let number = cell.numberTextField.text,
-            number != "" else {
+            let number = cell.numberTextField.text else {
             return
         }
         players[indexPath.row] = Player(name: name, number: number, captain: cell.captain, x: self.view.bounds.width / 2, y: (self.view.bounds.height / 2) + 60)
