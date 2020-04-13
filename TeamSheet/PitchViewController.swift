@@ -14,7 +14,11 @@ enum PlayerType {
     case opposition
 }
 
-class PitchViewController: UIViewController, PlayerIconDelegate {
+class PitchViewController:
+    UIViewController,
+    PlayerIconDelegate,
+    PitchMenuViewDelegate
+{
     
     @IBOutlet weak var pitchImageView: UIImageView!
     
@@ -22,10 +26,32 @@ class PitchViewController: UIViewController, PlayerIconDelegate {
     var opposition = [Player]()
     var playerIcons = [PlayerIcon]()
     var oppositionIcons = [PlayerIcon]()
+    var pitchMenuView: PitchMenuView?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "+ Opposition", style: .plain, target: self, action: #selector(addOpposition))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "menu"), style: .plain, target: self, action: #selector(toggleMenu))
+    }
+    
+    @objc func toggleMenu() {
+        if let menu = self.pitchMenuView {
+            menu.removeFromSuperview()
+            self.pitchMenuView = nil
+        } else {
+            let menuWidth: CGFloat = 200
+            let menuHeight: CGFloat = 80
+            let pitchFrame = self.pitchImageView.frame
+            pitchMenuView = PitchMenuView(
+                frame: CGRect(
+                    x: pitchFrame.width - menuWidth,
+                    y: pitchFrame.origin.y,
+                    width: menuWidth,
+                    height: menuHeight
+                )
+            )
+            pitchMenuView?.delegate = self
+            self.view.addSubview(pitchMenuView!)
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -135,11 +161,19 @@ class PitchViewController: UIViewController, PlayerIconDelegate {
         }
     }
     
+    func updatePlayerTeamColor(view: PlayerIcon, color: UIColor) {
+        squad.forEach { (playerIcon) in
+            if playerIcon.name == view.name && playerIcon.number == view.number {
+                playerIcon.teamColor = color
+            }
+        }
+    }
+    
     @objc func addOpposition() {
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "- Opposition", style: .plain, target: self, action: #selector(removeOpposition))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "menu"), style: .plain, target: self, action: #selector(toggleMenu))
         var i = 1
         while i < 12 {
-            let player = Player(name: "-", number: "\(i)", captain: false, x: self.view.bounds.width / 2, y: self.view.bounds.height / 2)
+            let player = Player(name: "-", number: "\(i)", captain: false, x: self.view.bounds.width / 2, y: self.view.bounds.height / 2, teamColor: .white)
             opposition.append(player)
             addPlayer(player: player, playerType: .opposition)
             i += 1
@@ -147,12 +181,33 @@ class PitchViewController: UIViewController, PlayerIconDelegate {
     }
     
     @objc func removeOpposition() {
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "+ Opposition", style: .plain, target: self, action: #selector(addOpposition))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "menu"), style: .plain, target: self, action: #selector(toggleMenu))
         opposition.removeAll()
         oppositionIcons.forEach { (oppositonIcon) in
             oppositonIcon.removeFromSuperview()
         }
         oppositionIcons.removeAll()
+    }
+    
+    func toggleOppostion(add: Bool) {
+        if add {
+            self.addOpposition()
+        } else {
+            self.removeOpposition()
+        }
+    }
+    
+    func toggleTitle(add: Bool) {
+        if add {
+            let textField = UITextField(frame: CGRect(x: 0, y: 0, width: 200, height: 21))
+            textField.addDoneToolbar()
+            textField.text = "Insert title..."
+            textField.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
+            textField.textAlignment = .center
+            self.navigationItem.titleView = textField
+        } else {
+            self.navigationItem.titleView = nil
+        }
     }
 
 }

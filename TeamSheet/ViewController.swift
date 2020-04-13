@@ -75,7 +75,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     @objc func addPlayer() {
-        let player = Player()
+        let player = Player(
+            x: self.view.bounds.width / 2,
+            y: (self.view.bounds.height / 2) + 60
+        )
         players.append(player)
         playersTableView.beginUpdates()
         playersTableView.insertRows(at: [IndexPath(row: players.count-1, section: 0)], with: .automatic)
@@ -160,7 +163,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             let number = cell.numberTextField.text else {
             return
         }
-        players[indexPath.row] = Player(name: name, number: number, captain: cell.captain, x: self.view.bounds.width / 2, y: (self.view.bounds.height / 2) + 60)
+        let player = players[indexPath.row]
+        player.name = name
+        player.number = number
     }
 }
 

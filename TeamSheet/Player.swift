@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class Player: Equatable, Encodable {
+class Player: Equatable {
     static func == (lhs: Player, rhs: Player) -> Bool {
         return lhs.name == rhs.name && lhs.number == rhs.number
     }
@@ -19,20 +19,33 @@ class Player: Equatable, Encodable {
     var captain: Bool
     var x: CGFloat
     var y: CGFloat
+    var teamColor: UIColor
     
-    init(name: String, number: String, captain: Bool, x: CGFloat, y: CGFloat) {
+    init(
+        name: String,
+        number: String,
+        captain: Bool,
+        x: CGFloat,
+        y: CGFloat,
+        teamColor: UIColor
+    ) {
         self.name = name
         self.number = number
         self.captain = captain
         self.x = x
         self.y = y
+        self.teamColor = teamColor
     }
     
-    init() {
+    init(
+        x: CGFloat,
+        y: CGFloat
+    ) {
         self.name = ""
         self.number = ""
         self.captain = false
-        self.x = 0
-        self.y = 0
+        self.x = x
+        self.y = y
+        self.teamColor = .white
     }
 }

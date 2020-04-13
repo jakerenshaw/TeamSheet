@@ -11,6 +11,24 @@ import UIKit
 protocol PlayerIconDelegate: class {
     func draggedView(_ sender:UIPanGestureRecognizer, viewDrag: PlayerIcon)
     func updatePlayerPositon(view: PlayerIcon, x: CGFloat, y: CGFloat)
+    func updatePlayerTeamColor(view: PlayerIcon, color: UIColor)
+}
+
+class Helpers {
+    static let colors : [UIColor] = [.white, .red, .blue, .green, .yellow, .purple, .orange]
+    
+    static func newColor(current: UIColor?) -> UIColor {
+        guard let current = current,
+            let index = colors.index(of: current) else {
+            return .white
+        }
+        let nextColorIndex = index + 1
+        if colors.indices.contains(nextColorIndex) {
+            return colors[nextColorIndex]
+        } else {
+            return .white
+        }
+    }
 }
 
 class PlayerIcon: UIView, UIGestureRecognizerDelegate {
@@ -23,7 +41,8 @@ class PlayerIcon: UIView, UIGestureRecognizerDelegate {
     let name: String
     let number: String
     let captain: Bool
-    var panGesture = UIPanGestureRecognizer()
+    var panGesture: UIPanGestureRecognizer?
+    var tapGesture: UITapGestureRecognizer?
     weak var delegate: PlayerIconDelegate?
     
     init(frame: CGRect, name: String, number: String, captain: Bool) {
@@ -36,7 +55,8 @@ class PlayerIcon: UIView, UIGestureRecognizerDelegate {
         contentView.frame = self.bounds
         contentView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
         setupView()
-        panGesture.delegate = self
+        panGesture?.delegate = self
+        tapGesture?.delegate = self
     }
     
     
@@ -46,8 +66,10 @@ class PlayerIcon: UIView, UIGestureRecognizerDelegate {
     
     func setupView() {
         panGesture = UIPanGestureRecognizer(target: self, action: #selector(draggedView(_:)))
+        tapGesture = UITapGestureRecognizer(target: self, action: #selector(updateBackgroundColor(_:)))
         self.isUserInteractionEnabled = true
-        self.addGestureRecognizer(panGesture)
+        self.addGestureRecognizer(panGesture!)
+        self.addGestureRecognizer(tapGesture!)
         self.nameLabel.text = name
         self.numberLabel.text = number
         if captain {
@@ -55,7 +77,6 @@ class PlayerIcon: UIView, UIGestureRecognizerDelegate {
         } else {
             removeCaptain()
         }
-        self.containerView.layer.borderColor = UIColor.black.cgColor
         self.containerView.layer.borderWidth = 2
         self.containerView.layer.cornerRadius = self.containerView.bounds.size.width/2
         self.nameLabel.sizeToFit()
@@ -66,11 +87,11 @@ class PlayerIcon: UIView, UIGestureRecognizerDelegate {
     }
     
     func setCaptain() {
-        self.containerView.backgroundColor = UIColor.yellow
+        self.containerView.layer.borderColor = UIColor.yellow.cgColor
     }
     
     func removeCaptain() {
-        self.containerView.backgroundColor = UIColor.white
+        self.containerView.layer.borderColor = UIColor.black.cgColor
     }
     
     @objc func draggedView(_ sender:UIPanGestureRecognizer){
@@ -81,6 +102,12 @@ class PlayerIcon: UIView, UIGestureRecognizerDelegate {
             let playerY = self.frame.origin.y + (self.frame.height / 2)
             self.delegate?.updatePlayerPositon(view: self, x: playerX, y: playerY)
         }
+    }
+    
+    @objc func updateBackgroundColor(_ sender:UITapGestureRecognizer){
+        let newColor = Helpers.newColor(current: self.containerView.backgroundColor)
+        self.containerView.backgroundColor = newColor
+        self.delegate?.updatePlayerTeamColor(view: self, color: newColor)
     }
     
     override var bounds: CGRect {
