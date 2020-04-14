@@ -44,9 +44,18 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         self.view.addGestureRecognizer(tap)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-        navigationItem.title = "Squad"
-        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addPlayer))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Pitch", style: .plain, target: self, action: #selector(showPitch))
+        let titleLabel = UILabel()
+        titleLabel.text = "Squad"
+        navigationItem.titleView = titleLabel
+        let backButton = UIBarButtonItem(title: "Squad", style: .plain, target: self, action: nil)
+        backButton.tintColor = .systemGray
+        navigationItem.backBarButtonItem = backButton
+        let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addPlayer))
+        addButton.tintColor = .systemGray
+        navigationItem.leftBarButtonItem = addButton
+        let pitchButton = UIBarButtonItem(title: "Pitch", style: .plain, target: self, action: #selector(showPitch))
+        pitchButton.tintColor = .systemGray
+        navigationItem.rightBarButtonItem = pitchButton
         playersTableView.register(UINib(nibName: "TeamMateTableViewCell", bundle: nil), forCellReuseIdentifier: "TeamMateTableViewCell")
     }
     

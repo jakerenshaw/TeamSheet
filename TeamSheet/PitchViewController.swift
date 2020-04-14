@@ -30,7 +30,17 @@ class PitchViewController:
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "menu"), style: .plain, target: self, action: #selector(toggleMenu))
+        let menuImage: UIImage?
+        let menuButton: UIBarButtonItem?
+        if #available(iOS 13.0, *) {
+            menuImage = UIImage(named: "menu")?.withTintColor(.systemGray, renderingMode: .alwaysOriginal)
+            menuButton = UIBarButtonItem(image: menuImage, style: .plain, target: self, action: #selector(toggleMenu))
+        } else {
+            menuImage = UIImage(named: "menu")?.withRenderingMode(.alwaysTemplate)
+            menuButton = UIBarButtonItem(image: menuImage, style: .plain, target: self, action: #selector(toggleMenu))
+            menuButton?.tintColor = .gray
+        }
+        self.navigationItem.rightBarButtonItem = menuButton
     }
     
     @objc func toggleMenu() {
@@ -170,7 +180,6 @@ class PitchViewController:
     }
     
     @objc func addOpposition() {
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "menu"), style: .plain, target: self, action: #selector(toggleMenu))
         var i = 1
         while i < 12 {
             let player = Player(name: "-", number: "\(i)", captain: false, x: self.view.bounds.width / 2, y: self.view.bounds.height / 2, teamColor: .white)
@@ -181,7 +190,6 @@ class PitchViewController:
     }
     
     @objc func removeOpposition() {
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "menu"), style: .plain, target: self, action: #selector(toggleMenu))
         opposition.removeAll()
         oppositionIcons.forEach { (oppositonIcon) in
             oppositonIcon.removeFromSuperview()
