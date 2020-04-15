@@ -14,23 +14,6 @@ protocol PlayerIconDelegate: class {
     func updatePlayerTeamColor(view: PlayerIcon, color: UIColor)
 }
 
-class Helpers {
-    static let colors : [UIColor] = [.white, .red, .blue, .green, .yellow, .purple, .orange]
-    
-    static func newColor(current: UIColor?) -> UIColor {
-        guard let current = current,
-            let index = colors.index(of: current) else {
-            return .white
-        }
-        let nextColorIndex = index + 1
-        if colors.indices.contains(nextColorIndex) {
-            return colors[nextColorIndex]
-        } else {
-            return .white
-        }
-    }
-}
-
 class PlayerIcon: UIView, UIGestureRecognizerDelegate {
     
     @IBOutlet var contentView: UIView!
@@ -105,7 +88,7 @@ class PlayerIcon: UIView, UIGestureRecognizerDelegate {
     }
     
     @objc func updateBackgroundColor(_ sender:UITapGestureRecognizer){
-        let newColor = Helpers.newColor(current: self.containerView.backgroundColor)
+        let newColor = Colors.newColor(current: self.containerView.backgroundColor)
         self.containerView.backgroundColor = newColor
         self.delegate?.updatePlayerTeamColor(view: self, color: newColor)
     }

@@ -1,5 +1,5 @@
 //
-//  TeamMateTableViewCell.swift
+//  SquadTableViewCell.swift
 //  TeamSheet
 //
 //  Created by Jake Renshaw on 07/04/2019.
@@ -8,35 +8,17 @@
 
 import UIKit
 
-protocol TeamMateTableViewCellDelegate: class {
-    func setActiveCell(cell: TeamMateTableViewCell)
-    func setCaptain(cell: TeamMateTableViewCell)
-    func updatePlayerInfo(cell: TeamMateTableViewCell)
+protocol SquadTableViewCellDelegate: class {
+    func setActiveCell(cell: SquadTableViewCell)
+    func setCaptain(cell: SquadTableViewCell)
+    func updatePlayerInfo(cell: SquadTableViewCell)
 }
 
-extension UITextField {
-    func addDoneToolbar(onDone: (target: Any, action: Selector)? = nil) {
-        let onDone = onDone ?? (target: self, action: #selector(doneButtonTapped))
-        
-        let toolbar: UIToolbar = UIToolbar()
-        toolbar.barStyle = .default
-        toolbar.items = [
-            UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil),
-            UIBarButtonItem(title: "Done", style: .done, target: onDone.target, action: onDone.action)
-        ]
-        toolbar.sizeToFit()
-        
-        self.inputAccessoryView = toolbar
-    }
-    
-    @objc func doneButtonTapped() { self.resignFirstResponder() }
-}
-
-class TeamMateTableViewCell: UITableViewCell, UITextFieldDelegate {
+class SquadTableViewCell: UITableViewCell, UITextFieldDelegate {
     @IBOutlet weak var captainButton: UIButton!
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var numberTextField: UITextField!
-    weak var delegate: TeamMateTableViewCellDelegate?
+    weak var delegate: SquadTableViewCellDelegate?
     var captain = false {
         didSet {
             if self.captain {

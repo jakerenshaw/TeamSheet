@@ -9,11 +9,6 @@
 import UIKit
 import SnapKit
 
-enum PlayerType {
-    case squad
-    case opposition
-}
-
 class PitchViewController:
     UIViewController,
     PlayerIconDelegate,

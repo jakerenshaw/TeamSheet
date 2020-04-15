@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  SquadTableViewController.swift
 //  TeamSheet
 //
 //  Created by Jake Renshaw on 07/04/2019.
@@ -8,12 +8,12 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, TeamMateTableViewCellDelegate {
+class SquadTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, SquadTableViewCellDelegate {
     
-    @IBOutlet weak var playersTableView: PlayersTableView!
+    @IBOutlet weak var playersTableView: UITableView!
     
     var players = [Player]()
-    var activeCell: TeamMateTableViewCell?
+    var activeCell: SquadTableViewCell?
     var vc: PitchViewController?
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -21,7 +21,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = playersTableView.dequeueReusableCell(withIdentifier: "TeamMateTableViewCell") as? TeamMateTableViewCell
+        let cell = playersTableView.dequeueReusableCell(withIdentifier: "SquadTableViewCell") as? SquadTableViewCell
         cell?.captain = players[indexPath.row].captain
         cell?.nameTextField.text = players[indexPath.row].name
         cell?.numberTextField.text = players[indexPath.row].number
@@ -40,23 +40,32 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.addTapGesture()
+        
+        let titleLabel = UILabel()
+        titleLabel.text = "Squad"
+        navigationItem.titleView = titleLabel
+        
+        let backButton = UIBarButtonItem(title: "Squad", style: .plain, target: self, action: nil)
+        backButton.tintColor = .systemGray
+        navigationItem.backBarButtonItem = backButton
+        
+        let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addPlayer))
+        addButton.tintColor = .systemGray
+        navigationItem.leftBarButtonItem = addButton
+        
+        let pitchButton = UIBarButtonItem(title: "Pitch", style: .plain, target: self, action: #selector(showPitch))
+        pitchButton.tintColor = .systemGray
+        navigationItem.rightBarButtonItem = pitchButton
+        
+        playersTableView.register(UINib(nibName: "SquadTableViewCell", bundle: nil), forCellReuseIdentifier: "SquadTableViewCell")
+    }
+    
+    func addTapGesture() {
         let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap(sender:)))
         self.view.addGestureRecognizer(tap)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-        let titleLabel = UILabel()
-        titleLabel.text = "Squad"
-        navigationItem.titleView = titleLabel
-        let backButton = UIBarButtonItem(title: "Squad", style: .plain, target: self, action: nil)
-        backButton.tintColor = .systemGray
-        navigationItem.backBarButtonItem = backButton
-        let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addPlayer))
-        addButton.tintColor = .systemGray
-        navigationItem.leftBarButtonItem = addButton
-        let pitchButton = UIBarButtonItem(title: "Pitch", style: .plain, target: self, action: #selector(showPitch))
-        pitchButton.tintColor = .systemGray
-        navigationItem.rightBarButtonItem = pitchButton
-        playersTableView.register(UINib(nibName: "TeamMateTableViewCell", bundle: nil), forCellReuseIdentifier: "TeamMateTableViewCell")
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -154,11 +163,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         self.present(alert, animated: true, completion: nil)
     }
     
-    func setActiveCell(cell: TeamMateTableViewCell) {
+    func setActiveCell(cell: SquadTableViewCell) {
         self.activeCell = cell
     }
     
-    func setCaptain(cell: TeamMateTableViewCell) {
+    func setCaptain(cell: SquadTableViewCell) {
         cell.captain.toggle()
         guard let indexPath = playersTableView.indexPath(for: cell) else {
             return
@@ -166,7 +175,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         players[indexPath.row].captain = cell.captain
     }
     
-    func updatePlayerInfo(cell: TeamMateTableViewCell) {
+    func updatePlayerInfo(cell: SquadTableViewCell) {
         guard let indexPath = playersTableView.indexPath(for: cell),
             let name = cell.nameTextField.text,
             let number = cell.numberTextField.text else {

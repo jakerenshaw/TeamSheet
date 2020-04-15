@@ -9,6 +9,11 @@
 import Foundation
 import UIKit
 
+enum PlayerType {
+    case squad
+    case opposition
+}
+
 class Player: Equatable {
     static func == (lhs: Player, rhs: Player) -> Bool {
         return lhs.name == rhs.name && lhs.number == rhs.number
