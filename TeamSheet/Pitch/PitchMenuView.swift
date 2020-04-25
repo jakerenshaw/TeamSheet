@@ -76,9 +76,7 @@ class PitchMenuView: UIView {
     }
     
     @IBAction func saveSquad(_ sender: UIButton) {
-        
         self.delegate?.saveSquad()
     }
-    
     
 }

@@ -105,7 +105,9 @@ class SquadTableViewController: UIViewController, UITableViewDataSource, UITable
     
     @objc func showPitch() {
         if missingInfo() {
-            showAlert(message: "Info for a player is missing")
+            DispatchQueue.main.async {
+                self.showAlert(message: "Info for a player is missing")
+            }
         } else if multipleCaptains() {
             showAlert(message: "More than one captain is selected")
         } else if duplicatePlayer() {
@@ -159,7 +161,6 @@ class SquadTableViewController: UIViewController, UITableViewDataSource, UITable
         let alert = UIAlertController(title: "Warning", message: message, preferredStyle: UIAlertController.Style.alert)
         
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
-        
         self.present(alert, animated: true, completion: nil)
     }
     

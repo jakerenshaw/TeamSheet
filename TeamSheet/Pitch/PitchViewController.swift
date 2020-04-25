@@ -111,7 +111,7 @@ class PitchViewController:
     }
     
     func addPlayer(player: Player, playerType: PlayerType) {
-        let playerIcon = PlayerIcon(frame: CGRect(x: player.x, y: player.y, width: 10, height: 10), name: player.name, number: player.number, captain: player.captain)
+        let playerIcon = PlayerIcon(frame: CGRect(x: player.x, y: player.y, width: 10, height: 10), name: player.name, number: player.number, captain: player.captain, teamColor: player.teamColor)
         playerIcon.delegate = self
         self.view.addSubview(playerIcon)
         switch playerType {
@@ -225,15 +225,25 @@ class PitchViewController:
                 guard let self = self else { return }
                     if let error = error {
                         DispatchQueue.main.async {
-                            print(error)
+                            print(">>> \(error)")
                         }
                         return
                     }
                 guard let results = results else { return }
-                if let players = results.first!["players"] as? [CKRecord.Reference] {
-                    self.fetchPlayers(references: players)
+                var squadNames = [String]()
+                results.forEach { (record) in
+                    if let squadName = record["squadName"] as? String {
+                        squadNames.append(squadName)
+                    }
                 }
-                print(self.publicDataBase)
+                self.presentSquadLoaderAlert(squadNames: squadNames) { (chosenSquad) in
+                    let squad = results.first { (record) -> Bool in
+                        record["squadName"] as? String == chosenSquad
+                    }
+                    if let players = squad?["players"] as? [CKRecord.Reference] {
+                        self.fetchPlayers(references: players)
+                    }
+                }
         }
     }
     
@@ -243,14 +253,19 @@ class PitchViewController:
         operation.qualityOfService = .utility
         operation.fetchRecordsCompletionBlock = { records, error in
             if let error = error {
-                print(error)
+                print(">>> \(error)")
             }
             if let records = records {
-                print(records)
+                var newPlayers = [Player]()
                 records.forEach { (_, record) in
                     if let player = Player(record: record) {
-                        print(player)
+                        newPlayers.append(player)
                     }
+                }
+                DispatchQueue.main.async {
+                    self.removeSquad()
+                    self.squad = newPlayers
+                    self.sortSquad()
                 }
             }
         }
@@ -258,25 +273,30 @@ class PitchViewController:
     }
     
     func saveSquad() {
-        let squadToSave = CKRecord(recordType: "Squad")
-        squadToSave["squadName"] = "testSquad"
-        let squadReference = CKRecord.Reference(record: squadToSave, action: .none)
-        var players = [CKRecord.Reference]()
-        squad.forEach { (player) in
-            let playerToSave = CKRecord(recordType: "Player")
-            playerToSave["name"] = player.name
-            playerToSave["number"] = player.number
-            playerToSave["captain"] = Int(truncating: NSNumber(value:player.captain))
-            playerToSave["x"] = Double(player.x)
-            playerToSave["y"] = Double(player.y)
-            playerToSave["teamColor"] = player.teamColor.toHexString()
-            playerToSave["squad"] = squadReference
-            let playerReference = CKRecord.Reference(record: playerToSave, action: .deleteSelf)
-            players.append(playerReference)
-            uploadPlayer(record: playerToSave)
+        self.presentSquadNameAlert { (squadName) in
+            guard let squadName = squadName else {
+                return
+            }
+            let squadToSave = CKRecord(recordType: "Squad")
+            squadToSave["squadName"] = squadName
+            let squadReference = CKRecord.Reference(record: squadToSave, action: .deleteSelf)
+            var players = [CKRecord.Reference]()
+            self.squad.forEach { (player) in
+                let playerToSave = CKRecord(recordType: "Player")
+                playerToSave["name"] = player.name
+                playerToSave["number"] = player.number
+                playerToSave["captain"] = Int(truncating: NSNumber(value:player.captain))
+                playerToSave["x"] = Double(player.x)
+                playerToSave["y"] = Double(player.y)
+                playerToSave["teamColor"] = player.teamColor.toHexString()
+                playerToSave["squad"] = squadReference
+                let playerReference = CKRecord.Reference(record: playerToSave, action: .deleteSelf)
+                players.append(playerReference)
+                self.uploadPlayer(record: playerToSave)
+            }
+            squadToSave["players"] = players
+            self.uploadSquad(record: squadToSave)
         }
-        squadToSave["players"] = players
-        uploadSquad(record: squadToSave)
     }
     
     func uploadSquad(record: CKRecord) {
@@ -301,4 +321,45 @@ class PitchViewController:
         }
     }
     
+    func presentSquadNameAlert(completion: @escaping ((String?) -> Void)) {
+        DispatchQueue.main.async {
+            let alert = UIAlertController(title: "Squad Name", message: "Please enter the Squad Name", preferredStyle: .alert)
+            alert.addTextField {(_) in }
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (_) in
+                completion(nil)
+                alert.dismiss(animated: true, completion: nil)
+            }
+            alert.addAction(cancelAction)
+            let doneAction = UIAlertAction(title: "Save", style: .default) { (_) in
+                var name: String?
+                if let textField = alert.textFields?.first,
+                    let squadName = textField.text {
+                    name = squadName
+                }
+                completion(name)
+                alert.dismiss(animated: true, completion: nil)
+            }
+            alert.addAction(doneAction)
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
+    
+    func presentSquadLoaderAlert(squadNames: [String], completion: @escaping ((String?)->Void)) {
+        DispatchQueue.main.async {
+            let alert = UIAlertController(title: "Select Squad", message: "Please select a squad to load", preferredStyle: .alert)
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (_) in
+                completion(nil)
+                alert.dismiss(animated: true, completion: nil)
+            }
+            alert.addAction(cancelAction)
+            squadNames.forEach { (squadName) in
+                let alertAction = UIAlertAction(title: squadName, style: .default) { (_) in
+                    completion(squadName)
+                    alert.dismiss(animated: true, completion: nil)
+                }
+                alert.addAction(alertAction)
+            }
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
 }

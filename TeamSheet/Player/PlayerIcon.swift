@@ -24,14 +24,16 @@ class PlayerIcon: UIView, UIGestureRecognizerDelegate {
     let name: String
     let number: String
     let captain: Bool
+    let teamColor: UIColor
     var panGesture: UIPanGestureRecognizer?
     var tapGesture: UITapGestureRecognizer?
     weak var delegate: PlayerIconDelegate?
     
-    init(frame: CGRect, name: String, number: String, captain: Bool) {
+    init(frame: CGRect, name: String, number: String, captain: Bool, teamColor: UIColor) {
         self.name = name
         self.number = number
         self.captain = captain
+        self.teamColor = teamColor
         super.init(frame: frame)
         Bundle.main.loadNibNamed("PlayerIcon", owner: self, options: nil)
         self.addSubview(contentView)
@@ -53,6 +55,7 @@ class PlayerIcon: UIView, UIGestureRecognizerDelegate {
         self.isUserInteractionEnabled = true
         self.addGestureRecognizer(panGesture!)
         self.addGestureRecognizer(tapGesture!)
+        self.containerView.backgroundColor = self.teamColor
         self.nameLabel.text = name
         self.numberLabel.text = number
         if captain {
