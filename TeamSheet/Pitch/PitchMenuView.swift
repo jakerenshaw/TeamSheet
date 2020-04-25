@@ -12,6 +12,8 @@ import UIKit
 protocol PitchMenuViewDelegate: class {
     func toggleOppostion(add: Bool)
     func toggleTitle(add: Bool)
+    func loadSquad()
+    func saveSquad()
 }
 
 class TitleButton: UIButton {
@@ -43,6 +45,7 @@ class PitchMenuView: UIView {
     @IBOutlet var contentView: UIView!
     @IBOutlet weak var titleButton: TitleButton!
     @IBOutlet weak var oppositionButton: OppositionButton!
+    @IBOutlet weak var loadSquadButton: UIButton!
     
     weak var delegate: PitchMenuViewDelegate?
     
@@ -66,6 +69,15 @@ class PitchMenuView: UIView {
     @IBAction func toggleOpposition(_ sender: UIButton) {
         self.oppositionButton.switchOpposition.toggle()
         self.delegate?.toggleOppostion(add: self.oppositionButton.switchOpposition)
+    }
+    
+    @IBAction func loadSquad(_ sender: UIButton) {
+        self.delegate?.loadSquad()
+    }
+    
+    @IBAction func saveSquad(_ sender: UIButton) {
+        
+        self.delegate?.saveSquad()
     }
     
     

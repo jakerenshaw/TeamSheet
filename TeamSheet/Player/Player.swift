@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import CloudKit
 
 enum PlayerType {
     case squad
@@ -52,5 +53,22 @@ class Player: Equatable {
         self.x = x
         self.y = y
         self.teamColor = .white
+    }
+    
+    init?(record: CKRecord) {
+        guard let name = record["name"] as? String,
+            let number = record["number"] as? String,
+            let captain = record["captain"] as? Bool,
+            let x = record["x"] as? CGFloat,
+            let y = record["y"] as? CGFloat,
+            let teamColor = record["teamColor"] as? String else {
+            return nil
+        }
+        self.name = name
+        self.number = number
+        self.captain = captain
+        self.x = x
+        self.y = y
+        self.teamColor = UIColor(hexString: teamColor)
     }
 }

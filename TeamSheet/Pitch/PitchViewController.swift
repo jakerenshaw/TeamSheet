@@ -8,6 +8,7 @@
 
 import UIKit
 import SnapKit
+import CloudKit
 
 class PitchViewController:
     UIViewController,
@@ -22,7 +23,9 @@ class PitchViewController:
     var playerIcons = [PlayerIcon]()
     var oppositionIcons = [PlayerIcon]()
     var pitchMenuView: PitchMenuView?
-
+    let publicDataBase = CKContainer.default().publicCloudDatabase
+    let privateDataBase = CKContainer.default().privateCloudDatabase
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let menuImage: UIImage?
@@ -141,17 +144,17 @@ class PitchViewController:
     
     func draggedView(_ sender:UIPanGestureRecognizer, viewDrag: PlayerIcon) {
         guard let senderView = sender.view else {
-          return
+            return
         }
-
+        
         var translation = sender.translation(in: view)
-
+        
         translation.x = max(translation.x, pitchImageView.frame.minX - viewDrag.frame.minX)
         translation.x = min(translation.x, pitchImageView.frame.maxX - viewDrag.frame.maxX)
-
+        
         translation.y = max(translation.y, pitchImageView.frame.minY - viewDrag.frame.minY)
         translation.y = min(translation.y, pitchImageView.frame.maxY - viewDrag.frame.maxY)
-
+        
         senderView.center = CGPoint(x: senderView.center.x + translation.x, y: senderView.center.y + translation.y)
         sender.setTranslation(.zero, in: view)
         view.bringSubviewToFront(senderView)
@@ -212,5 +215,90 @@ class PitchViewController:
             self.navigationItem.titleView = nil
         }
     }
-
+    
+    func loadSquad() {
+        let predicate = NSPredicate(value: true)
+        let query = CKQuery(recordType: "Squad", predicate: predicate)
+        self.publicDataBase.perform(
+            query,
+            inZoneWith: CKRecordZone.default().zoneID) { [weak self] results, error in
+                guard let self = self else { return }
+                    if let error = error {
+                        DispatchQueue.main.async {
+                            print(error)
+                        }
+                        return
+                    }
+                guard let results = results else { return }
+                if let players = results.first!["players"] as? [CKRecord.Reference] {
+                    self.fetchPlayers(references: players)
+                }
+                print(self.publicDataBase)
+        }
+    }
+    
+    func fetchPlayers(references: [CKRecord.Reference]) {
+        let recordIDs = references.map { $0.recordID }
+        let operation = CKFetchRecordsOperation(recordIDs: recordIDs)
+        operation.qualityOfService = .utility
+        operation.fetchRecordsCompletionBlock = { records, error in
+            if let error = error {
+                print(error)
+            }
+            if let records = records {
+                print(records)
+                records.forEach { (_, record) in
+                    if let player = Player(record: record) {
+                        print(player)
+                    }
+                }
+            }
+        }
+        self.privateDataBase.add(operation)
+    }
+    
+    func saveSquad() {
+        let squadToSave = CKRecord(recordType: "Squad")
+        squadToSave["squadName"] = "testSquad"
+        let squadReference = CKRecord.Reference(record: squadToSave, action: .none)
+        var players = [CKRecord.Reference]()
+        squad.forEach { (player) in
+            let playerToSave = CKRecord(recordType: "Player")
+            playerToSave["name"] = player.name
+            playerToSave["number"] = player.number
+            playerToSave["captain"] = Int(truncating: NSNumber(value:player.captain))
+            playerToSave["x"] = Double(player.x)
+            playerToSave["y"] = Double(player.y)
+            playerToSave["teamColor"] = player.teamColor.toHexString()
+            playerToSave["squad"] = squadReference
+            let playerReference = CKRecord.Reference(record: playerToSave, action: .deleteSelf)
+            players.append(playerReference)
+            uploadPlayer(record: playerToSave)
+        }
+        squadToSave["players"] = players
+        uploadSquad(record: squadToSave)
+    }
+    
+    func uploadSquad(record: CKRecord) {
+        self.publicDataBase.save(record) { (record, error) in
+            if let error = error {
+                print(">>> squad error = \(error)")
+            }
+            if let record = record {
+                print(">>> squad complete = \(record)")
+            }
+        }
+    }
+    
+    func uploadPlayer(record: CKRecord) {
+        self.privateDataBase.save(record) { (record, error) in
+            if let error = error {
+                print(">>> player error = \(error)")
+            }
+            if let record = record {
+                print(">>> player complete = \(record)")
+            }
+        }
+    }
+    
 }

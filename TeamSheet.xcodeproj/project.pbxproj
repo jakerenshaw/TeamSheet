@@ -18,6 +18,7 @@
 		B6151F67225A25AB008A9185 /* PlayerIcon.xib in Resources */ = {isa = PBXBuildFile; fileRef = B6151F66225A25AB008A9185 /* PlayerIcon.xib */; };
 		B6151F6B225A277D008A9185 /* PlayerIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6151F6A225A277D008A9185 /* PlayerIcon.swift */; };
 		B655C3EA23E70AE3000E6994 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = B655C3E923E70AE3000E6994 /* Player.swift */; };
+		B670FBCA24547E5500269044 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B670FBC924547E5500269044 /* CloudKit.framework */; };
 		B67CB28324477C8800C97273 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67CB28224477C8800C97273 /* Colors.swift */; };
 		B68C9CDB24449F21002900C8 /* PitchMenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B68C9CDA24449F21002900C8 /* PitchMenuView.xib */; };
 		B6AF0290244746D500409AB9 /* PitchMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6AF028F244746D500409AB9 /* PitchMenuView.swift */; };
@@ -40,6 +41,8 @@
 		B6151F66225A25AB008A9185 /* PlayerIcon.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlayerIcon.xib; sourceTree = "<group>"; };
 		B6151F6A225A277D008A9185 /* PlayerIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerIcon.swift; sourceTree = "<group>"; };
 		B655C3E923E70AE3000E6994 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		B670FBC824547E4B00269044 /* TeamSheet.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TeamSheet.entitlements; sourceTree = "<group>"; };
+		B670FBC924547E5500269044 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		B67CB28224477C8800C97273 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		B68C9CDA24449F21002900C8 /* PitchMenuView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PitchMenuView.xib; sourceTree = "<group>"; };
 		B6AF028F244746D500409AB9 /* PitchMenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PitchMenuView.swift; sourceTree = "<group>"; };
@@ -54,6 +57,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E7AAD268A51613E4B3473D97 /* Pods_TeamSheet.framework in Frameworks */,
+				B670FBCA24547E5500269044 /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -81,6 +85,7 @@
 		B6151F4D225A0123008A9185 /* TeamSheet */ = {
 			isa = PBXGroup;
 			children = (
+				B670FBC824547E4B00269044 /* TeamSheet.entitlements */,
 				B6AF02962447640700409AB9 /* Helpers */,
 				B6AF029324474AA200409AB9 /* Squad */,
 				B6AF0292244749A700409AB9 /* Player */,
@@ -145,6 +150,7 @@
 		D33AD789BCBF1D3D3971DD16 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B670FBC924547E5500269044 /* CloudKit.framework */,
 				E557A2A3BE657EB592C542E3 /* Pods_TeamSheet.framework */,
 			);
 			name = Frameworks;
@@ -423,6 +429,7 @@
 			baseConfigurationReference = CBC8CCE496B24DF6637BCDD4 /* Pods-TeamSheet.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = TeamSheet/TeamSheet.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = HYR5KL46R6;
 				INFOPLIST_FILE = TeamSheet/Info.plist;
@@ -444,6 +451,7 @@
 			baseConfigurationReference = 33436A15C34CCBF41B228849 /* Pods-TeamSheet.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = TeamSheet/TeamSheet.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = HYR5KL46R6;
 				INFOPLIST_FILE = TeamSheet/Info.plist;
