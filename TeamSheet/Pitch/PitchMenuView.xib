@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina5_5" orientation="portrait" appearance="light"/>
+    <device id="retina5_5" orientation="portrait" appearance="dark"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
@@ -10,9 +10,12 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PitchMenuView" customModule="TeamSheet" customModuleProvider="target">
             <connections>
+                <outlet property="buttonStackView" destination="GdS-ad-axw" id="F01-ZU-xch"/>
                 <outlet property="contentView" destination="iN0-l3-epB" id="rVA-4G-pOb"/>
                 <outlet property="loadSquadButton" destination="aqb-FZ-la2" id="FJv-qL-HWA"/>
                 <outlet property="oppositionButton" destination="eR2-z4-r5F" id="cOl-V0-I6M"/>
+                <outlet property="saveSquadButton" destination="3zL-qg-zf2" id="uWe-Xb-g7g"/>
+                <outlet property="stackViewContainerView" destination="nOa-Aw-ITM" id="zu8-bK-h5u"/>
                 <outlet property="titleButton" destination="RYP-8W-4nC" id="rxh-Ii-q7m"/>
             </connections>
         </placeholder>
@@ -21,60 +24,71 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="GdS-ad-axw">
-                    <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nOa-Aw-ITM">
+                    <rect key="frame" x="6" y="0.0" width="157" height="196"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RYP-8W-4nC" customClass="TitleButton" customModule="TeamSheet" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="184"/>
-                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="24"/>
-                            <state key="normal" title="+ Title">
-                                <color key="titleColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </state>
-                            <connections>
-                                <action selector="toggleTitle:" destination="-1" eventType="touchUpInside" id="7fi-Qd-VDR"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eR2-z4-r5F" customClass="OppositionButton" customModule="TeamSheet" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="184" width="414" height="184"/>
-                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="24"/>
-                            <state key="normal" title="+ Opposition">
-                                <color key="titleColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </state>
-                            <connections>
-                                <action selector="toggleOpposition:" destination="-1" eventType="touchUpInside" id="JME-az-OcL"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aqb-FZ-la2">
-                            <rect key="frame" x="0.0" y="368" width="414" height="184"/>
-                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="24"/>
-                            <state key="normal" title="Load Squad">
-                                <color key="titleColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </state>
-                            <connections>
-                                <action selector="loadSquad:" destination="-1" eventType="touchUpInside" id="gnq-ql-kAu"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3zL-qg-zf2">
-                            <rect key="frame" x="0.0" y="552" width="414" height="184"/>
-                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="24"/>
-                            <state key="normal" title="Save Squad">
-                                <color key="titleColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </state>
-                            <connections>
-                                <action selector="saveSquad:" destination="-1" eventType="touchUpInside" id="pQW-M5-for"/>
-                            </connections>
-                        </button>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="GdS-ad-axw">
+                            <rect key="frame" x="8" y="4" width="141" height="188"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RYP-8W-4nC" customClass="TitleButton" customModule="TeamSheet" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="0.0" width="141" height="41"/>
+                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="24"/>
+                                    <inset key="contentEdgeInsets" minX="-1" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                    <state key="normal" title="+ Title">
+                                        <color key="titleColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="toggleTitle:" destination="-1" eventType="touchUpInside" id="7fi-Qd-VDR"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eR2-z4-r5F" customClass="OppositionButton" customModule="TeamSheet" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="49" width="141" height="41"/>
+                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="24"/>
+                                    <state key="normal" title="+ Opposition">
+                                        <color key="titleColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="toggleOpposition:" destination="-1" eventType="touchUpInside" id="JME-az-OcL"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aqb-FZ-la2">
+                                    <rect key="frame" x="0.0" y="98" width="141" height="41"/>
+                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="24"/>
+                                    <state key="normal" title="Load Squad">
+                                        <color key="titleColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="loadSquad:" destination="-1" eventType="touchUpInside" id="gnq-ql-kAu"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3zL-qg-zf2">
+                                    <rect key="frame" x="0.0" y="147" width="141" height="41"/>
+                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="24"/>
+                                    <state key="normal" title="Save Squad">
+                                        <color key="titleColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="saveSquad:" destination="-1" eventType="touchUpInside" id="pQW-M5-for"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </stackView>
                     </subviews>
-                </stackView>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="GdS-ad-axw" secondAttribute="bottom" constant="4" id="3kR-G7-Pv9"/>
+                        <constraint firstItem="GdS-ad-axw" firstAttribute="top" secondItem="nOa-Aw-ITM" secondAttribute="top" constant="4" id="I2B-AP-ear"/>
+                        <constraint firstItem="GdS-ad-axw" firstAttribute="leading" secondItem="nOa-Aw-ITM" secondAttribute="leading" constant="8" id="M1f-iV-wAo"/>
+                        <constraint firstAttribute="trailing" secondItem="GdS-ad-axw" secondAttribute="trailing" constant="8" id="RXc-sM-EQE"/>
+                    </constraints>
+                </view>
             </subviews>
-            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
             <constraints>
-                <constraint firstItem="GdS-ad-axw" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="2CF-jV-bcQ"/>
-                <constraint firstAttribute="bottom" secondItem="GdS-ad-axw" secondAttribute="bottom" id="NPs-9O-skw"/>
-                <constraint firstItem="GdS-ad-axw" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="VTd-hV-hSN"/>
-                <constraint firstAttribute="trailing" secondItem="GdS-ad-axw" secondAttribute="trailing" id="tZB-bC-tiW"/>
+                <constraint firstItem="nOa-Aw-ITM" firstAttribute="top" secondItem="Bnj-jO-BJQ" secondAttribute="top" id="eYs-bG-DDx"/>
+                <constraint firstItem="nOa-Aw-ITM" firstAttribute="leading" secondItem="Bnj-jO-BJQ" secondAttribute="leading" constant="6" id="tVZ-WK-S8G"/>
             </constraints>
-            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <viewLayoutGuide key="safeArea" id="Bnj-jO-BJQ"/>
             <point key="canvasLocation" x="139" y="133"/>
         </view>
     </objects>

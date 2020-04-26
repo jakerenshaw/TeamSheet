@@ -20,6 +20,9 @@
 		B655C3EA23E70AE3000E6994 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = B655C3E923E70AE3000E6994 /* Player.swift */; };
 		B670FBCA24547E5500269044 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B670FBC924547E5500269044 /* CloudKit.framework */; };
 		B67CB28324477C8800C97273 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67CB28224477C8800C97273 /* Colors.swift */; };
+		B680A00E2455C94A0034E0CC /* PrivateDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B680A00D2455C94A0034E0CC /* PrivateDatabase.swift */; };
+		B680A0102455F00C0034E0CC /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = B680A00F2455F00C0034E0CC /* Errors.swift */; };
+		B680A0132455F45F0034E0CC /* AlertPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B680A0122455F45F0034E0CC /* AlertPresenter.swift */; };
 		B68C9CDB24449F21002900C8 /* PitchMenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B68C9CDA24449F21002900C8 /* PitchMenuView.xib */; };
 		B6AF0290244746D500409AB9 /* PitchMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6AF028F244746D500409AB9 /* PitchMenuView.swift */; };
 		B6AF02982447642700409AB9 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6AF02972447642700409AB9 /* Extensions.swift */; };
@@ -44,6 +47,9 @@
 		B670FBC824547E4B00269044 /* TeamSheet.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TeamSheet.entitlements; sourceTree = "<group>"; };
 		B670FBC924547E5500269044 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		B67CB28224477C8800C97273 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		B680A00D2455C94A0034E0CC /* PrivateDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateDatabase.swift; sourceTree = "<group>"; };
+		B680A00F2455F00C0034E0CC /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
+		B680A0122455F45F0034E0CC /* AlertPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertPresenter.swift; sourceTree = "<group>"; };
 		B68C9CDA24449F21002900C8 /* PitchMenuView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PitchMenuView.xib; sourceTree = "<group>"; };
 		B6AF028F244746D500409AB9 /* PitchMenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PitchMenuView.swift; sourceTree = "<group>"; };
 		B6AF02972447642700409AB9 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -85,6 +91,8 @@
 		B6151F4D225A0123008A9185 /* TeamSheet */ = {
 			isa = PBXGroup;
 			children = (
+				B680A0112455F4090034E0CC /* Presenter */,
+				B680A00C2455C90A0034E0CC /* CloudKit */,
 				B670FBC824547E4B00269044 /* TeamSheet.entitlements */,
 				B6AF02962447640700409AB9 /* Helpers */,
 				B6AF029324474AA200409AB9 /* Squad */,
@@ -97,6 +105,23 @@
 				B6151F52225A0123008A9185 /* Main.storyboard */,
 			);
 			path = TeamSheet;
+			sourceTree = "<group>";
+		};
+		B680A00C2455C90A0034E0CC /* CloudKit */ = {
+			isa = PBXGroup;
+			children = (
+				B680A00D2455C94A0034E0CC /* PrivateDatabase.swift */,
+				B680A00F2455F00C0034E0CC /* Errors.swift */,
+			);
+			path = CloudKit;
+			sourceTree = "<group>";
+		};
+		B680A0112455F4090034E0CC /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				B680A0122455F45F0034E0CC /* AlertPresenter.swift */,
+			);
+			path = Presenter;
 			sourceTree = "<group>";
 		};
 		B6AF0291244748FA00409AB9 /* Pitch */ = {
@@ -281,8 +306,11 @@
 				B6AF02982447642700409AB9 /* Extensions.swift in Sources */,
 				B6151F62225A042F008A9185 /* SquadTableViewCell.swift in Sources */,
 				B655C3EA23E70AE3000E6994 /* Player.swift in Sources */,
+				B680A0102455F00C0034E0CC /* Errors.swift in Sources */,
 				B6AF0290244746D500409AB9 /* PitchMenuView.swift in Sources */,
+				B680A00E2455C94A0034E0CC /* PrivateDatabase.swift in Sources */,
 				B6151F65225A090D008A9185 /* PitchViewController.swift in Sources */,
+				B680A0132455F45F0034E0CC /* AlertPresenter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -6,14 +6,11 @@
 //  Copyright © 2019 Jake Renshaw. All rights reserved.
 //
 
-import UIKit
 import SnapKit
-import CloudKit
 
 class PitchViewController:
     UIViewController,
-    PlayerIconDelegate,
-    PitchMenuViewDelegate
+    PlayerIconDelegate
 {
     
     @IBOutlet weak var pitchImageView: UIImageView!
@@ -23,8 +20,16 @@ class PitchViewController:
     var playerIcons = [PlayerIcon]()
     var oppositionIcons = [PlayerIcon]()
     var pitchMenuView: PitchMenuView?
-    let publicDataBase = CKContainer.default().publicCloudDatabase
-    let privateDataBase = CKContainer.default().privateCloudDatabase
+    
+    lazy var privateDatabase: PrivateDatabase = {
+        let privateDatabase = PrivateDatabase()
+        privateDatabase.delegate = self
+        return privateDatabase
+    }()
+    
+    lazy var alertPresenter: AlertPresenter = {
+        AlertPresenter(presentationController: self)
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,15 +51,13 @@ class PitchViewController:
             menu.removeFromSuperview()
             self.pitchMenuView = nil
         } else {
-            let menuWidth: CGFloat = 200
-            let menuHeight: CGFloat = 80
             let pitchFrame = self.pitchImageView.frame
             pitchMenuView = PitchMenuView(
                 frame: CGRect(
-                    x: pitchFrame.width - menuWidth,
+                    x: pitchFrame.width,
                     y: pitchFrame.origin.y,
-                    width: menuWidth,
-                    height: menuHeight
+                    width: 0,
+                    height: 0
                 )
             )
             pitchMenuView?.delegate = self
@@ -215,151 +218,80 @@ class PitchViewController:
             self.navigationItem.titleView = nil
         }
     }
-    
+}
+
+extension PitchViewController: PitchMenuViewDelegate {
     func loadSquad() {
-        let predicate = NSPredicate(value: true)
-        let query = CKQuery(recordType: "Squad", predicate: predicate)
-        self.publicDataBase.perform(
-            query,
-            inZoneWith: CKRecordZone.default().zoneID) { [weak self] results, error in
-                guard let self = self else { return }
-                    if let error = error {
-                        DispatchQueue.main.async {
-                            print(">>> \(error)")
-                        }
-                        return
-                    }
-                guard let results = results else { return }
-                var squadNames = [String]()
-                results.forEach { (record) in
-                    if let squadName = record["squadName"] as? String {
-                        squadNames.append(squadName)
-                    }
-                }
-                self.presentSquadLoaderAlert(squadNames: squadNames) { (chosenSquad) in
-                    let squad = results.first { (record) -> Bool in
-                        record["squadName"] as? String == chosenSquad
-                    }
-                    if let players = squad?["players"] as? [CKRecord.Reference] {
-                        self.fetchPlayers(references: players)
-                    }
-                }
-        }
-    }
-    
-    func fetchPlayers(references: [CKRecord.Reference]) {
-        let recordIDs = references.map { $0.recordID }
-        let operation = CKFetchRecordsOperation(recordIDs: recordIDs)
-        operation.qualityOfService = .utility
-        operation.fetchRecordsCompletionBlock = { records, error in
-            if let error = error {
-                print(">>> \(error)")
-            }
-            if let records = records {
-                var newPlayers = [Player]()
-                records.forEach { (_, record) in
-                    if let player = Player(record: record) {
-                        newPlayers.append(player)
-                    }
-                }
-                DispatchQueue.main.async {
-                    self.removeSquad()
-                    self.squad = newPlayers
-                    self.sortSquad()
-                }
-            }
-        }
-        self.privateDataBase.add(operation)
+        self.privateDatabase.loadSquad()
     }
     
     func saveSquad() {
-        self.presentSquadNameAlert { (squadName) in
-            guard let squadName = squadName else {
-                return
-            }
-            let squadToSave = CKRecord(recordType: "Squad")
-            squadToSave["squadName"] = squadName
-            let squadReference = CKRecord.Reference(record: squadToSave, action: .deleteSelf)
-            var players = [CKRecord.Reference]()
-            self.squad.forEach { (player) in
-                let playerToSave = CKRecord(recordType: "Player")
-                playerToSave["name"] = player.name
-                playerToSave["number"] = player.number
-                playerToSave["captain"] = Int(truncating: NSNumber(value:player.captain))
-                playerToSave["x"] = Double(player.x)
-                playerToSave["y"] = Double(player.y)
-                playerToSave["teamColor"] = player.teamColor.toHexString()
-                playerToSave["squad"] = squadReference
-                let playerReference = CKRecord.Reference(record: playerToSave, action: .deleteSelf)
-                players.append(playerReference)
-                self.uploadPlayer(record: playerToSave)
-            }
-            squadToSave["players"] = players
-            self.uploadSquad(record: squadToSave)
-        }
+        self.privateDatabase.saveSquad(squad: self.squad)
+    }
+}
+
+extension PitchViewController: PrivateDatabaseDelegate {
+    
+    func presentRecordExistsError() {
+        let recordExistsContent = AlertContent(
+            title: "Duplicate Squad Name",
+            message: "The Squad name chosen already exists. Please choose another",
+            actions: [.ok]
+        )
+        self.alertPresenter.presentAlert(alertContent: recordExistsContent)
     }
     
-    func uploadSquad(record: CKRecord) {
-        self.publicDataBase.save(record) { (record, error) in
-            if let error = error {
-                print(">>> squad error = \(error)")
-            }
-            if let record = record {
-                print(">>> squad complete = \(record)")
-            }
-        }
+    func presentSuccessAlert(squadName: String) {
+        let cloudSignInContent = AlertContent(
+            title: "Squad Saved",
+            message: "\(squadName) has been saved successfully",
+            actions: [.ok]
+        )
+        self.alertPresenter.presentAlert(alertContent: cloudSignInContent)
     }
     
-    func uploadPlayer(record: CKRecord) {
-        self.privateDataBase.save(record) { (record, error) in
-            if let error = error {
-                print(">>> player error = \(error)")
-            }
-            if let record = record {
-                print(">>> player complete = \(record)")
-            }
-        }
+    func presentCloudSignInError() {
+        let cloudSignInContent = AlertContent(
+            title: "Sign into iCloud",
+            message: "Please sign in to iCloud to load/save squads.",
+            actions: [.cancel(), .settings(preferred: true)]
+        )
+        self.alertPresenter.presentAlert(alertContent: cloudSignInContent)
+    }
+    
+    func presentSquadLoaderAlert(squadNames: [String], completion: @escaping ((String?) -> Void)) {
+        let squadLoaderContent = AlertContent(
+            title: "Select Squad",
+            message: "Please select a squad to load",
+            actions: [
+                .cancel(completion: completion),
+                .squad(squadNames: squadNames, completion: completion)
+            ]
+        )
+        self.alertPresenter.presentAlert(alertContent: squadLoaderContent)
     }
     
     func presentSquadNameAlert(completion: @escaping ((String?) -> Void)) {
-        DispatchQueue.main.async {
-            let alert = UIAlertController(title: "Squad Name", message: "Please enter the Squad Name", preferredStyle: .alert)
-            alert.addTextField {(_) in }
-            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (_) in
-                completion(nil)
-                alert.dismiss(animated: true, completion: nil)
-            }
-            alert.addAction(cancelAction)
-            let doneAction = UIAlertAction(title: "Save", style: .default) { (_) in
-                var name: String?
-                if let textField = alert.textFields?.first,
-                    let squadName = textField.text {
-                    name = squadName
-                }
-                completion(name)
-                alert.dismiss(animated: true, completion: nil)
-            }
-            alert.addAction(doneAction)
-            self.present(alert, animated: true, completion: nil)
+        if let squadName = (navigationItem.titleView as? UITextField)?.text {
+            completion(squadName)
+        } else {
+            let squadNameContent = AlertContent(
+                title: "Squad Name",
+                message: "Please enter the Squad Name",
+                actions: [
+                    .cancel(completion: completion),
+                    .save(completion: completion)
+                ]
+            )
+            self.alertPresenter.presentAlert(alertContent: squadNameContent)
         }
     }
     
-    func presentSquadLoaderAlert(squadNames: [String], completion: @escaping ((String?)->Void)) {
+    func fetchedPlayers(players: [Player]) {
         DispatchQueue.main.async {
-            let alert = UIAlertController(title: "Select Squad", message: "Please select a squad to load", preferredStyle: .alert)
-            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (_) in
-                completion(nil)
-                alert.dismiss(animated: true, completion: nil)
-            }
-            alert.addAction(cancelAction)
-            squadNames.forEach { (squadName) in
-                let alertAction = UIAlertAction(title: squadName, style: .default) { (_) in
-                    completion(squadName)
-                    alert.dismiss(animated: true, completion: nil)
-                }
-                alert.addAction(alertAction)
-            }
-            self.present(alert, animated: true, completion: nil)
+            self.removeSquad()
+            self.squad = players
+            self.sortSquad()
         }
     }
 }

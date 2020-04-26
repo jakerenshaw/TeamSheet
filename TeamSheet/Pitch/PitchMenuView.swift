@@ -43,15 +43,19 @@ class OppositionButton: UIButton {
 class PitchMenuView: UIView {
     
     @IBOutlet var contentView: UIView!
+    @IBOutlet weak var stackViewContainerView: UIView!
+    @IBOutlet weak var buttonStackView: UIStackView!
     @IBOutlet weak var titleButton: TitleButton!
     @IBOutlet weak var oppositionButton: OppositionButton!
     @IBOutlet weak var loadSquadButton: UIButton!
+    @IBOutlet weak var saveSquadButton: UIButton!
     
     weak var delegate: PitchMenuViewDelegate?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         Bundle.main.loadNibNamed("PitchMenuView", owner: self, options: nil)
+        self.updateFrame()
         self.addSubview(contentView)
         contentView.frame = self.bounds
         contentView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
@@ -59,6 +63,10 @@ class PitchMenuView: UIView {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func updateFrame() {
+        self.frame = CGRect(x: self.frame.origin.x - self.stackViewContainerView.frame.width, y: self.frame.origin.y, width: self.stackViewContainerView.frame.width, height: self.stackViewContainerView.frame.height)
     }
     
     @IBAction func toggleTitle(_ sender: UIButton) {
