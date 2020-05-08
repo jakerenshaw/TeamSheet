@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="QPa-O0-Tkm">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -8,34 +8,45 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Main View Controller-->
+        <!--Root View Controller-->
         <scene sceneID="Kgm-a2-G3Y">
             <objects>
-                <viewController storyboardIdentifier="MainViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="QPa-O0-Tkm" customClass="MainViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RootViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="QPa-O0-Tkm" customClass="RootViewController" customModule="TeamSheet" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="RQN-jt-5Yx">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pitch" translatesAutoresizingMaskIntoConstraints="NO" id="uTA-LS-4xv">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="789-zc-4ds">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="587"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xZA-XF-3VD">
+                                <rect key="frame" x="0.0" y="587" width="375" height="80"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="80" id="Jun-MV-yCa"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="uTA-LS-4xv" firstAttribute="top" secondItem="9NF-32-zWh" secondAttribute="top" id="DhN-PL-QDH"/>
-                            <constraint firstItem="9NF-32-zWh" firstAttribute="bottom" secondItem="uTA-LS-4xv" secondAttribute="bottom" id="EkW-pa-y6e"/>
-                            <constraint firstItem="9NF-32-zWh" firstAttribute="trailing" secondItem="uTA-LS-4xv" secondAttribute="trailing" id="w8W-4u-40v"/>
-                            <constraint firstItem="uTA-LS-4xv" firstAttribute="leading" secondItem="9NF-32-zWh" secondAttribute="leading" id="xqT-sw-fSE"/>
+                            <constraint firstItem="9NF-32-zWh" firstAttribute="bottom" secondItem="xZA-XF-3VD" secondAttribute="bottom" id="5sP-ru-Atu"/>
+                            <constraint firstAttribute="trailing" secondItem="789-zc-4ds" secondAttribute="trailing" id="Ohg-wS-ODK"/>
+                            <constraint firstItem="xZA-XF-3VD" firstAttribute="top" secondItem="789-zc-4ds" secondAttribute="bottom" id="a1R-Zo-XJo"/>
+                            <constraint firstItem="xZA-XF-3VD" firstAttribute="leading" secondItem="RQN-jt-5Yx" secondAttribute="leading" id="f2q-kZ-1ny"/>
+                            <constraint firstAttribute="trailing" secondItem="xZA-XF-3VD" secondAttribute="trailing" id="idG-tP-TxP"/>
+                            <constraint firstItem="789-zc-4ds" firstAttribute="leading" secondItem="RQN-jt-5Yx" secondAttribute="leading" id="mij-JV-79o"/>
+                            <constraint firstItem="789-zc-4ds" firstAttribute="top" secondItem="9NF-32-zWh" secondAttribute="top" id="xVA-1B-5As"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="9NF-32-zWh"/>
                     </view>
+                    <connections>
+                        <outlet property="mainContainerView" destination="RQN-jt-5Yx" id="gX3-Yy-VPK"/>
+                        <outlet property="pageContainerView" destination="789-zc-4ds" id="AM2-jM-8pJ"/>
+                        <outlet property="tabContainerView" destination="xZA-XF-3VD" id="OXq-ED-gQm"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MbG-2f-t39" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1556" y="-679"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="pitch" width="768" height="1024"/>
-    </resources>
 </document>
