@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 protocol TabViewDelegate: class {
-    func setSelectedTab(tabType: TabType)
+    func setCurrentTab(currentTab: TabType)
 }
 
 class TabView: UIView, UIGestureRecognizerDelegate {
@@ -47,15 +47,14 @@ class TabView: UIView, UIGestureRecognizerDelegate {
     }
     
     @objc func viewTapped() {
-        self.selected = true
+        self.delegate?.setCurrentTab(currentTab: self.tabType)
     }
     
     func setSelected() {
         self.tintColor = .green
-        self.delegate?.setSelectedTab(tabType: self.tabType)
     }
     
     func setUnselected() {
-        self.tintColor = .clear
+        self.tintColor = .black
     }
 }

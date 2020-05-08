@@ -17,7 +17,7 @@ protocol TabViewControllerDelegate: class {
     func setPage(tab: TabType)
 }
 
-class TabViewController: UIViewController {
+class TabViewController: UIViewController, TabViewDelegate {
     
     @IBOutlet weak var tabStackView: UIStackView!
     weak var delegate: TabViewControllerDelegate?
@@ -36,7 +36,7 @@ class TabViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.addTabs()
-        self.setInitialTab()
+        self.setCurrentTab(currentTab: .squad)
     }
     
     func addTabs() {
@@ -57,20 +57,17 @@ class TabViewController: UIViewController {
         }
     }
     
-    func setInitialTab() {
+    func setCurrentTab(currentTab: TabType) {
         tabStackView.arrangedSubviews.forEach { (view) in
             guard let tab = view as? TabView else {
                 return
             }
-            if tab.tabType == .squad {
+            if tab.tabType == currentTab {
                 tab.selected = true
+                self.delegate?.setPage(tab: currentTab)
+            } else {
+                tab.selected = false
             }
         }
-    }
-}
-
-extension TabViewController: TabViewDelegate {
-    func setSelectedTab(tabType: TabType) {
-        self.delegate?.setPage(tab: tabType)
     }
 }
