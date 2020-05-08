@@ -8,13 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		B6151F4F225A0123008A9185 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6151F4E225A0123008A9185 /* AppDelegate.swift */; };
-		B6151F51225A0123008A9185 /* SquadTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6151F50225A0123008A9185 /* SquadTableViewController.swift */; };
 		B6151F54225A0123008A9185 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6151F52225A0123008A9185 /* Main.storyboard */; };
 		B6151F56225A0124008A9185 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B6151F55225A0124008A9185 /* Assets.xcassets */; };
 		B6151F59225A0124008A9185 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6151F57225A0124008A9185 /* LaunchScreen.storyboard */; };
 		B6151F62225A042F008A9185 /* SquadTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6151F60225A042F008A9185 /* SquadTableViewCell.swift */; };
 		B6151F63225A042F008A9185 /* SquadTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B6151F61225A042F008A9185 /* SquadTableViewCell.xib */; };
-		B6151F65225A090D008A9185 /* PitchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6151F64225A090D008A9185 /* PitchViewController.swift */; };
 		B6151F67225A25AB008A9185 /* PlayerIcon.xib in Resources */ = {isa = PBXBuildFile; fileRef = B6151F66225A25AB008A9185 /* PlayerIcon.xib */; };
 		B6151F6B225A277D008A9185 /* PlayerIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6151F6A225A277D008A9185 /* PlayerIcon.swift */; };
 		B655C3EA23E70AE3000E6994 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = B655C3E923E70AE3000E6994 /* Player.swift */; };
@@ -22,11 +20,15 @@
 		B65A2FDB246597140018EC6B /* TabViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B65A2FD9246597140018EC6B /* TabViewController.xib */; };
 		B65A2FDD24659BA70018EC6B /* TabView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B65A2FDC24659BA60018EC6B /* TabView.xib */; };
 		B65A2FDF24659BB60018EC6B /* TabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65A2FDE24659BB60018EC6B /* TabView.swift */; };
+		B65A2FE42465A5530018EC6B /* SquadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65A2FE22465A5530018EC6B /* SquadViewController.swift */; };
+		B65A2FE52465A5530018EC6B /* SquadViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B65A2FE32465A5530018EC6B /* SquadViewController.xib */; };
 		B670FBCA24547E5500269044 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B670FBC924547E5500269044 /* CloudKit.framework */; };
 		B67CB28324477C8800C97273 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67CB28224477C8800C97273 /* Colors.swift */; };
 		B680A00E2455C94A0034E0CC /* PrivateDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B680A00D2455C94A0034E0CC /* PrivateDatabase.swift */; };
 		B680A0102455F00C0034E0CC /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = B680A00F2455F00C0034E0CC /* Errors.swift */; };
 		B680A0132455F45F0034E0CC /* AlertPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B680A0122455F45F0034E0CC /* AlertPresenter.swift */; };
+		B6865C0B2465AA0400284A42 /* PitchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6865C092465AA0400284A42 /* PitchViewController.swift */; };
+		B6865C0C2465AA0400284A42 /* PitchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B6865C0A2465AA0400284A42 /* PitchViewController.xib */; };
 		B68C9CDB24449F21002900C8 /* PitchMenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B68C9CDA24449F21002900C8 /* PitchMenuView.xib */; };
 		B6AF0290244746D500409AB9 /* PitchMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6AF028F244746D500409AB9 /* PitchMenuView.swift */; };
 		B6AF02982447642700409AB9 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6AF02972447642700409AB9 /* Extensions.swift */; };
@@ -37,14 +39,12 @@
 		33436A15C34CCBF41B228849 /* Pods-TeamSheet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TeamSheet.release.xcconfig"; path = "Target Support Files/Pods-TeamSheet/Pods-TeamSheet.release.xcconfig"; sourceTree = "<group>"; };
 		B6151F4B225A0123008A9185 /* TeamSheet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TeamSheet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6151F4E225A0123008A9185 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		B6151F50225A0123008A9185 /* SquadTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SquadTableViewController.swift; sourceTree = "<group>"; };
 		B6151F53225A0123008A9185 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B6151F55225A0124008A9185 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B6151F58225A0124008A9185 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B6151F5A225A0124008A9185 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B6151F60225A042F008A9185 /* SquadTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SquadTableViewCell.swift; sourceTree = "<group>"; };
 		B6151F61225A042F008A9185 /* SquadTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SquadTableViewCell.xib; sourceTree = "<group>"; };
-		B6151F64225A090D008A9185 /* PitchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PitchViewController.swift; sourceTree = "<group>"; };
 		B6151F66225A25AB008A9185 /* PlayerIcon.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlayerIcon.xib; sourceTree = "<group>"; };
 		B6151F6A225A277D008A9185 /* PlayerIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerIcon.swift; sourceTree = "<group>"; };
 		B655C3E923E70AE3000E6994 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
@@ -52,12 +52,16 @@
 		B65A2FD9246597140018EC6B /* TabViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TabViewController.xib; sourceTree = "<group>"; };
 		B65A2FDC24659BA60018EC6B /* TabView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TabView.xib; sourceTree = "<group>"; };
 		B65A2FDE24659BB60018EC6B /* TabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabView.swift; sourceTree = "<group>"; };
+		B65A2FE22465A5530018EC6B /* SquadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SquadViewController.swift; sourceTree = "<group>"; };
+		B65A2FE32465A5530018EC6B /* SquadViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SquadViewController.xib; sourceTree = "<group>"; };
 		B670FBC824547E4B00269044 /* TeamSheet.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TeamSheet.entitlements; sourceTree = "<group>"; };
 		B670FBC924547E5500269044 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		B67CB28224477C8800C97273 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		B680A00D2455C94A0034E0CC /* PrivateDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivateDatabase.swift; sourceTree = "<group>"; };
 		B680A00F2455F00C0034E0CC /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		B680A0122455F45F0034E0CC /* AlertPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertPresenter.swift; sourceTree = "<group>"; };
+		B6865C092465AA0400284A42 /* PitchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PitchViewController.swift; sourceTree = "<group>"; };
+		B6865C0A2465AA0400284A42 /* PitchViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PitchViewController.xib; sourceTree = "<group>"; };
 		B68C9CDA24449F21002900C8 /* PitchMenuView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PitchMenuView.xib; sourceTree = "<group>"; };
 		B6AF028F244746D500409AB9 /* PitchMenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PitchMenuView.swift; sourceTree = "<group>"; };
 		B6AF02972447642700409AB9 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -148,8 +152,9 @@
 			isa = PBXGroup;
 			children = (
 				B6AF028F244746D500409AB9 /* PitchMenuView.swift */,
-				B6151F64225A090D008A9185 /* PitchViewController.swift */,
 				B68C9CDA24449F21002900C8 /* PitchMenuView.xib */,
+				B6865C092465AA0400284A42 /* PitchViewController.swift */,
+				B6865C0A2465AA0400284A42 /* PitchViewController.xib */,
 			);
 			path = Pitch;
 			sourceTree = "<group>";
@@ -168,8 +173,9 @@
 			isa = PBXGroup;
 			children = (
 				B6151F60225A042F008A9185 /* SquadTableViewCell.swift */,
-				B6151F50225A0123008A9185 /* SquadTableViewController.swift */,
 				B6151F61225A042F008A9185 /* SquadTableViewCell.xib */,
+				B65A2FE22465A5530018EC6B /* SquadViewController.swift */,
+				B65A2FE32465A5530018EC6B /* SquadViewController.xib */,
 			);
 			path = Squad;
 			sourceTree = "<group>";
@@ -264,7 +270,9 @@
 				B65A2FDB246597140018EC6B /* TabViewController.xib in Resources */,
 				B6151F59225A0124008A9185 /* LaunchScreen.storyboard in Resources */,
 				B6151F56225A0124008A9185 /* Assets.xcassets in Resources */,
+				B65A2FE52465A5530018EC6B /* SquadViewController.xib in Resources */,
 				B68C9CDB24449F21002900C8 /* PitchMenuView.xib in Resources */,
+				B6865C0C2465AA0400284A42 /* PitchViewController.xib in Resources */,
 				B6151F67225A25AB008A9185 /* PlayerIcon.xib in Resources */,
 				B6151F54225A0123008A9185 /* Main.storyboard in Resources */,
 				B65A2FDD24659BA70018EC6B /* TabView.xib in Resources */,
@@ -321,9 +329,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B6151F51225A0123008A9185 /* SquadTableViewController.swift in Sources */,
 				B67CB28324477C8800C97273 /* Colors.swift in Sources */,
 				B6151F6B225A277D008A9185 /* PlayerIcon.swift in Sources */,
+				B65A2FE42465A5530018EC6B /* SquadViewController.swift in Sources */,
 				B6151F4F225A0123008A9185 /* AppDelegate.swift in Sources */,
 				B65A2FDF24659BB60018EC6B /* TabView.swift in Sources */,
 				B65A2FDA246597140018EC6B /* TabViewController.swift in Sources */,
@@ -332,8 +340,8 @@
 				B655C3EA23E70AE3000E6994 /* Player.swift in Sources */,
 				B680A0102455F00C0034E0CC /* Errors.swift in Sources */,
 				B6AF0290244746D500409AB9 /* PitchMenuView.swift in Sources */,
+				B6865C0B2465AA0400284A42 /* PitchViewController.swift in Sources */,
 				B680A00E2455C94A0034E0CC /* PrivateDatabase.swift in Sources */,
-				B6151F65225A090D008A9185 /* PitchViewController.swift in Sources */,
 				B680A0132455F45F0034E0CC /* AlertPresenter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

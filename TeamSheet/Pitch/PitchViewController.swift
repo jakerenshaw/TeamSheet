@@ -2,16 +2,13 @@
 //  PitchViewController.swift
 //  TeamSheet
 //
-//  Created by Jake Renshaw on 07/04/2019.
-//  Copyright © 2019 Jake Renshaw. All rights reserved.
+//  Created by Jake Renshaw on 08/05/2020.
+//  Copyright © 2020 Jake Renshaw. All rights reserved.
 //
 
-import SnapKit
+import UIKit
 
-class PitchViewController:
-    UIViewController,
-    PlayerIconDelegate
-{
+class PitchViewController: UIViewController, PlayerIconDelegate {
     
     @IBOutlet weak var pitchImageView: UIImageView!
     
@@ -231,7 +228,7 @@ extension PitchViewController: PitchMenuViewDelegate {
 }
 
 extension PitchViewController: PrivateDatabaseDelegate {
-    
+        
     func presentRecordExistsError() {
         let recordExistsContent = AlertContent(
             title: "Duplicate Squad Name",
