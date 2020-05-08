@@ -15,9 +15,34 @@
                     <view key="view" contentMode="scaleToFill" id="RQN-jt-5Yx">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="789-zc-4ds">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="587"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xZA-XF-3VD">
+                                <rect key="frame" x="0.0" y="587" width="375" height="80"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="80" id="Jun-MV-yCa"/>
+                                </constraints>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="9NF-32-zWh" firstAttribute="bottom" secondItem="xZA-XF-3VD" secondAttribute="bottom" id="5sP-ru-Atu"/>
+                            <constraint firstAttribute="trailing" secondItem="789-zc-4ds" secondAttribute="trailing" id="Ohg-wS-ODK"/>
+                            <constraint firstItem="xZA-XF-3VD" firstAttribute="top" secondItem="789-zc-4ds" secondAttribute="bottom" id="a1R-Zo-XJo"/>
+                            <constraint firstItem="xZA-XF-3VD" firstAttribute="leading" secondItem="RQN-jt-5Yx" secondAttribute="leading" id="f2q-kZ-1ny"/>
+                            <constraint firstAttribute="trailing" secondItem="xZA-XF-3VD" secondAttribute="trailing" id="idG-tP-TxP"/>
+                            <constraint firstItem="789-zc-4ds" firstAttribute="leading" secondItem="RQN-jt-5Yx" secondAttribute="leading" id="mij-JV-79o"/>
+                            <constraint firstItem="789-zc-4ds" firstAttribute="top" secondItem="9NF-32-zWh" secondAttribute="top" id="xVA-1B-5As"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="9NF-32-zWh"/>
                     </view>
+                    <connections>
+                        <outlet property="mainContainerView" destination="RQN-jt-5Yx" id="gX3-Yy-VPK"/>
+                        <outlet property="pageContainerView" destination="789-zc-4ds" id="AM2-jM-8pJ"/>
+                        <outlet property="tabContainerView" destination="xZA-XF-3VD" id="OXq-ED-gQm"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MbG-2f-t39" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

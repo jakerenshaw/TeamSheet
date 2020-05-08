@@ -19,14 +19,16 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <stackView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="896" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="ic3-j9-kUa">
+                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="ic3-j9-kUa">
                     <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                 </stackView>
             </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
             <constraints>
+                <constraint firstItem="ic3-j9-kUa" firstAttribute="bottom" secondItem="i5M-Pr-FkT" secondAttribute="bottom" id="3uQ-uM-Hqh"/>
                 <constraint firstItem="ic3-j9-kUa" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="43g-Im-kHy"/>
-                <constraint firstItem="ic3-j9-kUa" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="Thx-Fg-9ki"/>
+                <constraint firstItem="ic3-j9-kUa" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Thx-Fg-9ki"/>
+                <constraint firstAttribute="trailing" secondItem="ic3-j9-kUa" secondAttribute="trailing" id="qcO-Ug-1FD"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <point key="canvasLocation" x="139" y="114"/>
