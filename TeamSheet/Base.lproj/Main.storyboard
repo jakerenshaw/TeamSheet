@@ -17,12 +17,12 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="789-zc-4ds">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="587"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="612"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xZA-XF-3VD">
-                                <rect key="frame" x="0.0" y="587" width="375" height="80"/>
+                                <rect key="frame" x="0.0" y="612" width="375" height="55"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="80" id="Jun-MV-yCa"/>
+                                    <constraint firstAttribute="height" constant="55" id="Jun-MV-yCa"/>
                                 </constraints>
                             </view>
                         </subviews>

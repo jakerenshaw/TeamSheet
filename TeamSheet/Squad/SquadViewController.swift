@@ -11,10 +11,15 @@ import UIKit
 class SquadViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, SquadTableViewCellDelegate {
     
     @IBOutlet weak var squadTableView: UITableView!
-
+    @IBOutlet var squadMenuContainerView: UIView!
+    
     var players = [Player]()
     var activeCell: SquadTableViewCell?
     var vc: PitchViewController?
+    
+    lazy var squadMenuView: SquadMenuView = {
+        SquadMenuView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+    }()
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return players.count
@@ -40,6 +45,7 @@ class SquadViewController: UIViewController, UITableViewDataSource, UITableViewD
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.addSquadMenuView()
         self.squadTableView.delegate = self
         self.addTapGesture()
         
@@ -60,6 +66,13 @@ class SquadViewController: UIViewController, UITableViewDataSource, UITableViewD
         navigationItem.rightBarButtonItem = pitchButton
         
         squadTableView.register(UINib(nibName: "SquadTableViewCell", bundle: nil), forCellReuseIdentifier: "SquadTableViewCell")
+    }
+    
+    func addSquadMenuView() {
+        squadMenuContainerView.addSubview(squadMenuView)
+        squadMenuView.snp.makeConstraints { (make) in
+            make.edges.equalToSuperview()
+        }
     }
     
     func addTapGesture() {
