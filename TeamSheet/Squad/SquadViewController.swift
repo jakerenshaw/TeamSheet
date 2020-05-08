@@ -14,7 +14,7 @@ class SquadViewController: UIViewController, UITableViewDataSource, UITableViewD
 
     var players = [Player]()
     var activeCell: SquadTableViewCell?
-    var vc: OldPitchViewController?
+    var vc: PitchViewController?
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return players.count
@@ -115,7 +115,7 @@ class SquadViewController: UIViewController, UITableViewDataSource, UITableViewD
             showAlert(message: "Duplicate players in squad")
         } else {
             if vc == nil {
-                vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "OldPitchViewController") as? OldPitchViewController
+                vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "PitchViewController") as? PitchViewController
             } else {
                 vc?.squad = players
                 self.navigationController?.pushViewController(vc!, animated: true)
