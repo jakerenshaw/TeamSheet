@@ -45,12 +45,14 @@ class SquadMenuView: UIView {
 
 extension SquadMenuView: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        if textField == self.addPlayersTextField,
-            let text = self.addPlayersTextField.text,
-            string != "" {
-            return text.count < 2 && string != " "
-        } else {
+        if string == "" {
             return true
+        }
+        if let text = textField.text,
+            let num = Int("\(text)\(string)") {
+            return string != " " && num < 17 && num != 0
+        } else {
+            return false
         }
     }
 }

@@ -21,6 +21,13 @@ class MenuTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        var currentTintColor: UIColor = .black
+        if #available(iOS 12.0, *) {
+            if traitCollection.userInterfaceStyle == .dark {
+                currentTintColor = .white
+            }
+        }
+        self.menuImage.tintColor = currentTintColor
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

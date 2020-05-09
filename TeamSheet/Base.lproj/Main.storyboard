@@ -26,7 +26,7 @@
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="9NF-32-zWh" firstAttribute="bottom" secondItem="xZA-XF-3VD" secondAttribute="bottom" id="5sP-ru-Atu"/>
                             <constraint firstAttribute="trailing" secondItem="789-zc-4ds" secondAttribute="trailing" id="Ohg-wS-ODK"/>
