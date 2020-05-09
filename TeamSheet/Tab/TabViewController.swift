@@ -11,6 +11,7 @@ import UIKit
 enum TabType: String {
     case squad
     case pitch
+    case menu
 }
 
 protocol TabViewControllerDelegate: class {
@@ -53,6 +54,10 @@ class TabViewController: UIViewController, TabViewDelegate {
                 newTab.tabType = .pitch
                 newTab.tabName.text = "Pitch"
                 newTab.tabImage.image = UIImage(named: "tab_pitch")
+            case .menu:
+                newTab.tabType = .menu
+                newTab.tabName.text = "Menu"
+                newTab.tabImage.image = UIImage(named: "menu")
             }
         }
     }

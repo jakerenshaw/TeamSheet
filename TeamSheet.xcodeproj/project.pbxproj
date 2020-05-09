@@ -30,11 +30,14 @@
 		B6865C0B2465AA0400284A42 /* PitchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6865C092465AA0400284A42 /* PitchViewController.swift */; };
 		B6865C0C2465AA0400284A42 /* PitchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B6865C0A2465AA0400284A42 /* PitchViewController.xib */; };
 		B6865C162465AF0100284A42 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6865C152465AF0100284A42 /* RootViewController.swift */; };
-		B68C9CDB24449F21002900C8 /* PitchMenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B68C9CDA24449F21002900C8 /* PitchMenuView.xib */; };
-		B6AF0290244746D500409AB9 /* PitchMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6AF028F244746D500409AB9 /* PitchMenuView.swift */; };
 		B6AF02982447642700409AB9 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6AF02972447642700409AB9 /* Extensions.swift */; };
 		B6CFC4B62465C31200D1F1FB /* SquadMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6CFC4B52465C31200D1F1FB /* SquadMenuView.swift */; };
 		B6CFC4B82465C34C00D1F1FB /* SquadMenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B6CFC4B72465C34C00D1F1FB /* SquadMenuView.xib */; };
+		B6F6DB652466DC30007978D9 /* SquadStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F6DB642466DC30007978D9 /* SquadStore.swift */; };
+		B6F6DB692466E24D007978D9 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F6DB672466E24D007978D9 /* MenuViewController.swift */; };
+		B6F6DB6A2466E24D007978D9 /* MenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B6F6DB682466E24D007978D9 /* MenuViewController.xib */; };
+		B6F6DB6D2466E6C3007978D9 /* MenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F6DB6B2466E6C3007978D9 /* MenuTableViewCell.swift */; };
+		B6F6DB6E2466E6C3007978D9 /* MenuTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B6F6DB6C2466E6C3007978D9 /* MenuTableViewCell.xib */; };
 		E7AAD268A51613E4B3473D97 /* Pods_TeamSheet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E557A2A3BE657EB592C542E3 /* Pods_TeamSheet.framework */; };
 /* End PBXBuildFile section */
 
@@ -66,11 +69,14 @@
 		B6865C092465AA0400284A42 /* PitchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PitchViewController.swift; sourceTree = "<group>"; };
 		B6865C0A2465AA0400284A42 /* PitchViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PitchViewController.xib; sourceTree = "<group>"; };
 		B6865C152465AF0100284A42 /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
-		B68C9CDA24449F21002900C8 /* PitchMenuView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PitchMenuView.xib; sourceTree = "<group>"; };
-		B6AF028F244746D500409AB9 /* PitchMenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PitchMenuView.swift; sourceTree = "<group>"; };
 		B6AF02972447642700409AB9 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		B6CFC4B52465C31200D1F1FB /* SquadMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SquadMenuView.swift; sourceTree = "<group>"; };
 		B6CFC4B72465C34C00D1F1FB /* SquadMenuView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SquadMenuView.xib; sourceTree = "<group>"; };
+		B6F6DB642466DC30007978D9 /* SquadStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SquadStore.swift; sourceTree = "<group>"; };
+		B6F6DB672466E24D007978D9 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
+		B6F6DB682466E24D007978D9 /* MenuViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MenuViewController.xib; sourceTree = "<group>"; };
+		B6F6DB6B2466E6C3007978D9 /* MenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTableViewCell.swift; sourceTree = "<group>"; };
+		B6F6DB6C2466E6C3007978D9 /* MenuTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MenuTableViewCell.xib; sourceTree = "<group>"; };
 		CBC8CCE496B24DF6637BCDD4 /* Pods-TeamSheet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TeamSheet.debug.xcconfig"; path = "Target Support Files/Pods-TeamSheet/Pods-TeamSheet.debug.xcconfig"; sourceTree = "<group>"; };
 		E557A2A3BE657EB592C542E3 /* Pods_TeamSheet.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TeamSheet.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -109,6 +115,8 @@
 		B6151F4D225A0123008A9185 /* TeamSheet */ = {
 			isa = PBXGroup;
 			children = (
+				B6F6DB662466E233007978D9 /* Menu */,
+				B6F6DB632466DC12007978D9 /* LocalStorage */,
 				B65A2FD7246596DA0018EC6B /* Tab */,
 				B680A0112455F4090034E0CC /* Presenter */,
 				B680A00C2455C90A0034E0CC /* CloudKit */,
@@ -158,8 +166,6 @@
 		B6AF0291244748FA00409AB9 /* Pitch */ = {
 			isa = PBXGroup;
 			children = (
-				B6AF028F244746D500409AB9 /* PitchMenuView.swift */,
-				B68C9CDA24449F21002900C8 /* PitchMenuView.xib */,
 				B6865C092465AA0400284A42 /* PitchViewController.swift */,
 				B6865C0A2465AA0400284A42 /* PitchViewController.xib */,
 			);
@@ -196,6 +202,25 @@
 				B67CB28224477C8800C97273 /* Colors.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		B6F6DB632466DC12007978D9 /* LocalStorage */ = {
+			isa = PBXGroup;
+			children = (
+				B6F6DB642466DC30007978D9 /* SquadStore.swift */,
+			);
+			path = LocalStorage;
+			sourceTree = "<group>";
+		};
+		B6F6DB662466E233007978D9 /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				B6F6DB672466E24D007978D9 /* MenuViewController.swift */,
+				B6F6DB682466E24D007978D9 /* MenuViewController.xib */,
+				B6F6DB6B2466E6C3007978D9 /* MenuTableViewCell.swift */,
+				B6F6DB6C2466E6C3007978D9 /* MenuTableViewCell.xib */,
+			);
+			path = Menu;
 			sourceTree = "<group>";
 		};
 		C5263BA1DFDA138CC65C1AA5 /* Pods */ = {
@@ -280,9 +305,10 @@
 				B6151F59225A0124008A9185 /* LaunchScreen.storyboard in Resources */,
 				B6151F56225A0124008A9185 /* Assets.xcassets in Resources */,
 				B65A2FE52465A5530018EC6B /* SquadViewController.xib in Resources */,
-				B68C9CDB24449F21002900C8 /* PitchMenuView.xib in Resources */,
 				B6865C0C2465AA0400284A42 /* PitchViewController.xib in Resources */,
 				B6CFC4B82465C34C00D1F1FB /* SquadMenuView.xib in Resources */,
+				B6F6DB6E2466E6C3007978D9 /* MenuTableViewCell.xib in Resources */,
+				B6F6DB6A2466E24D007978D9 /* MenuViewController.xib in Resources */,
 				B6151F67225A25AB008A9185 /* PlayerIcon.xib in Resources */,
 				B6151F54225A0123008A9185 /* Main.storyboard in Resources */,
 				B65A2FDD24659BA70018EC6B /* TabView.xib in Resources */,
@@ -339,6 +365,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B6F6DB652466DC30007978D9 /* SquadStore.swift in Sources */,
 				B67CB28324477C8800C97273 /* Colors.swift in Sources */,
 				B6151F6B225A277D008A9185 /* PlayerIcon.swift in Sources */,
 				B65A2FE42465A5530018EC6B /* SquadViewController.swift in Sources */,
@@ -350,8 +377,9 @@
 				B6151F62225A042F008A9185 /* SquadTableViewCell.swift in Sources */,
 				B655C3EA23E70AE3000E6994 /* Player.swift in Sources */,
 				B680A0102455F00C0034E0CC /* Errors.swift in Sources */,
-				B6AF0290244746D500409AB9 /* PitchMenuView.swift in Sources */,
+				B6F6DB692466E24D007978D9 /* MenuViewController.swift in Sources */,
 				B6CFC4B62465C31200D1F1FB /* SquadMenuView.swift in Sources */,
+				B6F6DB6D2466E6C3007978D9 /* MenuTableViewCell.swift in Sources */,
 				B6865C0B2465AA0400284A42 /* PitchViewController.swift in Sources */,
 				B680A00E2455C94A0034E0CC /* PrivateDatabase.swift in Sources */,
 				B680A0132455F45F0034E0CC /* AlertPresenter.swift in Sources */,

@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "menu-2.png",
+      "filename" : "icons8-upload-to-cloud-50.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "menu-1.png",
+      "filename" : "icons8-upload-to-cloud-51.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "menu.png",
+      "filename" : "icons8-upload-to-cloud-52.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
@@ -19,8 +19,5 @@
   "info" : {
     "author" : "xcode",
     "version" : 1
-  },
-  "properties" : {
-    "template-rendering-intent" : "template"
   }
 }

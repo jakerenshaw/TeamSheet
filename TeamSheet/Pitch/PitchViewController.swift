@@ -12,54 +12,22 @@ class PitchViewController: UIViewController, PlayerIconDelegate {
     
     @IBOutlet weak var pitchImageView: UIImageView!
     
-    var squad = [Player]()
     var opposition = [Player]()
     var playerIcons = [PlayerIcon]()
     var oppositionIcons = [PlayerIcon]()
-    var pitchMenuView: PitchMenuView?
+    let squadStore: SquadStore
     
-    lazy var privateDatabase: PrivateDatabase = {
-        let privateDatabase = PrivateDatabase()
-        privateDatabase.delegate = self
-        return privateDatabase
-    }()
+    init(squadStore: SquadStore, nibName: String?, bundle: Bundle?) {
+        self.squadStore = squadStore
+        super.init(nibName: nibName, bundle: bundle)
+    }
     
-    lazy var alertPresenter: AlertPresenter = {
-        AlertPresenter(presentationController: self)
-    }()
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let menuImage: UIImage?
-        let menuButton: UIBarButtonItem?
-        if #available(iOS 13.0, *) {
-            menuImage = UIImage(named: "menu")?.withTintColor(.systemGray, renderingMode: .alwaysOriginal)
-            menuButton = UIBarButtonItem(image: menuImage, style: .plain, target: self, action: #selector(toggleMenu))
-        } else {
-            menuImage = UIImage(named: "menu")?.withRenderingMode(.alwaysTemplate)
-            menuButton = UIBarButtonItem(image: menuImage, style: .plain, target: self, action: #selector(toggleMenu))
-            menuButton?.tintColor = .gray
-        }
-        self.navigationItem.rightBarButtonItem = menuButton
-    }
-    
-    @objc func toggleMenu() {
-        if let menu = self.pitchMenuView {
-            menu.removeFromSuperview()
-            self.pitchMenuView = nil
-        } else {
-            let pitchFrame = self.pitchImageView.frame
-            pitchMenuView = PitchMenuView(
-                frame: CGRect(
-                    x: pitchFrame.width,
-                    y: pitchFrame.origin.y,
-                    width: 0,
-                    height: 0
-                )
-            )
-            pitchMenuView?.delegate = self
-            self.view.addSubview(pitchMenuView!)
-        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -67,7 +35,7 @@ class PitchViewController: UIViewController, PlayerIconDelegate {
     }
     
     func sortSquad() {
-        if squad.isEmpty {
+        if self.squadStore.squad.isEmpty {
             self.removeSquad()
         } else if playerIcons.isEmpty {
             self.addSquad()
@@ -78,7 +46,7 @@ class PitchViewController: UIViewController, PlayerIconDelegate {
     }
     
     func addPlayerCheck() {
-        squad.forEach { (player) in
+        self.squadStore.squad.forEach { (player) in
             var playerInSquad = false
             playerIcons.forEach { (playerIcon) in
                 if (playerIcon.name == player.name) && (playerIcon.number == player.number) {
@@ -99,7 +67,7 @@ class PitchViewController: UIViewController, PlayerIconDelegate {
     func removePlayerCheck() {
         playerIcons.forEach { (playerIcon) in
             var playerInSquad = false
-            squad.forEach { (player) in
+            self.squadStore.squad.forEach { (player) in
                 if (playerIcon.name == player.name) && (playerIcon.number == player.number) {
                     playerInSquad = true
                 }
@@ -137,7 +105,7 @@ class PitchViewController: UIViewController, PlayerIconDelegate {
     }
     
     func addSquad() {
-        squad.forEach { (player) in
+        self.squadStore.squad.forEach { (player) in
             addPlayer(player: player, playerType: .squad)
         }
     }
@@ -161,7 +129,7 @@ class PitchViewController: UIViewController, PlayerIconDelegate {
     }
     
     func updatePlayerPositon(view: PlayerIcon, x: CGFloat, y: CGFloat) {
-        squad.forEach { (playerIcon) in
+        self.squadStore.squad.forEach { (playerIcon) in
             if playerIcon.name == view.name && playerIcon.number == view.number {
                 playerIcon.x = x
                 playerIcon.y = y
@@ -170,7 +138,7 @@ class PitchViewController: UIViewController, PlayerIconDelegate {
     }
     
     func updatePlayerTeamColor(view: PlayerIcon, color: UIColor) {
-        squad.forEach { (playerIcon) in
+        self.squadStore.squad.forEach { (playerIcon) in
             if playerIcon.name == view.name && playerIcon.number == view.number {
                 playerIcon.teamColor = color
             }
@@ -213,82 +181,6 @@ class PitchViewController: UIViewController, PlayerIconDelegate {
             self.navigationItem.titleView = textField
         } else {
             self.navigationItem.titleView = nil
-        }
-    }
-}
-
-extension PitchViewController: PitchMenuViewDelegate {
-    func loadSquad() {
-        self.privateDatabase.loadSquad()
-    }
-    
-    func saveSquad() {
-        self.privateDatabase.saveSquad(squad: self.squad)
-    }
-}
-
-extension PitchViewController: PrivateDatabaseDelegate {
-        
-    func presentRecordExistsError() {
-        let recordExistsContent = AlertContent(
-            title: "Duplicate Squad Name",
-            message: "The Squad name chosen already exists. Please choose another",
-            actions: [.ok]
-        )
-        self.alertPresenter.presentAlert(alertContent: recordExistsContent)
-    }
-    
-    func presentSuccessAlert(squadName: String) {
-        let cloudSignInContent = AlertContent(
-            title: "Squad Saved",
-            message: "\(squadName) has been saved successfully",
-            actions: [.ok]
-        )
-        self.alertPresenter.presentAlert(alertContent: cloudSignInContent)
-    }
-    
-    func presentCloudSignInError() {
-        let cloudSignInContent = AlertContent(
-            title: "Sign into iCloud",
-            message: "Please sign in to iCloud to load/save squads.",
-            actions: [.cancel(), .settings(preferred: true)]
-        )
-        self.alertPresenter.presentAlert(alertContent: cloudSignInContent)
-    }
-    
-    func presentSquadLoaderAlert(squadNames: [String], completion: @escaping ((String?) -> Void)) {
-        let squadLoaderContent = AlertContent(
-            title: "Select Squad",
-            message: "Please select a squad to load",
-            actions: [
-                .cancel(completion: completion),
-                .squad(squadNames: squadNames, completion: completion)
-            ]
-        )
-        self.alertPresenter.presentAlert(alertContent: squadLoaderContent)
-    }
-    
-    func presentSquadNameAlert(completion: @escaping ((String?) -> Void)) {
-        if let squadName = (navigationItem.titleView as? UITextField)?.text {
-            completion(squadName)
-        } else {
-            let squadNameContent = AlertContent(
-                title: "Squad Name",
-                message: "Please enter the Squad Name",
-                actions: [
-                    .cancel(completion: completion),
-                    .save(completion: completion)
-                ]
-            )
-            self.alertPresenter.presentAlert(alertContent: squadNameContent)
-        }
-    }
-    
-    func fetchedPlayers(players: [Player]) {
-        DispatchQueue.main.async {
-            self.removeSquad()
-            self.squad = players
-            self.sortSquad()
         }
     }
 }

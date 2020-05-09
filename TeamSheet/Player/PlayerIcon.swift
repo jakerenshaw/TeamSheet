@@ -84,8 +84,8 @@ class PlayerIcon: UIView, UIGestureRecognizerDelegate {
         self.delegate?.draggedView(sender, viewDrag: self)
         if(sender.state == .ended)
         {
-            let playerX = self.frame.origin.x + (self.frame.width / 2)
-            let playerY = self.frame.origin.y + (self.frame.height / 2)
+            let playerX = self.frame.origin.x
+            let playerY = self.frame.origin.y
             self.delegate?.updatePlayerPositon(view: self, x: playerX, y: playerY)
         }
     }

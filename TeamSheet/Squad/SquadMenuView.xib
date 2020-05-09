@@ -20,17 +20,17 @@
             <rect key="frame" x="0.0" y="0.0" width="350" height="46"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kPl-aP-62t">
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kPl-aP-62t">
                     <rect key="frame" x="24" y="6" width="50" height="34"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="34" id="Lal-nI-CFv"/>
                         <constraint firstAttribute="width" constant="50" id="dTp-oP-kgC"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits"/>
+                    <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                 </textField>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bxc-gV-L3O">
-                    <rect key="frame" x="80" y="4" width="30" height="38"/>
+                    <rect key="frame" x="76" y="4" width="30" height="38"/>
                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="21"/>
                     <state key="normal" title="+">
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -45,7 +45,7 @@
                 <constraint firstItem="bxc-gV-L3O" firstAttribute="centerY" secondItem="kPl-aP-62t" secondAttribute="centerY" id="AFS-09-0ez"/>
                 <constraint firstItem="kPl-aP-62t" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="24" id="CNT-RZ-ztl"/>
                 <constraint firstItem="kPl-aP-62t" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="6" id="Q1g-2E-NG1"/>
-                <constraint firstItem="bxc-gV-L3O" firstAttribute="leading" secondItem="kPl-aP-62t" secondAttribute="trailing" constant="6" id="gZz-jO-sTO"/>
+                <constraint firstItem="bxc-gV-L3O" firstAttribute="leading" secondItem="kPl-aP-62t" secondAttribute="trailing" constant="2" id="gZz-jO-sTO"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="kPl-aP-62t" secondAttribute="bottom" constant="6" id="hhY-FT-6nH"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

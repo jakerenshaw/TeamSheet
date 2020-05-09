@@ -13,23 +13,34 @@ class SquadViewController: UIViewController, UITableViewDataSource, UITableViewD
     @IBOutlet weak var squadTableView: UITableView!
     @IBOutlet var squadMenuContainerView: UIView!
     
-    var players = [Player]()
     var activeCell: SquadTableViewCell?
     var vc: PitchViewController?
+    let squadStore: SquadStore
     
     lazy var squadMenuView: SquadMenuView = {
-        SquadMenuView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+        let squad = SquadMenuView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+        squad.delegate = self
+        return squad
     }()
     
+    init(squadStore: SquadStore, nibName: String?, bundle: Bundle?) {
+        self.squadStore = squadStore
+        super.init(nibName: nibName, bundle: bundle)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return players.count
+        return self.squadStore.squad.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = squadTableView.dequeueReusableCell(withIdentifier: "SquadTableViewCell") as? SquadTableViewCell
-        cell?.captain = players[indexPath.row].captain
-        cell?.nameTextField.text = players[indexPath.row].name
-        cell?.numberTextField.text = players[indexPath.row].number
+        cell?.captain = self.squadStore.squad[indexPath.row].captain
+        cell?.nameTextField.text = self.squadStore.squad[indexPath.row].name
+        cell?.numberTextField.text = self.squadStore.squad[indexPath.row].number
         cell?.delegate = self
         return cell!
     }
@@ -37,7 +48,7 @@ class SquadViewController: UIViewController, UITableViewDataSource, UITableViewD
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             self.squadTableView.beginUpdates()
-            self.players.remove(at: indexPath.row)
+            self.squadStore.squad.remove(at: indexPath.row)
             self.squadTableView.deleteRows(at: [indexPath], with: .automatic)
             self.squadTableView.endUpdates()
         }
@@ -48,23 +59,6 @@ class SquadViewController: UIViewController, UITableViewDataSource, UITableViewD
         self.addSquadMenuView()
         self.squadTableView.delegate = self
         self.addTapGesture()
-        
-        let titleLabel = UILabel()
-        titleLabel.text = "Squad"
-        navigationItem.titleView = titleLabel
-        
-        let backButton = UIBarButtonItem(title: "Squad", style: .plain, target: self, action: nil)
-        backButton.tintColor = .systemGray
-        navigationItem.backBarButtonItem = backButton
-        
-        let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addPlayer))
-        addButton.tintColor = .systemGray
-        navigationItem.leftBarButtonItem = addButton
-        
-        let pitchButton = UIBarButtonItem(title: "Pitch", style: .plain, target: self, action: #selector(showPitch))
-        pitchButton.tintColor = .systemGray
-        navigationItem.rightBarButtonItem = pitchButton
-        
         squadTableView.register(UINib(nibName: "SquadTableViewCell", bundle: nil), forCellReuseIdentifier: "SquadTableViewCell")
     }
     
@@ -111,35 +105,25 @@ class SquadViewController: UIViewController, UITableViewDataSource, UITableViewD
             x: self.view.bounds.width / 2,
             y: (self.view.bounds.height / 2) + 60
         )
-        players.append(player)
+        self.squadStore.squad.append(player)
         squadTableView.beginUpdates()
-        squadTableView.insertRows(at: [IndexPath(row: players.count-1, section: 0)], with: .automatic)
+        squadTableView.insertRows(at: [IndexPath(row: self.squadStore.squad.count-1, section: 0)], with: .automatic)
         squadTableView.endUpdates()
     }
     
-    @objc func showPitch() {
-        if missingInfo() {
-            DispatchQueue.main.async {
-                self.showAlert(message: "Info for a player is missing")
-            }
-        } else if multipleCaptains() {
-            showAlert(message: "More than one captain is selected")
-        } else if duplicatePlayer() {
-            showAlert(message: "Duplicate players in squad")
-        } else {
-            if vc == nil {
-                vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "PitchViewController") as? PitchViewController
-            } else {
-                vc?.squad = players
-                self.navigationController?.pushViewController(vc!, animated: true)
-            }
-        }
-    }
+//    if missingInfo() {
+//        DispatchQueue.main.async {
+//            self.showAlert(message: "Info for a player is missing")
+//        }
+//    } else if multipleCaptains() {
+//        showAlert(message: "More than one captain is selected")
+//    } else if duplicatePlayer() {
+//        showAlert(message: "Duplicate players in squad")
     
     func duplicatePlayer() -> Bool {
         var duplicatePlayer = false
         var duplicates = [Player]()
-        players.forEach { (player) in
+        self.squadStore.squad.forEach { (player) in
             if !duplicates.contains(player) {
                 duplicates.append(player)
             } else {
@@ -152,7 +136,7 @@ class SquadViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     func multipleCaptains() -> Bool {
         var numberOfCaptains = 0
-        players.forEach { (player) in
+        self.squadStore.squad.forEach { (player) in
             if player.captain {
                 numberOfCaptains += 1
             }
@@ -162,7 +146,7 @@ class SquadViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     func missingInfo() -> Bool {
         var missing = false
-        players.forEach { (player) in
+        self.squadStore.squad.forEach { (player) in
             if player.name == "" || player.number == "" {
                 missing = true
                 return
@@ -187,7 +171,7 @@ class SquadViewController: UIViewController, UITableViewDataSource, UITableViewD
         guard let indexPath = squadTableView.indexPath(for: cell) else {
             return
         }
-        players[indexPath.row].captain = cell.captain
+        self.squadStore.squad[indexPath.row].captain = cell.captain
     }
     
     func updatePlayerInfo(cell: SquadTableViewCell) {
@@ -196,9 +180,27 @@ class SquadViewController: UIViewController, UITableViewDataSource, UITableViewD
             let number = cell.numberTextField.text else {
             return
         }
-        let player = players[indexPath.row]
+        let player = self.squadStore.squad[indexPath.row]
         player.name = name
         player.number = number
     }
+    
+    func reloadData() {
+        self.squadTableView.reloadData()
+    }
 
+}
+
+extension SquadViewController: SquadMenuViewDelegate {
+    func addPlayers(numberOfPlayers: Int) {
+        var i = 0
+        while i < numberOfPlayers {
+            addPlayer()
+            i+=1
+        }
+    }
+    
+    func loadSquad() {
+        //
+    }
 }
