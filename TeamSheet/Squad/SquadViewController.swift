@@ -111,57 +111,6 @@ class SquadViewController: UIViewController, UITableViewDataSource, UITableViewD
         squadTableView.endUpdates()
     }
     
-//    if missingInfo() {
-//        DispatchQueue.main.async {
-//            self.showAlert(message: "Info for a player is missing")
-//        }
-//    } else if multipleCaptains() {
-//        showAlert(message: "More than one captain is selected")
-//    } else if duplicatePlayer() {
-//        showAlert(message: "Duplicate players in squad")
-    
-    func duplicatePlayer() -> Bool {
-        var duplicatePlayer = false
-        var duplicates = [Player]()
-        self.squadStore.squad.forEach { (player) in
-            if !duplicates.contains(player) {
-                duplicates.append(player)
-            } else {
-                duplicatePlayer = true
-                return
-            }
-        }
-        return duplicatePlayer
-    }
-    
-    func multipleCaptains() -> Bool {
-        var numberOfCaptains = 0
-        self.squadStore.squad.forEach { (player) in
-            if player.captain {
-                numberOfCaptains += 1
-            }
-        }
-        return numberOfCaptains > 1
-    }
-    
-    func missingInfo() -> Bool {
-        var missing = false
-        self.squadStore.squad.forEach { (player) in
-            if player.name == "" || player.number == "" {
-                missing = true
-                return
-            }
-        }
-        return missing
-    }
-    
-    func showAlert(message: String) {
-        let alert = UIAlertController(title: "Warning", message: message, preferredStyle: UIAlertController.Style.alert)
-        
-        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
-        self.present(alert, animated: true, completion: nil)
-    }
-    
     func setActiveCell(cell: SquadTableViewCell) {
         self.activeCell = cell
     }
@@ -193,14 +142,12 @@ class SquadViewController: UIViewController, UITableViewDataSource, UITableViewD
 
 extension SquadViewController: SquadMenuViewDelegate {
     func addPlayers(numberOfPlayers: Int) {
-        var i = 0
-        while i < numberOfPlayers {
-            addPlayer()
-            i+=1
+        if squadStore.squad.count + numberOfPlayers < 17 {
+            var i = 0
+            while i < numberOfPlayers {
+                addPlayer()
+                i+=1
+            }
         }
-    }
-    
-    func loadSquad() {
-        //
     }
 }

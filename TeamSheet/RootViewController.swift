@@ -22,7 +22,9 @@ class RootViewController: UIViewController {
     }()
     
     lazy var pitchViewController: PitchViewController = {
-        PitchViewController(squadStore: self.squadStore, nibName: "PitchViewController", bundle: nil)
+        let pitch = PitchViewController(squadStore: self.squadStore, nibName: "PitchViewController", bundle: nil)
+        pitch.delegate = self
+        return pitch
     }()
     
     lazy var menuViewController: MenuViewController = {
@@ -82,6 +84,40 @@ extension RootViewController: TabViewControllerDelegate {
         currentViewController?.view.snp.makeConstraints({ (make) in
             make.edges.equalToSuperview()
         })
+    }
+}
+
+extension RootViewController: PitchViewControllerDelegate {
+    func error(error: SquadError) {
+        switch error {
+        case .missingInfo:
+            let missingInfoContent = AlertContent(
+                title: "Missing Info",
+                message: "A player has a missing name/number in the squad",
+                actions: [.cancel(completion: { (_) in
+                    self.tabViewController.setCurrentTab(currentTab: .squad)
+                })]
+            )
+            self.alertPresenter.presentAlert(alertContent: missingInfoContent)
+        case .multipleCaptains:
+            let multipleCaptainsContent = AlertContent(
+                title: "Multiple Captains",
+                message: "There are multiple captains selected in the sqaud",
+                actions: [.cancel(completion: { (_) in
+                    self.tabViewController.setCurrentTab(currentTab: .squad)
+                })]
+            )
+            self.alertPresenter.presentAlert(alertContent: multipleCaptainsContent)
+        case .duplicatePlayers:
+            let duplicatePlayersContent = AlertContent(
+                title: "Duplicate Players",
+                message: "There are duplicate players in the squad",
+                actions: [.cancel(completion: { (_) in
+                    self.tabViewController.setCurrentTab(currentTab: .squad)
+                })]
+            )
+            self.alertPresenter.presentAlert(alertContent: duplicatePlayersContent)
+        }
     }
 }
 

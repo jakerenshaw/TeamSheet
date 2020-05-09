@@ -55,12 +55,10 @@ class TabView: UIView, UIGestureRecognizerDelegate {
     }
     
     func setUnselected() {
-        var currentTintColor: UIColor = .black
-        if #available(iOS 12.0, *) {
-            if traitCollection.userInterfaceStyle == .dark {
-                currentTintColor = .white
-            }
+        if #available(iOS 13.0, *) {
+            self.tintColor = .label
+        } else {
+            self.tintColor = .white
         }
-        self.tintColor = currentTintColor
     }
 }

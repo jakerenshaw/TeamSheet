@@ -8,6 +8,16 @@
 
 import UIKit
 
+enum SquadError: String {
+    case missingInfo
+    case multipleCaptains
+    case duplicatePlayers
+}
+
+protocol PitchViewControllerDelegate: class {
+    func error(error: SquadError)
+}
+
 class PitchViewController: UIViewController, PlayerIconDelegate {
     
     @IBOutlet weak var pitchImageView: UIImageView!
@@ -16,6 +26,7 @@ class PitchViewController: UIViewController, PlayerIconDelegate {
     var playerIcons = [PlayerIcon]()
     var oppositionIcons = [PlayerIcon]()
     let squadStore: SquadStore
+    weak var delegate: PitchViewControllerDelegate?
     
     init(squadStore: SquadStore, nibName: String?, bundle: Bundle?) {
         self.squadStore = squadStore
@@ -31,7 +42,60 @@ class PitchViewController: UIViewController, PlayerIconDelegate {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        sortSquad()
+        if !errorOccured() {
+            sortSquad()
+        }
+        super.viewDidAppear(animated)
+    }
+        
+    func duplicatePlayer() -> Bool {
+        var duplicatePlayer = false
+        var duplicates = [Player]()
+        self.squadStore.squad.forEach { (player) in
+            if !duplicates.contains(player) {
+                duplicates.append(player)
+            } else {
+                duplicatePlayer = true
+                return
+            }
+        }
+        return duplicatePlayer
+    }
+    
+    func multipleCaptains() -> Bool {
+        var numberOfCaptains = 0
+        self.squadStore.squad.forEach { (player) in
+            if player.captain {
+                numberOfCaptains += 1
+            }
+        }
+        return numberOfCaptains > 1
+    }
+    
+    func missingInfo() -> Bool {
+        var missing = false
+        self.squadStore.squad.forEach { (player) in
+            if player.name == "" || player.number == "" {
+                missing = true
+                return
+            }
+        }
+        return missing
+    }
+    
+    func errorOccured() -> Bool {
+        var error = false
+        if missingInfo() {
+            self.delegate?.error(error: .missingInfo)
+            error = true
+        } else if multipleCaptains() {
+            self.delegate?.error(error: .multipleCaptains)
+            error = true
+        } else if duplicatePlayer() {
+            self.delegate?.error(error: .duplicatePlayers)
+            error = true
+        }
+        return error
     }
     
     func sortSquad() {

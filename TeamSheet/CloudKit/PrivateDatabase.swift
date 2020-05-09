@@ -140,9 +140,6 @@ class PrivateDatabase: NSObject {
                 self.handleError(errorDescription: error.localizedDescription)
                 return
             }
-//            if let record = record {
-//                print(">>> player complete = \(record)")
-//            }
         }
     }
     
