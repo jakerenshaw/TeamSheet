@@ -22,6 +22,8 @@
 		B65A2FDF24659BB60018EC6B /* TabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65A2FDE24659BB60018EC6B /* TabView.swift */; };
 		B65A2FE42465A5530018EC6B /* SquadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65A2FE22465A5530018EC6B /* SquadViewController.swift */; };
 		B65A2FE52465A5530018EC6B /* SquadViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B65A2FE32465A5530018EC6B /* SquadViewController.xib */; };
+		B66341332467585A00E69178 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B66341322467585A00E69178 /* HeaderView.swift */; };
+		B66341352467588500E69178 /* HeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B66341342467588500E69178 /* HeaderView.xib */; };
 		B670FBCA24547E5500269044 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B670FBC924547E5500269044 /* CloudKit.framework */; };
 		B67CB28324477C8800C97273 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67CB28224477C8800C97273 /* Colors.swift */; };
 		B680A00E2455C94A0034E0CC /* PrivateDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B680A00D2455C94A0034E0CC /* PrivateDatabase.swift */; };
@@ -63,6 +65,8 @@
 		B65A2FDE24659BB60018EC6B /* TabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabView.swift; sourceTree = "<group>"; };
 		B65A2FE22465A5530018EC6B /* SquadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SquadViewController.swift; sourceTree = "<group>"; };
 		B65A2FE32465A5530018EC6B /* SquadViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SquadViewController.xib; sourceTree = "<group>"; };
+		B66341322467585A00E69178 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
+		B66341342467588500E69178 /* HeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HeaderView.xib; sourceTree = "<group>"; };
 		B670FBC824547E4B00269044 /* TeamSheet.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TeamSheet.entitlements; sourceTree = "<group>"; };
 		B670FBC924547E5500269044 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		B67CB28224477C8800C97273 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
@@ -121,6 +125,7 @@
 		B6151F4D225A0123008A9185 /* TeamSheet */ = {
 			isa = PBXGroup;
 			children = (
+				B6634131246757FB00E69178 /* Header */,
 				B6929ECC2467364A0071A6D1 /* Resources */,
 				B6929EC9246735030071A6D1 /* Animation */,
 				B6F6DB662466E233007978D9 /* Menu */,
@@ -152,6 +157,15 @@
 				B65A2FDE24659BB60018EC6B /* TabView.swift */,
 			);
 			path = Tab;
+			sourceTree = "<group>";
+		};
+		B6634131246757FB00E69178 /* Header */ = {
+			isa = PBXGroup;
+			children = (
+				B66341322467585A00E69178 /* HeaderView.swift */,
+				B66341342467588500E69178 /* HeaderView.xib */,
+			);
+			path = Header;
 			sourceTree = "<group>";
 		};
 		B680A00C2455C90A0034E0CC /* CloudKit */ = {
@@ -332,6 +346,7 @@
 				B65A2FE52465A5530018EC6B /* SquadViewController.xib in Resources */,
 				B6865C0C2465AA0400284A42 /* PitchViewController.xib in Resources */,
 				B6CFC4B82465C34C00D1F1FB /* SquadMenuView.xib in Resources */,
+				B66341352467588500E69178 /* HeaderView.xib in Resources */,
 				B6F6DB6E2466E6C3007978D9 /* MenuTableViewCell.xib in Resources */,
 				B6F6DB6A2466E24D007978D9 /* MenuViewController.xib in Resources */,
 				B6929ED2246742E40071A6D1 /* HiRegularOblique-Kw8A.otf in Resources */,
@@ -407,6 +422,7 @@
 				B680A0102455F00C0034E0CC /* Errors.swift in Sources */,
 				B6F6DB692466E24D007978D9 /* MenuViewController.swift in Sources */,
 				B6CFC4B62465C31200D1F1FB /* SquadMenuView.swift in Sources */,
+				B66341332467585A00E69178 /* HeaderView.swift in Sources */,
 				B6F6DB6D2466E6C3007978D9 /* MenuTableViewCell.swift in Sources */,
 				B6865C0B2465AA0400284A42 /* PitchViewController.swift in Sources */,
 				B680A00E2455C94A0034E0CC /* PrivateDatabase.swift in Sources */,

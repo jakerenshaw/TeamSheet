@@ -14,7 +14,9 @@ class RootViewController: UIViewController {
     @IBOutlet var mainContainerView: UIView!
     @IBOutlet var tabContainerView: UIView!
     @IBOutlet var pageContainerView: UIView!
+    @IBOutlet var headerContainerView: UIView!
     @IBOutlet var loadingView: UIView!
+    @IBOutlet var headerContainerHeightConstraint: NSLayoutConstraint!
     
     var currentViewController: UIViewController?
     
@@ -58,10 +60,24 @@ class RootViewController: UIViewController {
         LoadingScreen(loadingView: self.loadingView)
     }()
     
+    lazy var headerView: HeaderView = {
+        HeaderView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        addLoadingScreen()
+        self.addLoadingScreen()
+        self.addHeaderView()
         self.addTabComponent()
+    }
+    
+    func addHeaderView() {
+        self.headerContainerView.addSubview(self.headerView)
+        self.headerView.snp.makeConstraints { (make) in
+            make.edges.equalToSuperview()
+        }
+        let safeAreaTop = UIApplication.shared.windows[0].safeAreaInsets.top
+        self.headerContainerHeightConstraint.constant += safeAreaTop
     }
     
     func addTabComponent() {

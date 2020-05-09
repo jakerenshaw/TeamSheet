@@ -19,8 +19,15 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Db-Ej-nGB">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k5p-B3-Swp">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="rMC-KD-OVU"/>
+                                </constraints>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="789-zc-4ds">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="612"/>
+                                <rect key="frame" x="0.0" y="50" width="375" height="562"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xZA-XF-3VD">
                                 <rect key="frame" x="0.0" y="612" width="375" height="55"/>
@@ -31,21 +38,26 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="k5p-B3-Swp" firstAttribute="leading" secondItem="9NF-32-zWh" secondAttribute="leading" id="5UM-52-vME"/>
                             <constraint firstItem="9NF-32-zWh" firstAttribute="bottom" secondItem="xZA-XF-3VD" secondAttribute="bottom" id="5sP-ru-Atu"/>
                             <constraint firstAttribute="trailing" secondItem="789-zc-4ds" secondAttribute="trailing" id="Ohg-wS-ODK"/>
                             <constraint firstItem="xZA-XF-3VD" firstAttribute="top" secondItem="789-zc-4ds" secondAttribute="bottom" id="a1R-Zo-XJo"/>
                             <constraint firstItem="1Db-Ej-nGB" firstAttribute="leading" secondItem="RQN-jt-5Yx" secondAttribute="leading" id="abW-46-bpq"/>
+                            <constraint firstItem="9NF-32-zWh" firstAttribute="trailing" secondItem="k5p-B3-Swp" secondAttribute="trailing" id="bvP-ha-UEh"/>
                             <constraint firstItem="xZA-XF-3VD" firstAttribute="leading" secondItem="RQN-jt-5Yx" secondAttribute="leading" id="f2q-kZ-1ny"/>
                             <constraint firstAttribute="trailing" secondItem="xZA-XF-3VD" secondAttribute="trailing" id="idG-tP-TxP"/>
+                            <constraint firstItem="k5p-B3-Swp" firstAttribute="top" secondItem="RQN-jt-5Yx" secondAttribute="top" id="mLF-89-dWu"/>
                             <constraint firstItem="789-zc-4ds" firstAttribute="leading" secondItem="RQN-jt-5Yx" secondAttribute="leading" id="mij-JV-79o"/>
                             <constraint firstItem="1Db-Ej-nGB" firstAttribute="top" secondItem="RQN-jt-5Yx" secondAttribute="top" id="o3A-hm-BdA"/>
                             <constraint firstAttribute="trailing" secondItem="1Db-Ej-nGB" secondAttribute="trailing" id="pdw-YO-9KT"/>
+                            <constraint firstItem="789-zc-4ds" firstAttribute="top" secondItem="k5p-B3-Swp" secondAttribute="bottom" id="qok-bE-jxA"/>
                             <constraint firstAttribute="bottom" secondItem="1Db-Ej-nGB" secondAttribute="bottom" id="tKX-Om-faB"/>
-                            <constraint firstItem="789-zc-4ds" firstAttribute="top" secondItem="9NF-32-zWh" secondAttribute="top" id="xVA-1B-5As"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="9NF-32-zWh"/>
                     </view>
                     <connections>
+                        <outlet property="headerContainerHeightConstraint" destination="rMC-KD-OVU" id="UJV-i4-EYU"/>
+                        <outlet property="headerContainerView" destination="k5p-B3-Swp" id="P23-TG-iQB"/>
                         <outlet property="loadingView" destination="1Db-Ej-nGB" id="OSy-Fb-4Bg"/>
                         <outlet property="mainContainerView" destination="RQN-jt-5Yx" id="gX3-Yy-VPK"/>
                         <outlet property="pageContainerView" destination="789-zc-4ds" id="AM2-jM-8pJ"/>
