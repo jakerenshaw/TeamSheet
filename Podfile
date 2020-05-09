@@ -5,5 +5,6 @@ target 'TeamSheet' do
   use_frameworks!
   pod 'SnapKit'
   pod 'SKStyleKit'
+  pod 'lottie-ios'
 
 end

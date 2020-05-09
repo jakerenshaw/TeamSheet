@@ -58,7 +58,15 @@ class TabView: UIView, UIGestureRecognizerDelegate {
         if #available(iOS 13.0, *) {
             self.tintColor = .label
         } else {
-            self.tintColor = .white
+            if #available(iOS 12.0, *) {
+                if traitCollection.userInterfaceStyle == .light {
+                    self.tintColor = .black
+                } else {
+                    self.tintColor = .white
+                }
+            } else {
+                self.tintColor = .white
+            }
         }
     }
 }

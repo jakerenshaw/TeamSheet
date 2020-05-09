@@ -38,6 +38,7 @@ class AlertPresenter: NSObject {
                 alert: alert,
                 actions: alertContent.actions
             )
+            alert.view.tintColor = .black
             self.presentationController.present(alert, animated: true, completion: nil)
         }
     }

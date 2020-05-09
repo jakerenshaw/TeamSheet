@@ -14,6 +14,7 @@ class RootViewController: UIViewController {
     @IBOutlet var mainContainerView: UIView!
     @IBOutlet var tabContainerView: UIView!
     @IBOutlet var pageContainerView: UIView!
+    @IBOutlet var loadingView: UIView!
     
     var currentViewController: UIViewController?
     
@@ -53,8 +54,13 @@ class RootViewController: UIViewController {
         AlertPresenter(presentationController: self)
     }()
     
+    lazy var loadingScreen: LoadingScreen = {
+        LoadingScreen(loadingView: self.loadingView)
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        addLoadingScreen()
         self.addTabComponent()
     }
     
@@ -63,6 +69,20 @@ class RootViewController: UIViewController {
         self.tabContainerView.addSubview(tabViewController.view)
         tabViewController.view.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
+        }
+    }
+    
+    func addLoadingScreen() {
+        self.view.bringSubviewToFront(loadingView)
+        self.loadingScreen.add()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            self.removeLoadingScreen()
+        }
+    }
+    
+    func removeLoadingScreen() {
+        self.loadingScreen.remove {
+            self.view.sendSubviewToBack(self.loadingView)
         }
     }
 }

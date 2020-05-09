@@ -7,6 +7,11 @@
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="HiRegularOblique-Kw8A.otf">
+            <string>HiObl</string>
+        </array>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SquadMenuView" customModule="TeamSheet" customModuleProvider="target">
             <connections>
@@ -21,27 +26,31 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kPl-aP-62t">
-                    <rect key="frame" x="204.5" y="6" width="50" height="34"/>
+                    <rect key="frame" x="237" y="6" width="50" height="34"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="34" id="Lal-nI-CFv"/>
                         <constraint firstAttribute="width" constant="50" id="dTp-oP-kgC"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <fontDescription key="fontDescription" name="MarkerFelt-Thin" family="Marker Felt" pointSize="14"/>
                     <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                 </textField>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bxc-gV-L3O">
-                    <rect key="frame" x="256.5" y="4" width="30" height="38"/>
-                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="21"/>
-                    <state key="normal" title="+">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bxc-gV-L3O">
+                    <rect key="frame" x="289" y="6" width="34" height="34"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="34" id="WVo-Kr-CwH"/>
+                        <constraint firstAttribute="height" constant="34" id="eFD-PE-0xi"/>
+                    </constraints>
+                    <color key="tintColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <state key="normal" image="add">
                         <color key="titleColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                     </state>
                     <connections>
                         <action selector="addPlayers:" destination="-1" eventType="touchUpInside" id="gPf-Jh-WTX"/>
                     </connections>
                 </button>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add Players (Max: 16) - " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3db-T5-LQt">
-                    <rect key="frame" x="16" y="12.5" width="182.5" height="21"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add Players (Max: 16) : " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3db-T5-LQt">
+                    <rect key="frame" x="16" y="14.5" width="215" height="17"/>
+                    <fontDescription key="fontDescription" name="HiObl" family="Hi." pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
@@ -49,9 +58,9 @@
             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
             <constraints>
                 <constraint firstItem="kPl-aP-62t" firstAttribute="leading" secondItem="3db-T5-LQt" secondAttribute="trailing" constant="6" id="6lP-ey-B70"/>
-                <constraint firstItem="bxc-gV-L3O" firstAttribute="centerY" secondItem="kPl-aP-62t" secondAttribute="centerY" id="AFS-09-0ez"/>
                 <constraint firstItem="3db-T5-LQt" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="CGi-Sf-nCL"/>
                 <constraint firstItem="kPl-aP-62t" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="6" id="Q1g-2E-NG1"/>
+                <constraint firstItem="bxc-gV-L3O" firstAttribute="centerY" secondItem="vUN-kp-3ea" secondAttribute="centerY" id="UvN-Sq-L9l"/>
                 <constraint firstItem="bxc-gV-L3O" firstAttribute="leading" secondItem="kPl-aP-62t" secondAttribute="trailing" constant="2" id="gZz-jO-sTO"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="kPl-aP-62t" secondAttribute="bottom" constant="6" id="hhY-FT-6nH"/>
                 <constraint firstItem="3db-T5-LQt" firstAttribute="centerY" secondItem="vUN-kp-3ea" secondAttribute="centerY" id="yzS-Ew-CfD"/>
@@ -61,4 +70,7 @@
             <point key="canvasLocation" x="118.40000000000001" y="-145.72713643178412"/>
         </view>
     </objects>
+    <resources>
+        <image name="add" width="25" height="25"/>
+    </resources>
 </document>
