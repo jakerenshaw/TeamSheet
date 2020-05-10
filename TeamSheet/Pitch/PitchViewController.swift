@@ -210,6 +210,7 @@ class PitchViewController: UIViewController, PlayerIconDelegate {
     }
     
     @objc func addOpposition() {
+        removeOpposition()
         var i = 1
         while i < 12 {
             let player = Player(name: "-", number: "\(i)", captain: false, x: self.view.bounds.width / 2, y: self.view.bounds.height / 2, teamColor: .white)
@@ -227,8 +228,8 @@ class PitchViewController: UIViewController, PlayerIconDelegate {
         oppositionIcons.removeAll()
     }
     
-    func toggleOppostion(add: Bool) {
-        if add {
+    func toggleOppostion() {
+        if opposition.isEmpty {
             self.addOpposition()
         } else {
             self.removeOpposition()

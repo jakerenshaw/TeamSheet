@@ -19,17 +19,28 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <view alpha="0.20000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ROS-KO-HDm">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="1"/>
+                    <color key="backgroundColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="c53-GF-Ioy"/>
+                    </constraints>
+                </view>
                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="ic3-j9-kUa">
-                    <rect key="frame" x="0.0" y="5" width="414" height="891"/>
+                    <rect key="frame" x="0.0" y="6" width="414" height="890"/>
                 </stackView>
             </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
             <constraints>
                 <constraint firstItem="ic3-j9-kUa" firstAttribute="bottom" secondItem="i5M-Pr-FkT" secondAttribute="bottom" id="3uQ-uM-Hqh"/>
-                <constraint firstItem="ic3-j9-kUa" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="5" id="43g-Im-kHy"/>
+                <constraint firstAttribute="trailing" secondItem="ROS-KO-HDm" secondAttribute="trailing" id="SoO-5E-kjg"/>
                 <constraint firstItem="ic3-j9-kUa" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Thx-Fg-9ki"/>
+                <constraint firstItem="ROS-KO-HDm" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Wdn-vz-VJs"/>
+                <constraint firstItem="ic3-j9-kUa" firstAttribute="top" secondItem="ROS-KO-HDm" secondAttribute="bottom" constant="5" id="mlG-BD-1N0"/>
                 <constraint firstAttribute="trailing" secondItem="ic3-j9-kUa" secondAttribute="trailing" id="qcO-Ug-1FD"/>
+                <constraint firstItem="ROS-KO-HDm" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="sfi-cZ-FHk"/>
             </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <point key="canvasLocation" x="139" y="114"/>
         </view>

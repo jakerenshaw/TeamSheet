@@ -76,9 +76,14 @@ class SquadTableViewCell: UITableViewCell, UITextFieldDelegate {
         }
     }
     
-    override func prepareForReuse() {
+    func clean() {
         self.captain = false
         self.nameTextField.text = ""
         self.numberTextField.text = ""
+    }
+    
+    override func prepareForReuse() {
+        self.clean()
+        super.prepareForReuse()
     }
 }

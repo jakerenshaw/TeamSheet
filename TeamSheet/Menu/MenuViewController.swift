@@ -9,6 +9,7 @@
 import UIKit
 
 enum MenuItemType {
+    case toggleOpposition
     case loadSquad
     case saveSquad
     case info
@@ -20,6 +21,7 @@ struct MenuContent {
 }
 
 protocol MenuViewControllerDelegate: class {
+    func toggleOpposition()
     func loadSquad()
     func saveSquad()
     func showInfo()
@@ -58,6 +60,10 @@ extension MenuViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = menuTableView.dequeueReusableCell(withIdentifier: "MenuTableViewCell") as? MenuTableViewCell
         cell?.delegate = self
         switch self.menuItems[indexPath.row] {
+        case .toggleOpposition:
+            cell?.menuItemType = .toggleOpposition
+            cell?.menuText.text = "Add/Remove Opposition"
+            cell?.menuImage.image = UIImage(named: "menu_opposition")
         case .loadSquad:
             cell?.menuItemType = .loadSquad
             cell?.menuText.text = "Load Squad"
@@ -82,6 +88,8 @@ extension MenuViewController: UITableViewDelegate, UITableViewDataSource {
 extension MenuViewController: MenuTableViewCellDelegate {
     func menuItemTapped(menuItemType: MenuItemType) {
         switch menuItemType {
+        case .toggleOpposition:
+            self.delegate?.toggleOpposition()
         case .loadSquad:
             self.delegate?.loadSquad()
         case .saveSquad:

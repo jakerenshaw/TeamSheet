@@ -7,6 +7,11 @@
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="HiRegularOblique-Kw8A.otf">
+            <string>HiObl</string>
+        </array>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HeaderView" customModule="TeamSheet" customModuleProvider="target">
             <connections>
@@ -15,12 +20,54 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB">
-            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <rect key="frame" x="0.0" y="0.0" width="507" height="50"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-            <color key="backgroundColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bfC-Zh-DXX">
+                    <rect key="frame" x="0.0" y="35" width="507" height="15"/>
+                    <color key="backgroundColor" red="0.68565493420000001" green="1" blue="0.56270879699999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="15" id="9Po-XA-UdV"/>
+                    </constraints>
+                </view>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="football" translatesAutoresizingMaskIntoConstraints="NO" id="81y-hc-PoI">
+                    <rect key="frame" x="238.5" y="10" width="30" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="1je-7V-tnS"/>
+                        <constraint firstAttribute="width" constant="30" id="pYi-qc-4CX"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Team" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QYO-9H-CP8">
+                    <rect key="frame" x="181.5" y="16.5" width="52" height="17"/>
+                    <fontDescription key="fontDescription" name="HiObl" family="Hi." pointSize="17"/>
+                    <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sheet" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fao-pI-eMg">
+                    <rect key="frame" x="273.5" y="16.5" width="57" height="17"/>
+                    <fontDescription key="fontDescription" name="HiObl" family="Hi." pointSize="17"/>
+                    <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" red="1" green="0.99215686270000003" blue="0.81568627449999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="fao-pI-eMg" firstAttribute="centerY" secondItem="81y-hc-PoI" secondAttribute="centerY" id="0Ij-un-LrH"/>
+                <constraint firstItem="bfC-Zh-DXX" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="DiB-9z-blM"/>
+                <constraint firstItem="81y-hc-PoI" firstAttribute="leading" secondItem="QYO-9H-CP8" secondAttribute="trailing" constant="5" id="EJH-aD-2CL"/>
+                <constraint firstItem="bfC-Zh-DXX" firstAttribute="bottom" secondItem="iN0-l3-epB" secondAttribute="bottom" id="I6O-0B-GtG"/>
+                <constraint firstAttribute="trailing" secondItem="bfC-Zh-DXX" secondAttribute="trailing" id="IYc-zD-Cu1"/>
+                <constraint firstItem="81y-hc-PoI" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="WcG-KH-An5"/>
+                <constraint firstItem="fao-pI-eMg" firstAttribute="leading" secondItem="81y-hc-PoI" secondAttribute="trailing" constant="5" id="rLo-pP-vBQ"/>
+                <constraint firstItem="QYO-9H-CP8" firstAttribute="centerY" secondItem="81y-hc-PoI" secondAttribute="centerY" id="rxL-XX-vrb"/>
+                <constraint firstItem="bfC-Zh-DXX" firstAttribute="top" secondItem="81y-hc-PoI" secondAttribute="bottom" constant="-5" id="xv0-Ka-iC3"/>
+            </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
-            <point key="canvasLocation" x="139" y="102"/>
+            <point key="canvasLocation" x="205.07246376811597" y="-181.47321428571428"/>
         </view>
     </objects>
+    <resources>
+        <image name="football" width="50" height="50"/>
+    </resources>
 </document>

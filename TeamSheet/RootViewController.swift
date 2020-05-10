@@ -31,7 +31,7 @@ class RootViewController: UIViewController {
     }()
     
     lazy var menuViewController: MenuViewController = {
-        let menu = MenuViewController(menuItems: [.loadSquad, .saveSquad, .info], nibName: "MenuViewController", bundle: nil)
+        let menu = MenuViewController(menuItems: [.toggleOpposition, .loadSquad, .saveSquad, .info], nibName: "MenuViewController", bundle: nil)
         menu.delegate = self
         return menu
     }()
@@ -158,6 +158,11 @@ extension RootViewController: PitchViewControllerDelegate {
 }
 
 extension RootViewController: MenuViewControllerDelegate {
+    func toggleOpposition() {
+        self.tabViewController.setCurrentTab(currentTab: .pitch)
+        self.pitchViewController.toggleOppostion()
+    }
+    
     func loadSquad() {
         self.tabViewController.setCurrentTab(currentTab: .squad)
         self.privateDatabase.loadSquad()

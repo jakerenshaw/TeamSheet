@@ -36,6 +36,10 @@ class SquadViewController: UIViewController, UITableViewDataSource, UITableViewD
         return self.squadStore.squad.count
     }
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        1
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = squadTableView.dequeueReusableCell(withIdentifier: "SquadTableViewCell") as? SquadTableViewCell
         cell?.captain = self.squadStore.squad[indexPath.row].captain
@@ -47,8 +51,8 @@ class SquadViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            self.squadTableView.beginUpdates()
             self.squadStore.squad.remove(at: indexPath.row)
+            self.squadTableView.beginUpdates()
             self.squadTableView.deleteRows(at: [indexPath], with: .automatic)
             self.squadTableView.endUpdates()
         }
