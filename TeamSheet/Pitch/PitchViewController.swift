@@ -143,7 +143,9 @@ class PitchViewController: UIViewController, PlayerIconDelegate {
     }
     
     func addPlayer(player: Player, playerType: PlayerType) {
-        let playerIcon = PlayerIcon(frame: CGRect(x: player.x, y: player.y, width: 10, height: 10), name: player.name, number: player.number, captain: player.captain, teamColor: player.teamColor)
+        let x = player.x == 0 ? 50 : player.x
+        let y = player.y == 0 ? 50 : player.y
+        let playerIcon = PlayerIcon(frame: CGRect(x: x, y: y, width: 10, height: 10), name: player.name, number: player.number, captain: player.captain, teamColor: player.teamColor)
         playerIcon.delegate = self
         self.view.addSubview(playerIcon)
         switch playerType {
@@ -213,7 +215,7 @@ class PitchViewController: UIViewController, PlayerIconDelegate {
         removeOpposition()
         var i = 1
         while i < 12 {
-            let player = Player(name: "-", number: "\(i)", captain: false, x: self.view.bounds.width / 2, y: self.view.bounds.height / 2, teamColor: .white)
+            let player = Player(name: "-", number: "\(i)", captain: false, x: 0, y: 0, teamColor: .white)
             opposition.append(player)
             addPlayer(player: player, playerType: .opposition)
             i += 1

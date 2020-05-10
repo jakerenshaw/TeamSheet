@@ -106,8 +106,8 @@ class SquadViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     @objc func addPlayer() {
         let player = Player(
-            x: self.view.bounds.width / 2,
-            y: (self.view.bounds.height / 2) + 60
+            x: 0,
+            y: 0
         )
         self.squadStore.squad.append(player)
         squadTableView.beginUpdates()

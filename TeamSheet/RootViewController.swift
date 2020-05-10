@@ -91,7 +91,7 @@ class RootViewController: UIViewController {
     func addLoadingScreen() {
         self.view.bringSubviewToFront(loadingView)
         self.loadingScreen.add()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             self.removeLoadingScreen()
         }
     }
