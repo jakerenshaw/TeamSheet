@@ -25,11 +25,13 @@ protocol MenuViewControllerDelegate: class {
     func loadSquad()
     func saveSquad()
     func showInfo()
+    func showBannerAd(containerView: UIView)
 }
 
 class MenuViewController: UIViewController {
     
     @IBOutlet var menuTableView: UITableView!
+    @IBOutlet var bannerAdContainerView: UIView!
     
     weak var delegate: MenuViewControllerDelegate?
     
@@ -46,6 +48,7 @@ class MenuViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.delegate?.showBannerAd(containerView: self.bannerAdContainerView)
         self.menuTableView.delegate = self
         self.menuTableView.register(UINib(nibName: "MenuTableViewCell", bundle: nil), forCellReuseIdentifier: "MenuTableViewCell")
     }

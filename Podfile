@@ -6,5 +6,6 @@ target 'TeamSheet' do
   pod 'SnapKit'
   pod 'SKStyleKit'
   pod 'lottie-ios'
+  pod 'Google-Mobile-Ads-SDK'
 
 end

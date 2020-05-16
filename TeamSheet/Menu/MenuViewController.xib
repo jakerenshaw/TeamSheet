@@ -10,6 +10,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MenuViewController" customModule="TeamSheet" customModuleProvider="target">
             <connections>
+                <outlet property="bannerAdContainerView" destination="clf-QO-Y13" id="MzX-Le-GrM"/>
                 <outlet property="menuTableView" destination="7Tu-ey-02K" id="NcW-XE-7Hf"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -20,19 +21,27 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="7Tu-ey-02K">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="467"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="o7Z-sF-vbJ"/>
                         <outlet property="delegate" destination="-1" id="WTt-2u-sb3"/>
                     </connections>
                 </tableView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="clf-QO-Y13">
+                    <rect key="frame" x="0.0" y="467" width="375" height="200"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                </view>
             </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
             <constraints>
+                <constraint firstItem="clf-QO-Y13" firstAttribute="top" secondItem="7Tu-ey-02K" secondAttribute="bottom" id="0vT-fj-eRN"/>
+                <constraint firstAttribute="trailing" secondItem="clf-QO-Y13" secondAttribute="trailing" id="2rc-dG-CLn"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="7Tu-ey-02K" secondAttribute="trailing" id="4cr-M0-xSq"/>
                 <constraint firstItem="7Tu-ey-02K" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="5P9-KR-WIG"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="7Tu-ey-02K" secondAttribute="bottom" id="SE5-sc-xsx"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="7Tu-ey-02K" secondAttribute="bottom" constant="200" id="SE5-sc-xsx"/>
+                <constraint firstAttribute="bottom" secondItem="clf-QO-Y13" secondAttribute="bottom" id="TuH-5j-7VN"/>
+                <constraint firstItem="clf-QO-Y13" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="c7L-Eh-oTH"/>
                 <constraint firstItem="7Tu-ey-02K" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="ipQ-mL-cnx"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>

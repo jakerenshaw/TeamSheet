@@ -16,6 +16,35 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HNt-TX-IGQ">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="305-08-f4g">
+                                        <rect key="frame" x="310" y="7" width="30" height="38"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" name="MarkerFelt-Wide" family="Marker Felt" pointSize="20"/>
+                                        <state key="normal" title="X">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="closeAd:" destination="QPa-O0-Tkm" eventType="touchUpInside" id="Ivs-3y-ZUm"/>
+                                        </connections>
+                                    </button>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6vY-uu-lnj">
+                                        <rect key="frame" x="30" y="50" width="315" height="567"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="6vY-uu-lnj" firstAttribute="leading" secondItem="HNt-TX-IGQ" secondAttribute="leading" constant="30" id="JX1-1D-nb7"/>
+                                    <constraint firstAttribute="bottom" secondItem="6vY-uu-lnj" secondAttribute="bottom" constant="50" id="JZL-gD-tTV"/>
+                                    <constraint firstAttribute="trailing" secondItem="6vY-uu-lnj" secondAttribute="trailing" constant="30" id="OTz-Dk-ift"/>
+                                    <constraint firstItem="6vY-uu-lnj" firstAttribute="top" secondItem="305-08-f4g" secondAttribute="bottom" constant="5" id="d95-oc-44l"/>
+                                    <constraint firstItem="305-08-f4g" firstAttribute="trailing" secondItem="6vY-uu-lnj" secondAttribute="trailing" constant="-5" id="dfC-5U-zO2"/>
+                                    <constraint firstItem="6vY-uu-lnj" firstAttribute="top" secondItem="HNt-TX-IGQ" secondAttribute="top" constant="50" id="lCj-hX-7kL"/>
+                                </constraints>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Db-Ej-nGB">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </view>
@@ -40,7 +69,10 @@
                         <constraints>
                             <constraint firstItem="k5p-B3-Swp" firstAttribute="leading" secondItem="9NF-32-zWh" secondAttribute="leading" id="5UM-52-vME"/>
                             <constraint firstItem="9NF-32-zWh" firstAttribute="bottom" secondItem="xZA-XF-3VD" secondAttribute="bottom" id="5sP-ru-Atu"/>
+                            <constraint firstItem="HNt-TX-IGQ" firstAttribute="top" secondItem="RQN-jt-5Yx" secondAttribute="top" id="Adj-79-DE5"/>
+                            <constraint firstItem="9NF-32-zWh" firstAttribute="bottom" secondItem="HNt-TX-IGQ" secondAttribute="bottom" id="Bhf-7T-K9c"/>
                             <constraint firstAttribute="trailing" secondItem="789-zc-4ds" secondAttribute="trailing" id="Ohg-wS-ODK"/>
+                            <constraint firstItem="HNt-TX-IGQ" firstAttribute="leading" secondItem="RQN-jt-5Yx" secondAttribute="leading" id="W4H-DL-ty4"/>
                             <constraint firstItem="xZA-XF-3VD" firstAttribute="top" secondItem="789-zc-4ds" secondAttribute="bottom" id="a1R-Zo-XJo"/>
                             <constraint firstItem="1Db-Ej-nGB" firstAttribute="leading" secondItem="RQN-jt-5Yx" secondAttribute="leading" id="abW-46-bpq"/>
                             <constraint firstItem="9NF-32-zWh" firstAttribute="trailing" secondItem="k5p-B3-Swp" secondAttribute="trailing" id="bvP-ha-UEh"/>
@@ -51,11 +83,16 @@
                             <constraint firstItem="1Db-Ej-nGB" firstAttribute="top" secondItem="RQN-jt-5Yx" secondAttribute="top" id="o3A-hm-BdA"/>
                             <constraint firstAttribute="trailing" secondItem="1Db-Ej-nGB" secondAttribute="trailing" id="pdw-YO-9KT"/>
                             <constraint firstItem="789-zc-4ds" firstAttribute="top" secondItem="k5p-B3-Swp" secondAttribute="bottom" id="qok-bE-jxA"/>
+                            <constraint firstAttribute="trailing" secondItem="HNt-TX-IGQ" secondAttribute="trailing" id="rh9-Pa-ab0"/>
                             <constraint firstAttribute="bottom" secondItem="1Db-Ej-nGB" secondAttribute="bottom" id="tKX-Om-faB"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="9NF-32-zWh"/>
                     </view>
                     <connections>
+                        <outlet property="adBackgroundView" destination="HNt-TX-IGQ" id="Ob4-gr-WgI"/>
+                        <outlet property="adCloseButton" destination="305-08-f4g" id="GXd-2V-HdX"/>
+                        <outlet property="adContainerTopConstraint" destination="lCj-hX-7kL" id="F6p-tM-SoD"/>
+                        <outlet property="adContainerView" destination="6vY-uu-lnj" id="FZu-Pn-4qX"/>
                         <outlet property="headerContainerHeightConstraint" destination="rMC-KD-OVU" id="UJV-i4-EYU"/>
                         <outlet property="headerContainerView" destination="k5p-B3-Swp" id="P23-TG-iQB"/>
                         <outlet property="loadingView" destination="1Db-Ej-nGB" id="OSy-Fb-4Bg"/>

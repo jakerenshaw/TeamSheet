@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B60650AF24700A9E0066BCF5 /* AdMob.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60650AE24700A9E0066BCF5 /* AdMob.swift */; };
+		B60650B7247026980066BCF5 /* NativeAdView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B60650B6247026980066BCF5 /* NativeAdView.xib */; };
 		B6151F4F225A0123008A9185 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6151F4E225A0123008A9185 /* AppDelegate.swift */; };
 		B6151F54225A0123008A9185 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6151F52225A0123008A9185 /* Main.storyboard */; };
 		B6151F56225A0124008A9185 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B6151F55225A0124008A9185 /* Assets.xcassets */; };
@@ -47,6 +49,8 @@
 
 /* Begin PBXFileReference section */
 		33436A15C34CCBF41B228849 /* Pods-TeamSheet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TeamSheet.release.xcconfig"; path = "Target Support Files/Pods-TeamSheet/Pods-TeamSheet.release.xcconfig"; sourceTree = "<group>"; };
+		B60650AE24700A9E0066BCF5 /* AdMob.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdMob.swift; sourceTree = "<group>"; };
+		B60650B6247026980066BCF5 /* NativeAdView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NativeAdView.xib; sourceTree = "<group>"; };
 		B6151F4B225A0123008A9185 /* TeamSheet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TeamSheet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6151F4E225A0123008A9185 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B6151F53225A0123008A9185 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -102,6 +106,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B60650AD24700A7A0066BCF5 /* Advert */ = {
+			isa = PBXGroup;
+			children = (
+				B60650AE24700A9E0066BCF5 /* AdMob.swift */,
+				B60650B6247026980066BCF5 /* NativeAdView.xib */,
+			);
+			path = Advert;
+			sourceTree = "<group>";
+		};
 		B6151F42225A0123008A9185 = {
 			isa = PBXGroup;
 			children = (
@@ -123,6 +136,7 @@
 		B6151F4D225A0123008A9185 /* TeamSheet */ = {
 			isa = PBXGroup;
 			children = (
+				B60650AD24700A7A0066BCF5 /* Advert */,
 				B6634131246757FB00E69178 /* Header */,
 				B6929ECC2467364A0071A6D1 /* Resources */,
 				B6929EC9246735030071A6D1 /* Animation */,
@@ -344,6 +358,7 @@
 				B6865C0C2465AA0400284A42 /* PitchViewController.xib in Resources */,
 				B6CFC4B82465C34C00D1F1FB /* SquadMenuView.xib in Resources */,
 				B66341352467588500E69178 /* HeaderView.xib in Resources */,
+				B60650B7247026980066BCF5 /* NativeAdView.xib in Resources */,
 				B6F6DB6E2466E6C3007978D9 /* MenuTableViewCell.xib in Resources */,
 				B6F6DB6A2466E24D007978D9 /* MenuViewController.xib in Resources */,
 				B6151F67225A25AB008A9185 /* PlayerIcon.xib in Resources */,
@@ -410,6 +425,7 @@
 				B6151F4F225A0123008A9185 /* AppDelegate.swift in Sources */,
 				B65A2FDF24659BB60018EC6B /* TabView.swift in Sources */,
 				B6865C162465AF0100284A42 /* RootViewController.swift in Sources */,
+				B60650AF24700A9E0066BCF5 /* AdMob.swift in Sources */,
 				B6929ECB246735320071A6D1 /* LottieAnimation.swift in Sources */,
 				B65A2FDA246597140018EC6B /* TabViewController.swift in Sources */,
 				B6AF02982447642700409AB9 /* Extensions.swift in Sources */,

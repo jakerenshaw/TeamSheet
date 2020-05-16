@@ -17,7 +17,11 @@ class RootViewController: UIViewController {
     @IBOutlet var headerContainerView: UIView!
     @IBOutlet var loadingView: UIView!
     @IBOutlet var headerContainerHeightConstraint: NSLayoutConstraint!
+    @IBOutlet var adBackgroundView: UIView!
+    @IBOutlet var adContainerView: UIView!
+    @IBOutlet var adContainerTopConstraint: NSLayoutConstraint!
     
+    @IBOutlet var adCloseButton: UIButton!
     var currentViewController: UIViewController?
     
     lazy var squadViewController: SquadViewController = {
@@ -26,6 +30,7 @@ class RootViewController: UIViewController {
     
     lazy var pitchViewController: PitchViewController = {
         let pitch = PitchViewController(squadStore: self.squadStore, nibName: "PitchViewController", bundle: nil)
+        self.addAd()
         pitch.delegate = self
         return pitch
     }()
@@ -64,11 +69,22 @@ class RootViewController: UIViewController {
         HeaderView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
     }()
     
+    lazy var adMob: AdMob = {
+        AdMob(rootViewController: self)
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.setupAdContainer()
         self.addLoadingScreen()
         self.addHeaderView()
         self.addTabComponent()
+    }
+    
+    func setupAdContainer() {
+        let safeAreaTop = UIApplication.shared.windows[0].safeAreaInsets.top
+        self.adContainerTopConstraint.constant += safeAreaTop
+        self.adBackgroundView.layer.backgroundColor = UIColor.gray.withAlphaComponent(0.7).cgColor
     }
     
     func addHeaderView() {
@@ -101,6 +117,17 @@ class RootViewController: UIViewController {
             self.view.sendSubviewToBack(self.loadingView)
         }
     }
+    
+    func addAd() {
+        self.view.bringSubviewToFront(adBackgroundView)
+        self.adMob.loadAdvert(containerView: adContainerView)
+    }
+    
+    @IBAction func closeAd(_ sender: UIButton) {
+        self.adMob.closeAdvert()
+        self.view.sendSubviewToBack(self.adBackgroundView)
+    }
+    
 }
 
 extension RootViewController: TabViewControllerDelegate {
@@ -158,6 +185,10 @@ extension RootViewController: PitchViewControllerDelegate {
 }
 
 extension RootViewController: MenuViewControllerDelegate {
+    func showBannerAd(containerView: UIView) {
+        self.adMob.addBanner(bannerContainerView: containerView)
+    }
+    
     func toggleOpposition() {
         self.tabViewController.setCurrentTab(currentTab: .pitch)
         self.pitchViewController.toggleOppostion()
