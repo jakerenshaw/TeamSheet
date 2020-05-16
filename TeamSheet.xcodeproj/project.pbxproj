@@ -34,7 +34,6 @@
 		B6865C162465AF0100284A42 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6865C152465AF0100284A42 /* RootViewController.swift */; };
 		B6929ECB246735320071A6D1 /* LottieAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6929ECA246735320071A6D1 /* LottieAnimation.swift */; };
 		B6929ECE2467367A0071A6D1 /* football_bouncing.json in Resources */ = {isa = PBXBuildFile; fileRef = B6929ECD246736790071A6D1 /* football_bouncing.json */; };
-		B6929ED2246742E40071A6D1 /* HiRegularOblique-Kw8A.otf in Resources */ = {isa = PBXBuildFile; fileRef = B6929ED1246742E40071A6D1 /* HiRegularOblique-Kw8A.otf */; };
 		B6AF02982447642700409AB9 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6AF02972447642700409AB9 /* Extensions.swift */; };
 		B6CFC4B62465C31200D1F1FB /* SquadMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6CFC4B52465C31200D1F1FB /* SquadMenuView.swift */; };
 		B6CFC4B82465C34C00D1F1FB /* SquadMenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B6CFC4B72465C34C00D1F1FB /* SquadMenuView.xib */; };
@@ -78,7 +77,6 @@
 		B6865C152465AF0100284A42 /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		B6929ECA246735320071A6D1 /* LottieAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieAnimation.swift; sourceTree = "<group>"; };
 		B6929ECD246736790071A6D1 /* football_bouncing.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = football_bouncing.json; sourceTree = "<group>"; };
-		B6929ED1246742E40071A6D1 /* HiRegularOblique-Kw8A.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "HiRegularOblique-Kw8A.otf"; sourceTree = "<group>"; };
 		B6AF02972447642700409AB9 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		B6CFC4B52465C31200D1F1FB /* SquadMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SquadMenuView.swift; sourceTree = "<group>"; };
 		B6CFC4B72465C34C00D1F1FB /* SquadMenuView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SquadMenuView.xib; sourceTree = "<group>"; };
@@ -196,7 +194,6 @@
 		B6929ECC2467364A0071A6D1 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				B6929ED1246742E40071A6D1 /* HiRegularOblique-Kw8A.otf */,
 				B6929ECD246736790071A6D1 /* football_bouncing.json */,
 			);
 			path = Resources;
@@ -349,7 +346,6 @@
 				B66341352467588500E69178 /* HeaderView.xib in Resources */,
 				B6F6DB6E2466E6C3007978D9 /* MenuTableViewCell.xib in Resources */,
 				B6F6DB6A2466E24D007978D9 /* MenuViewController.xib in Resources */,
-				B6929ED2246742E40071A6D1 /* HiRegularOblique-Kw8A.otf in Resources */,
 				B6151F67225A25AB008A9185 /* PlayerIcon.xib in Resources */,
 				B6151F54225A0123008A9185 /* Main.storyboard in Resources */,
 				B65A2FDD24659BA70018EC6B /* TabView.xib in Resources */,
