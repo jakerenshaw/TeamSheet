@@ -31,14 +31,14 @@ class AdMob: NSObject {
     }
     
     func loadNativeAdvert() {
-        adLoader = GADAdLoader(adUnitID: "ca-app-pub-3940256099942544/3986624511", rootViewController: rootViewController, adTypes: [.unifiedNative], options: nil)
+        adLoader = GADAdLoader(adUnitID: "ca-app-pub-9692683811405414/6787826208", rootViewController: rootViewController, adTypes: [.unifiedNative], options: nil)
         adLoader?.delegate = self
         adLoader?.load(GADRequest())
     }
     
     func loadBannerAdvert() {
         self.bannerView = GADBannerView(adSize: kGADAdSizeBanner)
-        self.bannerView?.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        self.bannerView?.adUnitID = "ca-app-pub-9692683811405414/4742270885"
         self.bannerView?.rootViewController = self.rootViewController
         self.bannerView?.delegate = self
         self.bannerView?.load(GADRequest())
@@ -158,6 +158,7 @@ extension AdMob: GADUnifiedNativeAdLoaderDelegate {
           return
         }
         nativeAdView.nativeAd = nativeAd
+        nativeAdView.mediaView?.contentMode = .scaleAspectFit
         nativeAdView.mediaView?.mediaContent = nativeAd.mediaContent
         (nativeAdView.headlineView as? UILabel)?.text = nativeAd.headline
         (nativeAdView.bodyView as? UILabel)?.text = nativeAd.body
