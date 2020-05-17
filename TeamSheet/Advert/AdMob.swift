@@ -11,15 +11,17 @@ import GoogleMobileAds
 
 class AdMob: NSObject {
 
-    let rootViewController: UIViewController
+    let rootViewController: RootViewController
     var nativeAdView: GADUnifiedNativeAdView?
     var adLoader: GADAdLoader?
     var bannerView: GADBannerView?
     var loadedBannerView: GADBannerView?
     var nativeAdvertCompletion: ((GADUnifiedNativeAdView) -> Void)?
     var bannerAdvertCompletion: ((GADBannerView) -> Void)?
+    var pendingAdCount = 0
+     
     
-    init(rootViewController: UIViewController) {
+    init(rootViewController: RootViewController) {
         self.rootViewController = rootViewController
         super.init()
         GADMobileAds.sharedInstance().start { (_) in
@@ -43,14 +45,19 @@ class AdMob: NSObject {
     }
     
     func displayNativeAdvert(containerView: UIView) {
-        let nativeAdvertCompletion = { (unifiedNativeAdView: GADUnifiedNativeAdView) in
+        let activitySpinner = UIActivityIndicatorView(style: .gray)
+        activitySpinner.color = rootViewController.darkModeColor
+        let nativeAdvertCompletion = { [weak self] (unifiedNativeAdView: GADUnifiedNativeAdView) in
             containerView.addSubview(unifiedNativeAdView)
             unifiedNativeAdView.frame = CGRect(x: 0, y: 0, width: containerView.frame.width, height: containerView.frame.height)
+            self?.removeSpinner(spinner: activitySpinner, view: containerView)
+            self?.pendingAdsCheck()
         }
         if let nativeAdView = self.nativeAdView {
             nativeAdvertCompletion(nativeAdView)
         } else {
             self.nativeAdvertCompletion = nativeAdvertCompletion
+            self.addSpinner(spinner: activitySpinner, view: containerView)
         }
     }
     
@@ -61,16 +68,67 @@ class AdMob: NSObject {
     }
     
     func displayBannerAdvert(bannerContainerView: UIView) {
-        let bannerAdvertCompletion = { (loadedBannerAdView: GADBannerView) in
+        let activitySpinner = UIActivityIndicatorView(style: .gray)
+        activitySpinner.color = rootViewController.darkModeColor
+        let bannerAdvertCompletion = { [weak self] (loadedBannerAdView: GADBannerView) in
             bannerContainerView.addSubview(loadedBannerAdView)
             loadedBannerAdView.snp.makeConstraints { (make) in
                 make.edges.equalToSuperview()
             }
+            self?.removeSpinner(spinner: activitySpinner, view: bannerContainerView)
+            self?.pendingAdsCheck()
         }
         if let loadedBannerView = self.loadedBannerView {
             bannerAdvertCompletion(loadedBannerView)
         } else {
             self.bannerAdvertCompletion = bannerAdvertCompletion
+            self.addSpinner(spinner: activitySpinner, view: bannerContainerView)
+        }
+    }
+    
+    func addSpinner(spinner: UIActivityIndicatorView, view: UIView) {
+        view.addSubview(spinner)
+        spinner.snp.makeConstraints { (make) in
+            make.center.equalToSuperview()
+        }
+        spinner.startAnimating()
+    }
+    
+    func removeSpinner(spinner: UIActivityIndicatorView, view: UIView) {
+        spinner.stopAnimating()
+        spinner.removeFromSuperview()
+    }
+    
+    @objc func reloadNativeAd(connection: Notification) {
+        guard let newConnection = connection.object as? Connection else {
+            return
+        }
+        switch newConnection {
+        case .connected:
+            pendingAdCount -= 1
+            self.adLoader?.load(GADRequest())
+        default:
+            break
+        }
+    }
+    
+    @objc func reloadBannerAd(connection: Notification) {
+        guard let newConnection = connection.object as? Connection else {
+            return
+        }
+        switch newConnection {
+        case .connected:
+            pendingAdCount -= 1
+            self.bannerView?.isHidden = false
+            self.bannerView?.load(GADRequest())
+        default:
+            break
+        }
+    }
+    
+    func pendingAdsCheck() {
+        if pendingAdCount == 0 {
+            NotificationCenter.default.removeObserver(self)
         }
     }
 }
@@ -81,6 +139,13 @@ extension AdMob: GADBannerViewDelegate {
         if let bannerAdvertCompletion = self.bannerAdvertCompletion {
             bannerAdvertCompletion(bannerView)
             self.bannerAdvertCompletion = nil
+        }
+    }
+    
+    func adView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: GADRequestError) {
+        if error.localizedDescription == "The Internet connection appears to be offline." {
+            pendingAdCount += 1
+            NotificationCenter.default.addObserver(self, selector: #selector(reloadBannerAd(connection:)), name: NSNotification.Name(Connection.update.rawValue), object: nil)
         }
     }
 }
@@ -118,7 +183,10 @@ extension AdMob: GADUnifiedNativeAdLoaderDelegate {
     }
     
     func adLoader(_ adLoader: GADAdLoader, didFailToReceiveAdWithError error: GADRequestError) {
-        //
+        if error.localizedDescription == "The Internet connection appears to be offline." {
+            pendingAdCount += 1
+            NotificationCenter.default.addObserver(self, selector: #selector(reloadNativeAd(connection:)), name: NSNotification.Name(Connection.update.rawValue), object: nil)
+        }
     }
 }
 

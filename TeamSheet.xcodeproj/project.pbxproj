@@ -19,6 +19,7 @@
 		B6151F67225A25AB008A9185 /* PlayerIcon.xib in Resources */ = {isa = PBXBuildFile; fileRef = B6151F66225A25AB008A9185 /* PlayerIcon.xib */; };
 		B6151F6B225A277D008A9185 /* PlayerIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6151F6A225A277D008A9185 /* PlayerIcon.swift */; };
 		B655C3EA23E70AE3000E6994 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = B655C3E923E70AE3000E6994 /* Player.swift */; };
+		B656E899247167E0001C2B2D /* ReachabilitySwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = B656E898247167E0001C2B2D /* ReachabilitySwift.swift */; };
 		B65A2FDA246597140018EC6B /* TabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65A2FD8246597140018EC6B /* TabViewController.swift */; };
 		B65A2FDB246597140018EC6B /* TabViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B65A2FD9246597140018EC6B /* TabViewController.xib */; };
 		B65A2FDD24659BA70018EC6B /* TabView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B65A2FDC24659BA60018EC6B /* TabView.xib */; };
@@ -64,6 +65,7 @@
 		B6151F66225A25AB008A9185 /* PlayerIcon.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlayerIcon.xib; sourceTree = "<group>"; };
 		B6151F6A225A277D008A9185 /* PlayerIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerIcon.swift; sourceTree = "<group>"; };
 		B655C3E923E70AE3000E6994 /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		B656E898247167E0001C2B2D /* ReachabilitySwift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReachabilitySwift.swift; sourceTree = "<group>"; };
 		B65A2FD8246597140018EC6B /* TabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabViewController.swift; sourceTree = "<group>"; };
 		B65A2FD9246597140018EC6B /* TabViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TabViewController.xib; sourceTree = "<group>"; };
 		B65A2FDC24659BA60018EC6B /* TabView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TabView.xib; sourceTree = "<group>"; };
@@ -138,6 +140,7 @@
 		B6151F4D225A0123008A9185 /* TeamSheet */ = {
 			isa = PBXGroup;
 			children = (
+				B656E89724716749001C2B2D /* Reachability */,
 				B60650AD24700A7A0066BCF5 /* Advert */,
 				B6634131246757FB00E69178 /* Header */,
 				B6929ECC2467364A0071A6D1 /* Resources */,
@@ -160,6 +163,14 @@
 				B6865C152465AF0100284A42 /* RootViewController.swift */,
 			);
 			path = TeamSheet;
+			sourceTree = "<group>";
+		};
+		B656E89724716749001C2B2D /* Reachability */ = {
+			isa = PBXGroup;
+			children = (
+				B656E898247167E0001C2B2D /* ReachabilitySwift.swift */,
+			);
+			path = Reachability;
 			sourceTree = "<group>";
 		};
 		B65A2FD7246596DA0018EC6B /* Tab */ = {
@@ -436,6 +447,7 @@
 				B6151F62225A042F008A9185 /* SquadTableViewCell.swift in Sources */,
 				B655C3EA23E70AE3000E6994 /* Player.swift in Sources */,
 				B680A0102455F00C0034E0CC /* Errors.swift in Sources */,
+				B656E899247167E0001C2B2D /* ReachabilitySwift.swift in Sources */,
 				B6F6DB692466E24D007978D9 /* MenuViewController.swift in Sources */,
 				B6CFC4B62465C31200D1F1FB /* SquadMenuView.swift in Sources */,
 				B66341332467585A00E69178 /* HeaderView.swift in Sources */,

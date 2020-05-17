@@ -78,6 +78,7 @@ class RootViewController: UIViewController {
     }()
     
     var adMob: AdMob!
+    let reachabilitySwift = ReachabilitySwift()
     
     override func viewDidLoad() {
         super.viewDidLoad()

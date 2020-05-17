@@ -7,5 +7,6 @@ target 'TeamSheet' do
   pod 'SKStyleKit'
   pod 'lottie-ios'
   pod 'Google-Mobile-Ads-SDK'
+  pod 'ReachabilitySwift'
 
 end
