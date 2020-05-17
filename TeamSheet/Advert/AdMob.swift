@@ -31,33 +31,30 @@ class AdMob: NSObject {
     }
     
     func loadNativeAdvert() {
-        adLoader = GADAdLoader(adUnitID: "ca-app-pub-9692683811405414/6787826208", rootViewController: rootViewController, adTypes: [.unifiedNative], options: nil)
+        adLoader = GADAdLoader(adUnitID: "ca-app-pub-9692683811405414/2560575077", rootViewController: rootViewController, adTypes: [.unifiedNative], options: nil)
         adLoader?.delegate = self
         adLoader?.load(GADRequest())
     }
     
     func loadBannerAdvert() {
         self.bannerView = GADBannerView(adSize: kGADAdSizeBanner)
-        self.bannerView?.adUnitID = "ca-app-pub-9692683811405414/4742270885"
+        self.bannerView?.adUnitID = "ca-app-pub-9692683811405414/7677525603"
         self.bannerView?.rootViewController = self.rootViewController
         self.bannerView?.delegate = self
         self.bannerView?.load(GADRequest())
     }
     
-    func displayNativeAdvert(containerView: UIView) {
-        let activitySpinner = UIActivityIndicatorView(style: .gray)
-        activitySpinner.color = rootViewController.darkModeColor
+    func displayNativeAdvert(containerView: UIView, completion: @escaping (() -> Void)) {
         let nativeAdvertCompletion = { [weak self] (unifiedNativeAdView: GADUnifiedNativeAdView) in
             containerView.addSubview(unifiedNativeAdView)
             unifiedNativeAdView.frame = CGRect(x: 0, y: 0, width: containerView.frame.width, height: containerView.frame.height)
-            self?.removeSpinner(spinner: activitySpinner, view: containerView)
             self?.pendingAdsCheck()
+            completion()
         }
         if let nativeAdView = self.nativeAdView {
             nativeAdvertCompletion(nativeAdView)
         } else {
             self.nativeAdvertCompletion = nativeAdvertCompletion
-            self.addSpinner(spinner: activitySpinner, view: containerView)
         }
     }
     
@@ -68,35 +65,18 @@ class AdMob: NSObject {
     }
     
     func displayBannerAdvert(bannerContainerView: UIView) {
-        let activitySpinner = UIActivityIndicatorView(style: .gray)
-        activitySpinner.color = rootViewController.darkModeColor
         let bannerAdvertCompletion = { [weak self] (loadedBannerAdView: GADBannerView) in
             bannerContainerView.addSubview(loadedBannerAdView)
             loadedBannerAdView.snp.makeConstraints { (make) in
                 make.edges.equalToSuperview()
             }
-            self?.removeSpinner(spinner: activitySpinner, view: bannerContainerView)
             self?.pendingAdsCheck()
         }
         if let loadedBannerView = self.loadedBannerView {
             bannerAdvertCompletion(loadedBannerView)
         } else {
             self.bannerAdvertCompletion = bannerAdvertCompletion
-            self.addSpinner(spinner: activitySpinner, view: bannerContainerView)
         }
-    }
-    
-    func addSpinner(spinner: UIActivityIndicatorView, view: UIView) {
-        view.addSubview(spinner)
-        spinner.snp.makeConstraints { (make) in
-            make.center.equalToSuperview()
-        }
-        spinner.startAnimating()
-    }
-    
-    func removeSpinner(spinner: UIActivityIndicatorView, view: UIView) {
-        spinner.stopAnimating()
-        spinner.removeFromSuperview()
     }
     
     @objc func reloadNativeAd(connection: Notification) {

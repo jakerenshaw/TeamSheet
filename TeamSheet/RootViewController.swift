@@ -32,6 +32,14 @@ class RootViewController: UIViewController {
         }
     }
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        if #available(iOS 13.0, *) {
+            return .darkContent
+        } else {
+            return .default
+        }
+    }
+    
     lazy var squadViewController: SquadViewController = {
         SquadViewController(squadStore: self.squadStore, nibName: "SquadViewController", bundle: nil)
     }()
@@ -127,8 +135,16 @@ class RootViewController: UIViewController {
     }
     
     func addAd() {
-        self.view.bringSubviewToFront(adBackgroundView)
-        self.adMob.displayNativeAdvert(containerView: adContainerView)
+        self.adBackgroundView.alpha = 0
+        self.adMob.displayNativeAdvert(containerView: adContainerView) { [weak self] in
+            guard let strongSelf = self else {
+                return
+            }
+            strongSelf.view.bringSubviewToFront(strongSelf.adBackgroundView)
+            UIView.animate(withDuration: 1) {
+                strongSelf.adBackgroundView.alpha = 1
+            }
+        }
     }
     
     @IBAction func closeAd(_ sender: UIButton) {
