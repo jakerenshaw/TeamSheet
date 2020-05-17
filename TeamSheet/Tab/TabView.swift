@@ -11,6 +11,7 @@ import UIKit
 
 protocol TabViewDelegate: class {
     func setCurrentTab(currentTab: TabType)
+    var darkModeColor: UIColor? { get }
 }
 
 class TabView: UIView, UIGestureRecognizerDelegate {
@@ -55,18 +56,6 @@ class TabView: UIView, UIGestureRecognizerDelegate {
     }
     
     func setUnselected() {
-        if #available(iOS 13.0, *) {
-            self.tintColor = .label
-        } else {
-            if #available(iOS 12.0, *) {
-                if traitCollection.userInterfaceStyle == .light {
-                    self.tintColor = .black
-                } else {
-                    self.tintColor = .white
-                }
-            } else {
-                self.tintColor = .white
-            }
-        }
+        self.tintColor = self.delegate?.darkModeColor
     }
 }

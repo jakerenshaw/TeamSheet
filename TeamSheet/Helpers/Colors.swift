@@ -24,4 +24,19 @@ class Colors {
             return .white
         }
     }
+    
+    @available(iOS 12.0, *)
+    static func darkModeColor(style: UIUserInterfaceStyle) -> UIColor {
+        let color: UIColor
+        if #available(iOS 13.0, *) {
+            color = .label
+        } else {
+            if style == .light {
+                color = .black
+            } else {
+                color = .white
+            }
+        }
+        return color
+    }
 }

@@ -24,6 +24,14 @@ class RootViewController: UIViewController {
     @IBOutlet var adCloseButton: UIButton!
     var currentViewController: UIViewController?
     
+    var darkModeColor: UIColor {
+        if #available(iOS 12.0, *) {
+            return Colors.darkModeColor(style: traitCollection.userInterfaceStyle)
+        } else {
+            return .white
+        }
+    }
+    
     lazy var squadViewController: SquadViewController = {
         SquadViewController(squadStore: self.squadStore, nibName: "SquadViewController", bundle: nil)
     }()

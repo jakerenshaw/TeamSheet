@@ -25,9 +25,9 @@ enum AlertActionType {
 
 class AlertPresenter: NSObject {
     
-    let presentationController: UIViewController
+    let presentationController: RootViewController
     
-    init(presentationController: UIViewController) {
+    init(presentationController: RootViewController) {
         self.presentationController = presentationController
     }
     
@@ -38,7 +38,7 @@ class AlertPresenter: NSObject {
                 alert: alert,
                 actions: alertContent.actions
             )
-            alert.view.tintColor = .black
+            alert.view.tintColor = self.presentationController.darkModeColor
             self.presentationController.present(alert, animated: true, completion: nil)
         }
     }

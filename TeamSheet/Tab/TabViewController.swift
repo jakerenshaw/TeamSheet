@@ -16,9 +16,14 @@ enum TabType: String {
 
 protocol TabViewControllerDelegate: class {
     func setPage(tab: TabType)
+    var darkModeColor: UIColor { get }
 }
 
 class TabViewController: UIViewController, TabViewDelegate {
+    
+    var darkModeColor: UIColor? {
+        self.delegate?.darkModeColor
+    }
     
     @IBOutlet weak var tabStackView: UIStackView!
     weak var delegate: TabViewControllerDelegate?
