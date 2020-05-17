@@ -12,92 +12,76 @@ import GoogleMobileAds
 class AdMob: NSObject {
 
     let rootViewController: UIViewController
-    var nativeAd: GADUnifiedNativeAd?
-    var containerView: UIView!
     var nativeAdView: GADUnifiedNativeAdView?
-    var bannerContainerView: UIView!
     var adLoader: GADAdLoader?
-    var gadBannerView: GADBannerView?
+    var bannerView: GADBannerView?
+    var loadedBannerView: GADBannerView?
+    var nativeAdvertCompletion: ((GADUnifiedNativeAdView) -> Void)?
+    var bannerAdvertCompletion: ((GADBannerView) -> Void)?
     
     init(rootViewController: UIViewController) {
         self.rootViewController = rootViewController
         super.init()
-        GADMobileAds.sharedInstance().start(completionHandler: nil)
+        GADMobileAds.sharedInstance().start { (_) in
+            self.loadNativeAdvert()
+            self.loadBannerAdvert()
+        }
     }
     
-    func loadAdvert(containerView: UIView) {
-        self.containerView = containerView
+    func loadNativeAdvert() {
         adLoader = GADAdLoader(adUnitID: "ca-app-pub-3940256099942544/3986624511", rootViewController: rootViewController, adTypes: [.unifiedNative], options: nil)
         adLoader?.delegate = self
         adLoader?.load(GADRequest())
     }
     
-    func closeAdvert() {
+    func loadBannerAdvert() {
+        self.bannerView = GADBannerView(adSize: kGADAdSizeBanner)
+        self.bannerView?.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        self.bannerView?.rootViewController = self.rootViewController
+        self.bannerView?.delegate = self
+        self.bannerView?.load(GADRequest())
+    }
+    
+    func displayNativeAdvert(containerView: UIView) {
+        let nativeAdvertCompletion = { (unifiedNativeAdView: GADUnifiedNativeAdView) in
+            containerView.addSubview(unifiedNativeAdView)
+            unifiedNativeAdView.frame = CGRect(x: 0, y: 0, width: containerView.frame.width, height: containerView.frame.height)
+        }
+        if let nativeAdView = self.nativeAdView {
+            nativeAdvertCompletion(nativeAdView)
+        } else {
+            self.nativeAdvertCompletion = nativeAdvertCompletion
+        }
+    }
+    
+    func closeNativeAdvert() {
         self.nativeAdView?.removeFromSuperview()
         self.nativeAdView = nil
         self.adLoader = nil
     }
     
-    func addBanner(bannerContainerView: UIView) {
-        self.bannerContainerView = bannerContainerView
-        gadBannerView = GADBannerView(adSize: kGADAdSizeBanner)
-        gadBannerView?.adUnitID = "ca-app-pub-3940256099942544/2934735716"
-        gadBannerView?.rootViewController = self.rootViewController
-        gadBannerView?.delegate = self
-        gadBannerView?.load(GADRequest())
-    }
-    
-    func imageOfStars(starRating: NSDecimalNumber?) -> UIImage? {
-      guard let rating = starRating?.doubleValue else {
-        return nil
-      }
-      if rating >= 5 {
-        return UIImage(named: "stars_5")
-      } else if rating >= 4.5 {
-        return UIImage(named: "stars_4_5")
-      } else if rating >= 4 {
-        return UIImage(named: "stars_4")
-      } else if rating >= 3.5 {
-        return UIImage(named: "stars_3_5")
-      } else {
-        return nil
-      }
+    func displayBannerAdvert(bannerContainerView: UIView) {
+        let bannerAdvertCompletion = { (loadedBannerAdView: GADBannerView) in
+            bannerContainerView.addSubview(loadedBannerAdView)
+            loadedBannerAdView.snp.makeConstraints { (make) in
+                make.edges.equalToSuperview()
+            }
+        }
+        if let loadedBannerView = self.loadedBannerView {
+            bannerAdvertCompletion(loadedBannerView)
+        } else {
+            self.bannerAdvertCompletion = bannerAdvertCompletion
+        }
     }
 }
 
 extension AdMob: GADBannerViewDelegate {
     func adViewDidReceiveAd(_ bannerView: GADBannerView) {
-        self.bannerContainerView.addSubview(bannerView)
-        bannerView.snp.makeConstraints { (make) in
-            make.edges.equalToSuperview()
+        self.loadedBannerView = bannerView
+        if let bannerAdvertCompletion = self.bannerAdvertCompletion {
+            bannerAdvertCompletion(bannerView)
+            self.bannerAdvertCompletion = nil
         }
-    }
-    
-    func adView(_ bannerView: GADBannerView,
-        didFailToReceiveAdWithError error: GADRequestError) {
-      print("adView:didFailToReceiveAdWithError: \(error.localizedDescription)")
-    }
-
-    /// Tells the delegate that a full-screen view will be presented in response
-    /// to the user clicking on an ad.
-    func adViewWillPresentScreen(_ bannerView: GADBannerView) {
-      print("adViewWillPresentScreen")
-    }
-
-    /// Tells the delegate that the full-screen view will be dismissed.
-    func adViewWillDismissScreen(_ bannerView: GADBannerView) {
-      print("adViewWillDismissScreen")
-    }
-
-    /// Tells the delegate that the full-screen view has been dismissed.
-    func adViewDidDismissScreen(_ bannerView: GADBannerView) {
-      print("adViewDidDismissScreen")
-    }
-
-    /// Tells the delegate that a user click will open another app (such as
-    /// the App Store), backgrounding the current app.
-    func adViewWillLeaveApplication(_ bannerView: GADBannerView) {
-      print("adViewWillLeaveApplication")
     }
 }
 
@@ -117,7 +101,7 @@ extension AdMob: GADUnifiedNativeAdLoaderDelegate {
         nativeAdView.callToActionView?.isHidden = nativeAd.callToAction == nil
         (nativeAdView.iconView as? UIImageView)?.image = nativeAd.icon?.image
         nativeAdView.iconView?.isHidden = nativeAd.icon == nil
-        (nativeAdView.starRatingView as? UIImageView)?.image = imageOfStars(starRating: nativeAd.starRating)
+        (nativeAdView.starRatingView as? UIImageView)?.image = StarRatingImages.imageOfStars(starRating: nativeAd.starRating)
         nativeAdView.starRatingView?.isHidden = nativeAd.starRating == nil
         (nativeAdView.storeView as? UILabel)?.text = nativeAd.store
         nativeAdView.storeView?.isHidden = nativeAd.store == nil
@@ -126,9 +110,11 @@ extension AdMob: GADUnifiedNativeAdLoaderDelegate {
         (nativeAdView.advertiserView as? UILabel)?.text = nativeAd.advertiser
         nativeAdView.advertiserView?.isHidden = nativeAd.advertiser == nil
         nativeAdView.callToActionView?.isUserInteractionEnabled = false
-        containerView.addSubview(nativeAdView)
-        nativeAdView.frame = CGRect(x: 0, y: 0, width: containerView.frame.width, height: containerView.frame.height)
         self.nativeAdView = nativeAdView
+        if let nativeAdvertCompletion = self.nativeAdvertCompletion {
+            nativeAdvertCompletion(nativeAdView)
+            self.nativeAdvertCompletion = nil
+        }
     }
     
     func adLoader(_ adLoader: GADAdLoader, didFailToReceiveAdWithError error: GADRequestError) {

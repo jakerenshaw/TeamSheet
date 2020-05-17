@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		B60650AF24700A9E0066BCF5 /* AdMob.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60650AE24700A9E0066BCF5 /* AdMob.swift */; };
 		B60650B7247026980066BCF5 /* NativeAdView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B60650B6247026980066BCF5 /* NativeAdView.xib */; };
+		B60D4F7C24712772004C5CC6 /* StarRatingImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = B60D4F7B24712772004C5CC6 /* StarRatingImages.swift */; };
 		B6151F4F225A0123008A9185 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6151F4E225A0123008A9185 /* AppDelegate.swift */; };
 		B6151F54225A0123008A9185 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6151F52225A0123008A9185 /* Main.storyboard */; };
 		B6151F56225A0124008A9185 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B6151F55225A0124008A9185 /* Assets.xcassets */; };
@@ -51,6 +52,7 @@
 		33436A15C34CCBF41B228849 /* Pods-TeamSheet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TeamSheet.release.xcconfig"; path = "Target Support Files/Pods-TeamSheet/Pods-TeamSheet.release.xcconfig"; sourceTree = "<group>"; };
 		B60650AE24700A9E0066BCF5 /* AdMob.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdMob.swift; sourceTree = "<group>"; };
 		B60650B6247026980066BCF5 /* NativeAdView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NativeAdView.xib; sourceTree = "<group>"; };
+		B60D4F7B24712772004C5CC6 /* StarRatingImages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarRatingImages.swift; sourceTree = "<group>"; };
 		B6151F4B225A0123008A9185 /* TeamSheet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TeamSheet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6151F4E225A0123008A9185 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B6151F53225A0123008A9185 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -250,6 +252,7 @@
 			children = (
 				B6AF02972447642700409AB9 /* Extensions.swift */,
 				B67CB28224477C8800C97273 /* Colors.swift */,
+				B60D4F7B24712772004C5CC6 /* StarRatingImages.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -418,6 +421,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B60D4F7C24712772004C5CC6 /* StarRatingImages.swift in Sources */,
 				B6F6DB652466DC30007978D9 /* SquadStore.swift in Sources */,
 				B67CB28324477C8800C97273 /* Colors.swift in Sources */,
 				B6151F6B225A277D008A9185 /* PlayerIcon.swift in Sources */,

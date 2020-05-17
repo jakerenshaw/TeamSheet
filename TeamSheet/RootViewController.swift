@@ -69,9 +69,7 @@ class RootViewController: UIViewController {
         HeaderView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
     }()
     
-    lazy var adMob: AdMob = {
-        AdMob(rootViewController: self)
-    }()
+    var adMob: AdMob!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -82,6 +80,7 @@ class RootViewController: UIViewController {
     }
     
     func setupAdContainer() {
+        self.adMob = AdMob(rootViewController: self)
         let safeAreaTop = UIApplication.shared.windows[0].safeAreaInsets.top
         self.adContainerTopConstraint.constant += safeAreaTop
         self.adBackgroundView.layer.backgroundColor = UIColor.gray.withAlphaComponent(0.7).cgColor
@@ -120,11 +119,11 @@ class RootViewController: UIViewController {
     
     func addAd() {
         self.view.bringSubviewToFront(adBackgroundView)
-        self.adMob.loadAdvert(containerView: adContainerView)
+        self.adMob.displayNativeAdvert(containerView: adContainerView)
     }
     
     @IBAction func closeAd(_ sender: UIButton) {
-        self.adMob.closeAdvert()
+        self.adMob.closeNativeAdvert()
         self.view.sendSubviewToBack(self.adBackgroundView)
     }
     
@@ -186,7 +185,7 @@ extension RootViewController: PitchViewControllerDelegate {
 
 extension RootViewController: MenuViewControllerDelegate {
     func showBannerAd(containerView: UIView) {
-        self.adMob.addBanner(bannerContainerView: containerView)
+        self.adMob.displayBannerAdvert(bannerContainerView: containerView)
     }
     
     func toggleOpposition() {
