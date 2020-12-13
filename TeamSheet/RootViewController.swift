@@ -85,12 +85,12 @@ class RootViewController: UIViewController {
         HeaderView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
     }()
     
-    var adMob: AdMob!
+    var adMob: AdMob?
     let reachabilitySwift = ReachabilitySwift()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.setupAdContainer()
+        //self.setupAdContainer()
         self.addLoadingScreen()
         self.addHeaderView()
         self.addTabComponent()
@@ -136,7 +136,7 @@ class RootViewController: UIViewController {
     
     func addAd() {
         self.adBackgroundView.alpha = 0
-        self.adMob.displayNativeAdvert(containerView: adContainerView) { [weak self] in
+        self.adMob?.displayNativeAdvert(containerView: adContainerView) { [weak self] in
             guard let strongSelf = self else {
                 return
             }
@@ -148,7 +148,7 @@ class RootViewController: UIViewController {
     }
     
     @IBAction func closeAd(_ sender: UIButton) {
-        self.adMob.closeNativeAdvert()
+        self.adMob?.closeNativeAdvert()
         self.view.sendSubviewToBack(self.adBackgroundView)
     }
     
@@ -210,7 +210,7 @@ extension RootViewController: PitchViewControllerDelegate {
 
 extension RootViewController: MenuViewControllerDelegate {
     func showBannerAd(containerView: UIView) {
-        self.adMob.displayBannerAdvert(bannerContainerView: containerView)
+        self.adMob?.displayBannerAdvert(bannerContainerView: containerView)
     }
     
     func toggleOpposition() {
